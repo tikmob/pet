@@ -13,23 +13,29 @@
     <link rel="canonical" href="https://yourwebsite.com/design">
     
     <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": "Custom T-Shirt",
-      "description": "Design your own custom t-shirt with our online designer tool",
-      "brand": {
-        "@type": "Brand",
-        "name": "Custom T-Shirt Designer"
-      },
-      "offers": {
-        "@type": "Offer",
-        "priceCurrency": "USD",
-        "price": "19.99"
-      }
+    <!-- Structured Data for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Custom T-Shirt",
+  "description": "Design your own custom t-shirt with our online designer tool. Upload your design, choose colors and placement.",
+  "brand": {
+    "@type": "Brand",
+    "name": "Custom T-Shirt Designer"
+  },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "19.99",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Organization",
+      "name": "Custom T-Shirt Designer"
     }
-    </script>
+  }
+}
+</script>
     
     <style>
         :root {
