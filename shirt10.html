@@ -1171,9 +1171,28 @@ const bgCanvas = document.getElementById('tshirt-bg');
 const bgCtx    = bgCanvas.getContext('2d');
 
 function changeTshirtColor(color = '#ffffff') {
-  bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
-  bgCtx.fillStyle = color;
-  bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
+    const canvas = document.getElementById('tshirt-bg');
+    const ctx = canvas.getContext('2d');
+
+    // نمسح كل شيء
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // نحدد حدود التيشيرت (عدّلها حسب صورتك)
+    const shirtX = 10;
+    const shirtY = 20;
+    const shirtWidth = 280;
+    const shirtHeight = 380;
+
+    // نرسم فقط داخل التيشيرت
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(shirtX, shirtY, shirtWidth, shirtHeight);
+    ctx.clip(); // ✅ هذا يجعل الرسم فقط داخل المستطيل
+
+    ctx.fillStyle = color;
+    ctx.fillRect(shirtX, shirtY, shirtWidth, shirtHeight);
+
+    ctx.restore(); // نعيد الحالة الطبيعية
 }
 
 // استدعاء أولي
