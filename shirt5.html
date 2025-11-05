@@ -3,14 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>T-Shirt Color Test</title>
+<title>T-Shirt Color Change Demo</title>
 <style>
   body {
-    background: #eee;
+    background: #f2f2f2;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
   }
 
   .tshirt-container {
@@ -20,15 +23,17 @@
     overflow: hidden;
   }
 
-  /* هذه الطبقة هي فقط للخلفية خلف التيشيرت */
+  /* الخلفية (لون القماش) */
   .tshirt-bg {
     position: absolute;
     inset: 0;
+    background: white;
     z-index: 0;
-    background-color: white;
+    border-radius: 10px;
+    transition: background 0.3s ease;
   }
 
-  /* صورة التيشيرت الشفافة */
+  /* صورة التيشيرت (يجب أن تكون شفافة) */
   .tshirt-img {
     position: absolute;
     inset: 0;
@@ -39,7 +44,7 @@
     pointer-events: none;
   }
 
-  /* التصميم فوق التيشيرت */
+  /* التصميم */
   .tshirt-design {
     position: absolute;
     inset: 0;
@@ -52,11 +57,24 @@
     pointer-events: none;
   }
 
-  .color-picker {
-    position: absolute;
-    bottom: -60px;
-    left: 50%;
-    transform: translateX(-50%);
+  /* الأزرار */
+  .color-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .color-buttons button {
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .color-buttons button:hover {
+    transform: scale(1.1);
   }
 </style>
 </head>
@@ -65,17 +83,23 @@
 <div class="tshirt-container">
   <div class="tshirt-bg" id="tshirt-bg"></div>
   <img src="images/front.png" class="tshirt-img" alt="T-shirt">
-  <img src="images/back1.png" class="tshirt-design" alt="Design">
-  <input type="color" class="color-picker" id="colorPicker" value="#ffffff">
+  <img src="images/design.png" class="tshirt-design" alt="Design">
+</div>
+
+<div class="color-buttons">
+  <button style="background: #ffffff;" onclick="changeTshirtColor('#ffffff')"></button>
+  <button style="background: #000000;" onclick="changeTshirtColor('#000000')"></button>
+  <button style="background: #ff0000;" onclick="changeTshirtColor('#ff0000')"></button>
+  <button style="background: #008000;" onclick="changeTshirtColor('#008000')"></button>
+  <button style="background: #0000ff;" onclick="changeTshirtColor('#0000ff')"></button>
+  <button style="background: #ffa500;" onclick="changeTshirtColor('#ffa500')"></button>
+  <button style="background: #808080;" onclick="changeTshirtColor('#808080')"></button>
 </div>
 
 <script>
-  const bg = document.getElementById('tshirt-bg');
-  const colorPicker = document.getElementById('colorPicker');
-
-  colorPicker.addEventListener('input', (e) => {
-    bg.style.backgroundColor = e.target.value;
-  });
+function changeTshirtColor(color) {
+  document.getElementById('tshirt-bg').style.background = color;
+}
 </script>
 
 </body>
