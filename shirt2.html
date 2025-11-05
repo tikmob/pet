@@ -1178,14 +1178,7 @@ document.querySelectorAll('.color-option').forEach(option => {
                     notification.classList.remove('show');
                 }, 5000);
             }
-          const bgCanvas = document.getElementById('tshirt-bg');
-const bgCtx = bgCanvas.getContext('2d');
-
-function changeTshirtColor(color) {
-    bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
-    bgCtx.fillStyle = color;
-    bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
-}
+         
  // ملء الخلفية باللون الأبيض افتراضياً
 const bgCanvas = document.getElementById('tshirt-bg');
 const bgCtx   = bgCanvas.getContext('2d');
