@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T-Shirt Color Test</title>
+<style>
+  body {
+    background: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .tshirt-container {
+    position: relative;
+    width: 300px;
+    height: 350px;
+    overflow: hidden;
+  }
+
+  /* هذه الطبقة هي فقط للخلفية خلف التيشيرت */
+  .tshirt-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-color: white;
+  }
+
+  /* صورة التيشيرت الشفافة */
+  .tshirt-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* التصميم فوق التيشيرت */
+  .tshirt-design {
+    position: absolute;
+    inset: 0;
+    width: 60%;
+    height: 60%;
+    top: 20%;
+    left: 20%;
+    object-fit: contain;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .color-picker {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+</style>
+</head>
+<body>
+
+<div class="tshirt-container">
+  <div class="tshirt-bg" id="tshirt-bg"></div>
+  <img src="images/tshirt-white.png" class="tshirt-img" alt="T-shirt">
+  <img src="images/design.png" class="tshirt-design" alt="Design">
+  <input type="color" class="color-picker" id="colorPicker" value="#ffffff">
+</div>
+
+<script>
+  const bg = document.getElementById('tshirt-bg');
+  const colorPicker = document.getElementById('colorPicker');
+
+  colorPicker.addEventListener('input', (e) => {
+    bg.style.backgroundColor = e.target.value;
+  });
+</script>
+
+</body>
+</html>
