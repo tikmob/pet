@@ -483,19 +483,36 @@
     <div class="container">
         <div class="main-content">
             <div class="design-area">
-                <div class="t-shirt-container">
-                    <div id="t-shirt-preview" style="position:relative; width:300px; height:400px;">
-    <!-- خلفية ملونة -->
-    <canvas id="tshirt-bg" width="300" height="400" style="position:absolute; top:0; left:0; z-index:1;"></canvas>
+               <div class="t-shirt-container">
+  <div id="t-shirt-preview" style="position:relative; width:300px; height:400px;">
 
-    <!-- صورة التيشيرت الشفافة -->
-    <img id="tshirt-img" class="t-shirt-base" src="images/front.png" alt="T-Shirt" style="position:absolute; top:0; left:0; z-index:2;">
-    <img id="tshirt-back" class="t-shirt-base" src="images/back.png" alt="Back" style="display:none; position:absolute; top:0; left:0; z-index:2;">
+    <!-- 1) خلفية بلون القماش -->
+    <canvas id="tshirt-bg"
+            width="300" height="400"
+            style="position:absolute; inset:0;"></canvas>
 
-    <!-- تصميم المستخدم -->
-    <canvas id="design-canvas" width="300" height="400" style="position:absolute; top:0; left:0; z-index:3; cursor:move;"></canvas>
+    <!-- 2) صورة التيشيرت الشفافة (تُلوَّن بالـ mix-blend-mode) -->
+    <img id="tshirt-img"
+         class="t-shirt-base"
+         src="images/front.png"
+         alt="T-Shirt"
+         style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+                mix-blend-mode:multiply; pointer-events:none;">
+
+    <img id="tshirt-back"
+         class="t-shirt-base"
+         src="images/back.png"
+         alt="Back"
+         style="display:none; position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+                mix-blend-mode:multiply; pointer-events:none;">
+
+    <!-- 3) كانفاس التصميم -->
+    <canvas id="design-canvas"
+            width="300" height="400"
+            style="position:absolute; inset:0; cursor:move;"></canvas>
+
+  </div>
 </div>
-                </div>
                 <div class="position-info" id="position-info">
                     <strong>Design Information:</strong><br>
                     Position: X=150, Y=200<br>
@@ -1169,6 +1186,15 @@ function changeTshirtColor(color) {
     bgCtx.fillStyle = color;
     bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
 }
+ // ملء الخلفية باللون الأبيض افتراضياً
+const bgCanvas = document.getElementById('tshirt-bg');
+const bgCtx   = bgCanvas.getContext('2d');
+function changeTshirtColor(color='#ffffff'){
+  bgCtx.clearRect(0,0,bgCanvas.width,bgCanvas.height);
+  bgCtx.fillStyle = color;
+  bgCtx.fillRect(0,0,bgCanvas.width,bgCanvas.height);
+}
+changeTshirtColor();   // استدعاء أولي
 
 // ✅ استدعاء أولي لملء الخلفية باللون الأبيض
 changeTshirtColor('#ffffff');
