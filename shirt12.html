@@ -486,23 +486,18 @@
         }
 
         /* مخفى على الكمبيوتر */
+/* نخفي نسخة الموبايل على الشاشات الكبيرة */
 .color-mobile {
     display: none;
-    margin-bottom: 15px;
-    text-align: center;
-}
-.color-mobile h3 {
-    margin: 0 0 10px;
-    font-size: 1.1rem;
-    color: var(--secondary-color);
 }
 
-/* يظهر فوق التيشيرت على الموبايل */
+/* نُظهرها ونُخفي الأصلية على الشاشات الصغيرة فقط */
 @media (max-width: 768px) {
     .color-mobile {
         display: block;
+        margin-bottom: 15px;
+        text-align: center;
     }
-    /* نخفي القائمة الأصلية الجانبية */
     .controls .control-group:first-child {
         display: none;
     }
