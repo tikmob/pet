@@ -1180,14 +1180,18 @@ document.querySelectorAll('.color-option').forEach(option => {
             }
          
  // ملء الخلفية باللون الأبيض افتراضياً
+// تعريف واحد فقط
 const bgCanvas = document.getElementById('tshirt-bg');
-const bgCtx   = bgCanvas.getContext('2d');
-function changeTshirtColor(color='#ffffff'){
-  bgCtx.clearRect(0,0,bgCanvas.width,bgCanvas.height);
-  bgCtx.fillStyle = color;
-  bgCtx.fillRect(0,0,bgCanvas.width,bgCanvas.height);
+const bgCtx = bgCanvas.getContext('2d');
+
+function changeTshirtColor(color = '#ffffff') {
+    bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+    bgCtx.fillStyle = color;
+    bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
 }
-changeTshirtColor();   // استدعاء أولي
+
+// ملء الخلفية بالأبيض عند التحميل
+changeTshirtColor('#ffffff');
 
 // ✅ استدعاء أولي لملء الخلفية باللون الأبيض
 changeTshirtColor('#ffffff');
