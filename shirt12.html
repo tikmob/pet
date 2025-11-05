@@ -486,14 +486,22 @@
         }
 
         /* مخفى على الكمبيوتر */
-/* نخفي نسخة الموبايل على الشاشات الكبيرة */
+/* إخفاء نسخة الموبايل على جميع الشاشات */
 .color-mobile {
-    display: none;
+    display: none !important;
 }
 
-
+/* إظهارها فقط على الشاشات الصغيرة */
+@media screen and (max-width: 768px) {
+    .color-mobile {
+        display: block !important;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    
+    /* إخفاء القائمة الأصلية على الموبايل */
     .controls .control-group:first-child {
-        display: none;
+        display: none !important;
     }
 }
     </style>
