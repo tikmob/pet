@@ -484,34 +484,32 @@
         <div class="main-content">
             <div class="design-area">
               <div class="t-shirt-container">
-  <div id="t-shirt-preview" style="position:relative; width:300px; height:400px;">
+  <div id="t-shirt-preview" style="position:relative; width:300px; height:400px; background-color:white;">
 
-    <div id="tshirt-color-bg" 
-         style="position:absolute; inset:0; background-color:#ffffff; mix-blend-mode:multiply;">
-    </div>
-
-    <!-- 1) خلفية بلون القماش -->
-    <canvas id="tshirt-bg"
-            width="300" height="400"
-            style="position:absolute; inset:0;"></canvas>
-
-    <!-- 2) صورة التيشيرت الشفافة (تُلوَّن بالـ mix-blend-mode) -->
-     <img id="tshirt-base"
+    <!-- 1) صورة التيشيرت البيضاء الشفافة فقط -->
+    <img id="tshirt-base"
          class="t-shirt-base"
          src="images/front.png"
          alt="T-Shirt"
          style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
-                mix-blend-mode:multiply; pointer-events:none;">
+                pointer-events:none;">
 
     <img id="tshirt-back"
          class="t-shirt-base"
          src="images/back.png"
          alt="Back"
          style="display:none; position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
-                mix-blend-mode:multiply; pointer-events:none;">
+                pointer-events:none;">
+
+    <!-- 2) طبقة اللون فقط على التيشيرت -->
+    <div id="tshirt-color-layer" 
+         style="position:absolute; inset:0; background-color:#ffffff; 
+                mask-image:url('images/front.png'); mask-size:contain; mask-repeat:no-repeat;
+                -webkit-mask-image:url('images/front.png'); -webkit-mask-size:contain; -webkit-mask-repeat:no-repeat;">
+    </div>
 
     <!-- 3) كانفاس التصميم -->
-     <canvas id="design-canvas"
+    <canvas id="design-canvas"
             width="300" height="400"
             style="position:absolute; inset:0; cursor:move;"></canvas>
 
@@ -666,19 +664,22 @@ const backImg  = document.getElementById('tshirt-back');
 
 // دالة التبديل بين الوجهين
 function switchSide(side){
-    placement = side;                       // لإرساله مع الفورم
+    placement = side;
     if(side === 'front'){
         frontImg.style.display = 'block';
-        backImg.style.display  = 'none';
+        backImg.style.display = 'none';
         document.getElementById('front-btn').classList.add('active');
         document.getElementById('back-btn').classList.remove('active');
-    }else{
+    } else {
         frontImg.style.display = 'none';
-        backImg.style.display  = 'block';
+        backImg.style.display = 'block';
         document.getElementById('back-btn').classList.add('active');
         document.getElementById('front-btn').classList.remove('active');
     }
-    drawDesign();   // أعد الرسم فوق الصورة الجديدة
+    
+    // تحديث طبقة اللون عند التبديل
+    changeTshirtColor(currentTshirtColor);
+    drawDesign();
 }
 
 // ربط الأزرار بالدالة الجديدة
@@ -1189,10 +1190,18 @@ const bgCanvas = document.getElementById('tshirt-bg');
 const bgCtx = bgCanvas.getContext('2d');
 
 function changeTshirtColor(color = '#ffffff') {
-    const colorBg = document.getElementById('tshirt-color-bg');
-    colorBg.style.backgroundColor = color;
+    const colorLayer = document.getElementById('tshirt-color-layer');
+    colorLayer.style.backgroundColor = color;
+    
+    // تحديث الماسك بناءً على الجانب المحدد
+    if (placement === 'front') {
+        colorLayer.style.maskImage = "url('images/front.png')";
+        colorLayer.style.webkitMaskImage = "url('images/front.png')";
+    } else {
+        colorLayer.style.maskImage = "url('images/back.png')";
+        colorLayer.style.webkitMaskImage = "url('images/back.png')";
+    }
 }
-
 // ملء الخلفية بالأبيض عند التحميل
 changeTshirtColor('#ffffff');
 
