@@ -931,6 +931,35 @@ header {
         height: 100vh;
         padding-top: 80px;
     }
+    /* إضافة زر البحث في القائمة المتنقلة */
+@media (max-width: 768px) {
+    .mobile-search-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: var(--transition);
+    }
+
+    .mobile-search-btn:hover {
+        background: #3A5FEF;
+    }
+}
+
+@media (min-width: 769px) {
+    .mobile-search-btn {
+        display: none;
+    }
+}
 
         }
     </style>
