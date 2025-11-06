@@ -990,32 +990,44 @@ function getRelatedArticles(currentId, count = 3) {
             // Update the article content
             document.getElementById('article-content').innerHTML = articleHeader + articleContent;
 
-            // Build sidebar
-            const sidebarContent = `
-                <div class="author-card">
-                    <div class="author-avatar">
-                        <img src="${articleData.author.avatar}" alt="${articleData.author.name}">
-                    </div>
-                    <h3>${articleData.author.name}</h3>
-                    <p class="author-title">${articleData.author.title}</p>
-                    <p class="author-bio">${articleData.author.bio}</p>
-                </div>
+            const relatedArticles = getRelatedArticles(articleData.id);
 
-                <div class="sidebar-widget">
-                    <h3>Related Articles</h3>
-                    <ul class="related-articles">
-                        ${getRelatedArticles(articleData.id).map(article => `
-                            <li class="related-article">
-                                <img src="${article.image}" alt="${article.title}">
-                                <div class="related-article-content">
-                                    <h4><a href="${article.url}">${article.title}</a></h4>
-                                    <div class="related-article-meta">${article.date} • ${article.readTime}</div>
-                                </div>
-                            </li>
-                        `).join('')}
-                    </ul>
-                </div>
+const sidebarContent = `
+  <div class="author-card">
+    <div class="author-avatar">
+      <img src="${articleData.author.avatar}" alt="${articleData.author.name}">
+    </div>
+    <h3>${articleData.author.name}</h3>
+    <p class="author-title">${articleData.author.title}</p>
+    <p class="author-bio">${articleData.author.bio}</p>
+  </div>
 
+  <div class="sidebar-widget">
+    <h3>Related Articles</h3>
+    <ul class="related-articles">
+      ${relatedArticles.map(art => `
+        <li class="related-article">
+          <img src="${art.featuredImage.url}" alt="${art.featuredImage.alt}">
+          <div class="related-article-content">
+            <h4><a href="article.html?id=${art.id}">${art.title}</a></h4>
+            <div class="related-article-meta">${art.datePublished} • ${art.readTime}</div>
+          </div>
+        </li>
+      `).join('')}
+    </ul>
+  </div>
+
+  <div class="sidebar-widget">
+    <h3>Popular Categories</h3>
+    <ul>
+      <li><a href="#">Dog Training</a></li>
+      <li><a href="#">Puppy Care</a></li>
+      <li><a href="#">Behavior Issues</a></li>
+      <li><a href="#">Health & Nutrition</a></li>
+      <li><a href="#">Product Reviews</a></li>
+    </ul>
+  </div>
+`;
                 <div class="sidebar-widget">
                     <h3>Popular Categories</h3>
                     <ul>
