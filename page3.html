@@ -844,7 +844,12 @@
     </footer>
 
     <script>
-
+// قراءة المقال المطلوب من الـ URL
+async function loadArticleData() {
+  const params = new URLSearchParams(location.search);
+  const id = params.get('id') || 'positive-reinforcement-dog-training'; // قيمة افتراضية
+  return allArticles.find(a => a.id === id) || null;
+}
         
         // Function to load article data from JSON
   let allArticles = [];
@@ -990,7 +995,8 @@ function getRelatedArticles(currentId, count = 3) {
             // Update the article content
             document.getElementById('article-content').innerHTML = articleHeader + articleContent;
 
-            const relatedArticles = getRelatedArticles(articleData.id);
+           // Build sidebar
+const relatedArticles = getRelatedArticles(articleData.id);
 
 const sidebarContent = `
   <div class="author-card">
@@ -1028,22 +1034,9 @@ const sidebarContent = `
     </ul>
   </div>
 `;
-                <div class="sidebar-widget">
-                    <h3>Popular Categories</h3>
-                    <ul>
-                        <li><a href="#">Dog Training</a></li>
-                        <li><a href="#">Puppy Care</a></li>
-                        <li><a href="#">Behavior Issues</a></li>
-                        <li><a href="#">Health & Nutrition</a></li>
-                        <li><a href="#">Product Reviews</a></li>
-                    </ul>
-                </div>
-            `;
 
-            // Update the sidebar
-            document.getElementById('sidebar-content').innerHTML = sidebarContent;
-        }
-
+// Update the sidebar
+document.getElementById('sidebar-content').innerHTML = sidebarContent;
         // Helper function to format date
         function formatDate(dateString) {
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
