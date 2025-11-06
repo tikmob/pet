@@ -39,7 +39,7 @@
         },
         {
           "type": "image",
-          "url": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80",
+          "url": "https://images.unsplash.com/photo-1554342321-9d54da54f8c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
           "alt": "Dog receiving treat for good behavior during training session",
           "caption": "Rewarding your dog immediately after good behavior reinforces positive actions"
         },
@@ -147,7 +147,7 @@
         "DogBehavior",
         "ObedienceTraining"
       ],
-      "keywords": "dog training, positive reinforcement, puppy training, dog behavior, obedience training, pet training",
-    
+      "keywords": "dog training, positive reinforcement, puppy training, dog behavior, obedience training, pet training"
+    }
   ]
 }
