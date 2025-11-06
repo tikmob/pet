@@ -45,15 +45,17 @@
             max-width: 1280px;
             margin: 0 auto;
             padding: 0 20px;
+            padding-top: 80px; /* إصلاح: تعويض المسافة المفقودة بسبب الهيدر الثابت */
         }
 
-        /* Header Styles */
+        /* Header Styles - إصلاح: تثبيت الهيدر */
         header {
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: var(--shadow);
-            position: sticky;
+            position: fixed; /* إصلاح: تغيير من sticky إلى fixed */
             top: 0;
+            width: 100%; /* إصلاح: إضافة width */
             z-index: 1000;
             transition: var(--transition);
         }
@@ -281,6 +283,11 @@
             color: var(--dark);
             z-index: 10000;
             position: relative;
+        }
+
+        /* إصلاح: إضافة زر البحث في القائمة المتنقلة */
+        .mobile-search-btn {
+            display: none;
         }
 
         /* Article Layout */
@@ -673,7 +680,7 @@
             background: #00C19A;
         }
 
-        /* Mobile Navigation */
+        /* Mobile Navigation - إصلاح: ترتيب z-index */
         @media (max-width: 768px) {
             #main-nav {
                 display: none;
@@ -683,12 +690,13 @@
                 width: 100%;
                 height: 100vh;
                 background-color: rgba(255, 255, 255, 0.98);
-                z-index: 9999;
+                z-index: 9999; /* إصلاح: ترتيب z-index */
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 text-align: center;
                 backdrop-filter: blur(10px);
+                padding-top: 80px; /* إصلاح: إضافة padding-top */
             }
 
             #main-nav.active {
@@ -702,6 +710,28 @@
 
             #main-nav a {
                 font-size: 1.3rem;
+            }
+
+            /* إصلاح: إضافة زر البحث في القائمة المتنقلة */
+            .mobile-search-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                background: var(--primary);
+                color: white;
+                border: none;
+                padding: 12px 24px;
+                border-radius: 50px;
+                font-size: 1.1rem;
+                font-weight: 600;
+                cursor: pointer;
+                margin-top: 20px;
+                transition: var(--transition);
+            }
+
+            .mobile-search-btn:hover {
+                background: #3A5FEF;
             }
 
             .mobile-menu {
@@ -767,6 +797,10 @@
 
             #main-nav li {
                 margin: 0 10px;
+            }
+
+            .mobile-search-btn {
+                display: none;
             }
         }
 
@@ -913,54 +947,6 @@
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
-            /* إصلاح تثبيت الهيدر */
-header {
-    position: fixed;
-    width: 100%;
-}
-
-/* تعويض المسافة المفقودة بسبب الهيدر الثابت */
-.container {
-    padding-top: 80px;
-}
-            /* إصلاح ترتيب z-index للقائمة المتنقلة */
-@media (max-width: 768px) {
-    #main-nav {
-        z-index: 9999;
-        top: 0;
-        height: 100vh;
-        padding-top: 80px;
-    }
-    /* إضافة زر البحث في القائمة المتنقلة */
-@media (max-width: 768px) {
-    .mobile-search-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        background: var(--primary);
-        color: white;
-        border: none;
-        padding: 12px 24px;
-        border-radius: 50px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        cursor: pointer;
-        margin-top: 20px;
-        transition: var(--transition);
-    }
-
-    .mobile-search-btn:hover {
-        background: #3A5FEF;
-    }
-}
-
-@media (min-width: 769px) {
-    .mobile-search-btn {
-        display: none;
-    }
-}
-
         }
     </style>
 </head>
@@ -981,10 +967,11 @@ header {
                     <li><a href="articles.html" class="active">Articles</a></li>
                     <li><a href="#">Products</a></li>
                     <li><a href="#">About Us</a></li>
-                    <button class="mobile-search-btn" id="mobile-search-btn">
-    <i class="fas fa-search"></i> Search Articles
-</button>
                 </ul>
+                <!-- إصلاح: إضافة زر البحث في القائمة المتنقلة -->
+                <button class="mobile-search-btn" id="mobile-search-btn">
+                    <i class="fas fa-search"></i> Search Articles
+                </button>
             </nav>
             
             <div class="header-actions">
@@ -1324,22 +1311,23 @@ header {
     // Search functionality
     function setupSearch() {
         const searchBtn = document.getElementById('search-btn');
+        const mobileSearchBtn = document.getElementById('mobile-search-btn'); // إصلاح: إضافة زر البحث للهاتف
         const searchModal = document.getElementById('search-modal');
         const closeSearch = document.getElementById('close-search');
         const searchForm = document.getElementById('search-form');
         const searchInput = document.getElementById('search-input');
         const searchResults = document.getElementById('search-results');
-        // Open search modal from mobile
-const mobileSearchBtn = document.getElementById('mobile-search-btn');
-mobileSearchBtn.addEventListener('click', () => {
-    searchModal.classList.add('active');
-    document.getElementById('main-nav').classList.remove('active');
-    searchInput.focus();
-});
 
-        // Open search modal
+        // Open search modal from desktop
         searchBtn.addEventListener('click', () => {
             searchModal.classList.add('active');
+            searchInput.focus();
+        });
+
+        // إصلاح: فتح نافذة البحث من القائمة المتنقلة
+        mobileSearchBtn.addEventListener('click', () => {
+            searchModal.classList.add('active');
+            document.getElementById('main-nav').classList.remove('active');
             searchInput.focus();
         });
 
