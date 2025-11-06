@@ -147,64 +147,10 @@
         "DogBehavior",
         "ObedienceTraining"
       ],
-      "keywords": "dog training, positive reinforcement, puppy training, dog behavior, obedience training, pet training"
-    },
-    {
-      "id": "puppy-training-schedule",
-      "title": "The Ultimate Puppy Training Schedule: First 6 Months",
-      "description": "Comprehensive guide to puppy training from 8 weeks to 6 months old.",
-      "category": "Puppy Training",
-      "author": {
-        "name": "The Pet Care Team",
-        "title": "Pet Training Expert",
-        "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80",
-        "bio": "Our passionate team of animal enthusiasts and trainers brings you trusted advice, tips, and stories about pets and wildlife. We believe every animal deserves care, respect, and understanding."
-      },
-      "datePublished": "2023-05-15",
-      "readTime": "8 min read",
-      "views": "1,923",
-      "featuredImage": {
-        "url": "https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-        "alt": "Cute puppy training"
-      }
-    },
-    {
-      "id": "dog-behavior-problems",
-      "title": "Solving Common Dog Behavior Problems: Barking, Chewing & More",
-      "description": "Learn how to solve the most common behavior issues in dogs.",
-      "category": "Dog Behavior",
-      "author": {
-        "name": "The Pet Care Team",
-        "title": "Pet Training Expert",
-        "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80",
-        "bio": "Our passionate team of animal enthusiasts and trainers brings you trusted advice, tips, and stories about pets and wildlife. We believe every animal deserves care, respect, and understanding."
-      },
-      "datePublished": "2023-05-10",
-      "readTime": "10 min read",
-      "views": "2,156",
-      "featuredImage": {
-        "url": "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-        "alt": "Dog behavior training"
-      }
-    },
-    {
-      "id": "advanced-dog-training",
-      "title": "Advanced Dog Training: Taking Obedience to the Next Level",
-      "description": "Advanced techniques for experienced dog owners.",
-      "category": "Advanced Training",
-      "author": {
-        "name": "The Pet Care Team",
-        "title": "Pet Training Expert",
-        "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80",
-        "bio": "Our passionate team of animal enthusiasts and trainers brings you trusted advice, tips, and stories about pets and wildlife. We believe every animal deserves care, respect, and understanding."
-      },
-      "datePublished": "2023-05-05",
-      "readTime": "12 min read",
-      "views": "1,745",
-      "featuredImage": {
-        "url": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-        "alt": "Advanced dog training"
-      }
+      "keywords": "dog training, positive reinforcement, puppy training, dog behavior, obedience training, pet training",
+      
+        }
+      ]
     }
   ]
 }
