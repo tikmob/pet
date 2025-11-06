@@ -844,6 +844,17 @@
     </footer>
 
     <script>
+${relatedArticles.map(article => `
+  <li class="related-article">
+    <img src="${article.featuredImage.url}" alt="${article.featuredImage.alt}">
+    <div class="related-article-content">
+      <h4><a href="article.html?id=${article.id}">${article.title}</a></h4>
+      <div class="related-article-meta">${article.datePublished} • ${article.readTime}</div>
+    </div>
+  </li>
+`).join('')}
+
+        
         // Function to load article data from JSON
   let allArticles = [];
 
