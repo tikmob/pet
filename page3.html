@@ -1002,7 +1002,7 @@ function getRelatedArticles(currentId, count = 3) {
                 <div class="sidebar-widget">
                     <h3>Related Articles</h3>
                     <ul class="related-articles">
-                        ${articleData.relatedArticles.map(article => `
+                        ${getRelatedArticles(articleData.id).map(article => `
                             <li class="related-article">
                                 <img src="${article.image}" alt="${article.title}">
                                 <div class="related-article-content">
