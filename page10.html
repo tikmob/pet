@@ -923,6 +923,15 @@ header {
 .container {
     padding-top: 80px;
 }
+            /* إصلاح ترتيب z-index للقائمة المتنقلة */
+@media (max-width: 768px) {
+    #main-nav {
+        z-index: 9999;
+        top: 0;
+        height: 100vh;
+        padding-top: 80px;
+    }
+
         }
     </style>
 </head>
@@ -943,6 +952,9 @@ header {
                     <li><a href="articles.html" class="active">Articles</a></li>
                     <li><a href="#">Products</a></li>
                     <li><a href="#">About Us</a></li>
+                    <button class="mobile-search-btn" id="mobile-search-btn">
+    <i class="fas fa-search"></i> Search Articles
+</button>
                 </ul>
             </nav>
             
@@ -1288,6 +1300,13 @@ header {
         const searchForm = document.getElementById('search-form');
         const searchInput = document.getElementById('search-input');
         const searchResults = document.getElementById('search-results');
+        // Open search modal from mobile
+const mobileSearchBtn = document.getElementById('mobile-search-btn');
+mobileSearchBtn.addEventListener('click', () => {
+    searchModal.classList.add('active');
+    document.getElementById('main-nav').classList.remove('active');
+    searchInput.focus();
+});
 
         // Open search modal
         searchBtn.addEventListener('click', () => {
