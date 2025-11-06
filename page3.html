@@ -1044,10 +1044,13 @@ document.getElementById('sidebar-content').innerHTML = sidebarContent;
         }
 
         // Initialize the page
-        document.addEventListener('DOMContentLoaded', async () => {
-  await loadAllArticles(); // تحميل جميع المقالات أولًا
-  const articleData = await loadArticleData(); // تحميل المقال الحالي
-  renderArticle(articleData);
+      document.addEventListener('DOMContentLoaded', async () => {
+  await loadAllArticles();        // يجب أن تنتهي أولًا
+  console.log('Articles loaded:', allArticles); // يجب أن تطبع المصفوفة
+  const articleData = await loadArticleData();
+  console.log('Current article:', articleData); // يجب أن تطبع كائنًا
+  if (articleData) renderArticle(articleData);
+  else document.getElementById('article-content').innerHTML = '<p>Article not found.</p>';
 });
 
         // Mobile Menu Toggle
