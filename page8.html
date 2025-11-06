@@ -788,12 +788,46 @@
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
+            .search-box {
+  display: none;
+  position: absolute;
+  top: 70px;
+  right: 10px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  z-index: 9999;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  padding: 8px;
+  width: 180px;
+}
+
+.search-box button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  font-size: 18px;
+}
+
         }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
+<div class="search-box" id="search-box">
+  <input type="text" placeholder="Search..." />
+  <button id="close-search"><i class="fas fa-times"></i></button>
+</div>
+
+        
         <div class="container header-container">
             <a href="index.html" class="logo">
                 <i class="fas fa-paw"></i>
@@ -1189,6 +1223,21 @@
     mainNav.classList.toggle("active");
   });
 </script>
+
+    <script>
+  const searchBtn = document.querySelector('.search-btn');
+  const searchBox = document.getElementById('search-box');
+  const closeSearch = document.getElementById('close-search');
+
+  searchBtn.addEventListener('click', () => {
+    searchBox.style.display = searchBox.style.display === 'block' ? 'none' : 'block';
+  });
+
+  closeSearch.addEventListener('click', () => {
+    searchBox.style.display = 'none';
+  });
+</script>
+
 
 
 </body>
