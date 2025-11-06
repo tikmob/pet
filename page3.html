@@ -845,15 +845,21 @@
 
     <script>
         // Function to load article data from JSON
-      async function loadArticleData() {
+  let allArticles = [];
+
+async function loadAllArticles() {
   try {
-    const response = await fetch('articles.json'); // أو 'data/articles.json'
-    const data = await response.json();
-    return data.article;
+    const response = await fetch('articles.json');
+    allArticles = await response.json();
   } catch (error) {
-    console.error('Error loading article data:', error);
-    return null;
+    console.error('Error loading articles:', error);
   }
+}
+
+function getRelatedArticles(currentId, count = 3) {
+  const filtered = allArticles.filter(article => article.id !== currentId);
+  const shuffled = filtered.sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
 }
 
         // Function to render article content
