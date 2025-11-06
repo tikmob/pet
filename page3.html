@@ -844,91 +844,107 @@
     </footer>
 
     <script>
-// قراءة المقال المطلوب من الـ URL
-async function loadArticleData() {
-  const params = new URLSearchParams(location.search);
-  const id = params.get('id') || 'positive-reinforcement-dog-training'; // قيمة افتراضية
-  return allArticles.find(a => a.id === id) || null;
-}
+    let allArticles = [];
+
+    // Function to load all articles from JSON
+    async function loadAllArticles() {
+        try {
+            const response = await fetch('articles.json');
+            const data = await response.json();
+            allArticles = data.articles; // الوصول إلى المصفوفة داخل الكائن
+            console.log('Articles loaded successfully:', allArticles);
+        } catch (error) {
+            console.error('Error loading articles:', error);
+        }
+    }
+
+    // Function to get current article from URL
+    function loadArticleData() {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id') || 'positive-reinforcement-dog-training';
+        console.log('Looking for article with ID:', id);
         
-        // Function to load article data from JSON
-  let allArticles = [];
+        const article = allArticles.find(a => a.id === id);
+        console.log('Found article:', article);
+        return article;
+    }
 
-async function loadAllArticles() {
-  try {
-    const response = await fetch('articles.json');
-    allArticles = await response.json();
-  } catch (error) {
-    console.error('Error loading articles:', error);
-  }
-}
+    // Function to get related articles
+    function getRelatedArticles(currentId, count = 3) {
+        const filtered = allArticles.filter(article => article.id !== currentId);
+        const shuffled = [...filtered].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, count);
+    }
 
-function getRelatedArticles(currentId, count = 3) {
-  const filtered = allArticles.filter(article => article.id !== currentId);
-  const shuffled = filtered.sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count);
-}
+    // Helper function to format date
+    function formatDate(dateString) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString('en-US', options);
+    }
 
-        // Function to render article content
-        function renderArticle(articleData) {
-            if (!articleData) {
-                document.getElementById('article-content').innerHTML = '<p>Error loading article content.</p>';
-                return;
-            }
+    // Function to render article content
+    function renderArticle(articleData) {
+        if (!articleData) {
+            document.getElementById('article-content').innerHTML = '<p>Error loading article content.</p>';
+            return;
+        }
 
-            // Update page metadata
-            document.getElementById('page-title').textContent = articleData.title;
-            document.getElementById('meta-description').setAttribute('content', articleData.description);
-            document.getElementById('meta-keywords').setAttribute('content', articleData.keywords);
+        console.log('Rendering article:', articleData);
 
-            // Update structured data
-            const structuredData = {
-                "@context": "https://schema.org",
-                "@type": "Article",
-                "headline": articleData.title,
-                "description": articleData.description,
-                "image": articleData.featuredImage.url,
-                "author": {
-                    "@type": "Person",
-                    "name": articleData.author.name
-                },
-                "publisher": {
-                    "@type": "Organization",
-                    "name": articleData.publisher.name,
-                    "logo": {
-                        "@type": "ImageObject",
-                        "url": articleData.publisher.logo
-                    }
-                },
-                "datePublished": articleData.datePublished,
-                "dateModified": articleData.dateModified,
-                "mainEntityOfPage": {
-                    "@type": "WebPage",
-                    "@id": window.location.href
+        // Update page metadata
+        document.title = articleData.title;
+        document.getElementById('meta-description').setAttribute('content', articleData.description);
+        document.getElementById('meta-keywords').setAttribute('content', articleData.keywords);
+
+        // Update structured data
+        const structuredData = {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": articleData.title,
+            "description": articleData.description,
+            "image": articleData.featuredImage.url,
+            "author": {
+                "@type": "Person",
+                "name": articleData.author.name
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": articleData.publisher.name,
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": articleData.publisher.logo
                 }
-            };
-            document.getElementById('structured-data').textContent = JSON.stringify(structuredData);
+            },
+            "datePublished": articleData.datePublished,
+            "dateModified": articleData.dateModified,
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": window.location.href
+            }
+        };
+        document.getElementById('structured-data').textContent = JSON.stringify(structuredData);
 
-            // Build article header
-            const articleHeader = `
-                <header class="article-header">
-                    <span class="article-category">${articleData.category}</span>
-                    <h1 class="article-title">${articleData.title}</h1>
-                    <div class="article-meta">
-                        <span><i class="far fa-user"></i> By ${articleData.author.name}</span>
-                        <span><i class="far fa-calendar"></i> ${formatDate(articleData.datePublished)}</span>
-                        <span><i class="far fa-clock"></i> ${articleData.readTime}</span>
-                        <span><i class="far fa-eye"></i> ${articleData.views} views</span>
-                    </div>
-                </header>
-                <div class="featured-image">
-                    <img src="${articleData.featuredImage.url}" alt="${articleData.featuredImage.alt}">
+        // Build article header
+        const articleHeader = `
+            <header class="article-header">
+                <span class="article-category">${articleData.category}</span>
+                <h1 class="article-title">${articleData.title}</h1>
+                <div class="article-meta">
+                    <span><i class="far fa-user"></i> By ${articleData.author.name}</span>
+                    <span><i class="far fa-calendar"></i> ${formatDate(articleData.datePublished)}</span>
+                    <span><i class="far fa-clock"></i> ${articleData.readTime}</span>
+                    <span><i class="far fa-eye"></i> ${articleData.views} views</span>
                 </div>
-            `;
+            </header>
+            <div class="featured-image">
+                <img src="${articleData.featuredImage.url}" alt="${articleData.featuredImage.alt}">
+            </div>
+        `;
 
-            // Build article content
-            let articleContent = '<div class="article-content">';
-            
+        // Build article content
+        let articleContent = '<div class="article-content">';
+        
+        if (articleData.content && Array.isArray(articleData.content)) {
             articleData.content.forEach(item => {
                 switch(item.type) {
                     case 'paragraph':
@@ -943,7 +959,7 @@ function getRelatedArticles(currentId, count = 3) {
                                 <div class="article-image">
                                     <img src="${item.url}" alt="${item.alt}">
                                 </div>
-                                <p class="image-caption">${item.caption}</p>
+                                ${item.caption ? `<p class="image-caption">${item.caption}</p>` : ''}
                             </div>
                         `;
                         break;
@@ -965,93 +981,97 @@ function getRelatedArticles(currentId, count = 3) {
                         break;
                 }
             });
+        }
 
-            // Add conclusion
+        // Add conclusion if exists
+        if (articleData.conclusion) {
             articleContent += `
                 <div class="conclusion">
                     <h3>${articleData.conclusion.title}</h3>
                     <p>${articleData.conclusion.content}</p>
                 </div>
             `;
+        }
 
-            // Add tags
+        // Add tags if exist
+        if (articleData.tags && articleData.tags.length > 0) {
             articleContent += '<div class="article-tags">';
             articleData.tags.forEach(tag => {
                 articleContent += `<span class="tag">#${tag}</span>`;
             });
             articleContent += '</div>';
-
-            // Add actions
-            articleContent += `
-                <div class="article-actions">
-                    <button class="share-btn"><i class="fas fa-share-alt"></i> Share</button>
-                    <button class="share-btn"><i class="far fa-bookmark"></i> Save</button>
-                    <button class="share-btn"><i class="far fa-thumbs-up"></i> Like</button>
-                </div>
-            `;
-
-            articleContent += '</div>';
-
-            // Update the article content
-            document.getElementById('article-content').innerHTML = articleHeader + articleContent;
-
-           // Build sidebar
-const relatedArticles = getRelatedArticles(articleData.id);
-
-const sidebarContent = `
-  <div class="author-card">
-    <div class="author-avatar">
-      <img src="${articleData.author.avatar}" alt="${articleData.author.name}">
-    </div>
-    <h3>${articleData.author.name}</h3>
-    <p class="author-title">${articleData.author.title}</p>
-    <p class="author-bio">${articleData.author.bio}</p>
-  </div>
-
-  <div class="sidebar-widget">
-    <h3>Related Articles</h3>
-    <ul class="related-articles">
-      ${relatedArticles.map(art => `
-        <li class="related-article">
-          <img src="${art.featuredImage.url}" alt="${art.featuredImage.alt}">
-          <div class="related-article-content">
-            <h4><a href="article.html?id=${art.id}">${art.title}</a></h4>
-            <div class="related-article-meta">${art.datePublished} • ${art.readTime}</div>
-          </div>
-        </li>
-      `).join('')}
-    </ul>
-  </div>
-
-  <div class="sidebar-widget">
-    <h3>Popular Categories</h3>
-    <ul>
-      <li><a href="#">Dog Training</a></li>
-      <li><a href="#">Puppy Care</a></li>
-      <li><a href="#">Behavior Issues</a></li>
-      <li><a href="#">Health & Nutrition</a></li>
-      <li><a href="#">Product Reviews</a></li>
-    </ul>
-  </div>
-`;
-
-// Update the sidebar
-document.getElementById('sidebar-content').innerHTML = sidebarContent;
-        // Helper function to format date
-        function formatDate(dateString) {
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            return new Date(dateString).toLocaleDateString('en-US', options);
         }
 
-        // Initialize the page
-      document.addEventListener('DOMContentLoaded', async () => {
-  await loadAllArticles();        // يجب أن تنتهي أولًا
-  console.log('Articles loaded:', allArticles); // يجب أن تطبع المصفوفة
-  const articleData = await loadArticleData();
-  console.log('Current article:', articleData); // يجب أن تطبع كائنًا
-  if (articleData) renderArticle(articleData);
-  else document.getElementById('article-content').innerHTML = '<p>Article not found.</p>';
-});
+        // Add actions
+        articleContent += `
+            <div class="article-actions">
+                <button class="share-btn"><i class="fas fa-share-alt"></i> Share</button>
+                <button class="share-btn"><i class="far fa-bookmark"></i> Save</button>
+                <button class="share-btn"><i class="far fa-thumbs-up"></i> Like</button>
+            </div>
+        `;
+
+        articleContent += '</div>';
+
+        // Update the article content
+        document.getElementById('article-content').innerHTML = articleHeader + articleContent;
+
+        // Build sidebar
+        const relatedArticles = getRelatedArticles(articleData.id);
+        
+        const sidebarContent = `
+            <div class="author-card">
+                <div class="author-avatar">
+                    <img src="${articleData.author.avatar}" alt="${articleData.author.name}">
+                </div>
+                <h3>${articleData.author.name}</h3>
+                <p class="author-title">${articleData.author.title}</p>
+                <p class="author-bio">${articleData.author.bio}</p>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3>Related Articles</h3>
+                <ul class="related-articles">
+                    ${relatedArticles.map(art => `
+                        <li class="related-article">
+                            <img src="${art.featuredImage.url}" alt="${art.title}">
+                            <div class="related-article-content">
+                                <h4><a href="article.html?id=${art.id}">${art.title}</a></h4>
+                                <div class="related-article-meta">${formatDate(art.datePublished)} • ${art.readTime}</div>
+                            </div>
+                        </li>
+                    `).join('')}
+                </ul>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3>Popular Categories</h3>
+                <ul>
+                    <li><a href="#">Dog Training</a></li>
+                    <li><a href="#">Puppy Care</a></li>
+                    <li><a href="#">Behavior Issues</a></li>
+                    <li><a href="#">Health & Nutrition</a></li>
+                    <li><a href="#">Product Reviews</a></li>
+                </ul>
+            </div>
+        `;
+
+        // Update the sidebar
+        document.getElementById('sidebar-content').innerHTML = sidebarContent;
+    }
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', async function() {
+        console.log('DOM loaded, initializing...');
+        
+        await loadAllArticles();
+        const articleData = loadArticleData();
+        
+        if (articleData) {
+            renderArticle(articleData);
+        } else {
+            document.getElementById('article-content').innerHTML = '<p>Article not found. Please check the URL.</p>';
+        }
 
         // Mobile Menu Toggle
         document.getElementById('mobile-menu').addEventListener('click', function() {
@@ -1067,7 +1087,6 @@ document.getElementById('sidebar-content').innerHTML = sidebarContent;
                         url: window.location.href
                     });
                 } else {
-                    // Fallback for browsers that don't support Web Share API
                     alert('Share this article using your browser\'s share functionality or copy the URL.');
                 }
             }
@@ -1084,6 +1103,7 @@ document.getElementById('sidebar-content').innerHTML = sidebarContent;
                 header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
             }
         });
-    </script>
+    });
+</script>
 </body>
 </html>
