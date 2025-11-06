@@ -1038,9 +1038,10 @@ function getRelatedArticles(currentId, count = 3) {
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', async () => {
-            const articleData = await loadArticleData();
-            renderArticle(articleData);
-        });
+  await loadAllArticles(); // تحميل جميع المقالات أولًا
+  const articleData = await loadArticleData(); // تحميل المقال الحالي
+  renderArticle(articleData);
+});
 
         // Mobile Menu Toggle
         document.getElementById('mobile-menu').addEventListener('click', function() {
