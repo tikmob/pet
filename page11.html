@@ -1390,6 +1390,16 @@ body.menu-open .sidebar {
             }
         });
 
+        // ====== Mobile Menu Fix ======
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mainNav    = document.getElementById('main-nav');
+
+    mobileMenu.addEventListener('click', () => {
+        const isOpen = mainNav.classList.toggle('active');
+        document.body.classList.toggle('menu-open', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
         // Header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
