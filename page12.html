@@ -919,6 +919,29 @@
                 gap: 40px;
             }
         }
+
+        /* إخفاء زر القائمة على الحاسوب */
+@media (min-width: 769px) {
+  .mobile-menu {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+}
+
+        @media (min-width: 769px) {
+  .mobile-menu {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    position: static !important; /* هذا هو المفتاح */
+    z-index: 0 !important;
+  }
+}
+
+
     </style>
 </head>
 <body>
