@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers - PetCare Pro | Join Our Team</title>
+    <meta name="description" content="Join the PetCare Pro team! Explore career opportunities in pet care, dog training, content creation, and animal welfare.">
+    <meta name="keywords" content="pet care careers, dog training jobs, animal care employment, veterinary jobs, pet industry careers">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yourdomain.com/careers.html">
+    <meta name="author" content="PetCare Pro Team">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Careers - PetCare Pro">
+    <meta property="og:description" content="Join our passionate team of pet care experts">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:url" content="https://yourdomain.com/careers.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "JobPosting",
+        "title": "Pet Care Specialist",
+        "description": "Join our team of passionate pet care experts",
+        "datePosted": "2023-12-01",
+        "employmentType": "FULL_TIME",
+        "hiringOrganization": {
+            "@type": "Organization",
+            "name": "PetCare Pro",
+            "sameAs": "https://yourdomain.com"
+        },
+        "jobLocation": {
+            "@type": "Place",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "City",
+                "addressRegion": "State",
+                "addressCountry": "US"
+            }
+        }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* نفس أنماط about-us.html مع إضافات للوظائف */
+        :root {
+            --primary: #4A6FFF;
+            --secondary: #FF6B8B;
+            --accent: #00D4AA;
+            --light: #F8FAFF;
+            --dark: #1A1D29;
+            --gray: #6C7486;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles - نفس الأنماط */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--accent);
+            font-size: 1.9rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            font-size: 1.05rem;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a.active {
+            color: var(--primary);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* Page Content */
+        .page-hero {
+            background: linear-gradient(135deg, var(--primary), #6A8AFF);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .page-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .page-hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            background: white;
+            padding: 60px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 50px;
+        }
+
+        .content-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .benefit-card {
+            background: var(--light);
+            padding: 40px 30px;
+            border-radius: var(--radius);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .benefit-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .benefit-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .jobs-list {
+            margin: 50px 0;
+        }
+
+        .job-card {
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: var(--radius);
+            padding: 40px;
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+
+        .job-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .job-title h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .job-meta {
+            display: flex;
+            gap: 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .job-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .apply-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .apply-btn:hover {
+            background: #3A5FEF;
+            transform: translateY(-2px);
+        }
+
+        .job-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .job-requirements {
+            margin-top: 25px;
+        }
+
+        .job-requirements h4 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .job-requirements ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .job-requirements li {
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .job-requirements li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Footer - نفس الأنماط */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: #B0B7C3;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #B0B7C3;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .page-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .content-section {
+                padding: 40px 30px;
+            }
+            
+            .job-header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-paw"></i>
+                <span>PetCare Pro</span>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Dogs</a></li>
+                    <li><a href="#">Cats</a></li>
+                    <li><a href="articles.html">Articles</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="careers.html" class="active">Careers</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Join Our Team</h1>
+            <p>Help us make a difference in the lives of pets and their owners</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content-section">
+            <h2>Why Work at PetCare Pro?</h2>
+            <p>At PetCare Pro, we're not just building a company - we're building a community of passionate animal lovers dedicated to improving pet care worldwide. Join us in our mission to provide expert guidance and support to pet owners everywhere.</p>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <i class="fas fa-paw"></i>
+                    <h4>Pet-Friendly Office</h4>
+                    <p>Bring your furry friend to work in our pet-friendly environment</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-heart"></i>
+                    <h4>Make a Difference</h4>
+                    <p>Directly impact the lives of pets and their families</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h4>Continuous Learning</h4>
+                    <p>Regular training and professional development opportunities</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-users"></i>
+                    <h4>Great Team</h4>
+                    <p>Work with passionate, like-minded animal enthusiasts</p>
+                </div>
+            </div>
+
+            <h2>Current Openings</h2>
+            <p>We're always looking for talented individuals who share our passion for animal welfare. Check out our current opportunities below.</p>
+
+            <div class="jobs-list">
+                <!-- Job 1 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-title">
+                            <h3>Certified Dog Trainer</h3>
+                            <div class="job-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Remote / On-site</span>
+                                <span><i class="fas fa-clock"></i> Full-time</span>
+                                <span><i class="fas fa-dollar-sign"></i> $45,000 - $65,000</span>
+                            </div>
+                        </div>
+                        <button class="apply-btn">Apply Now</button>
+                    </div>
+                    <p class="job-description">We're seeking an experienced Certified Dog Trainer to develop training content, conduct virtual training sessions, and contribute to our educational resources.</p>
+                    <div class="job-requirements">
+                        <h4>Requirements:</h4>
+                        <ul>
+                            <li>Certification in dog training (CPDT-KA preferred)</li>
+                            <li>3+ years of professional dog training experience</li>
+                            <li>Excellent communication and teaching skills</li>
+                            <li>Experience with positive reinforcement methods</li>
+                            <li>Ability to create engaging training content</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Job 2 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-title">
+                            <h3>Pet Care Content Writer</h3>
+                            <div class="job-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Remote</span>
+                                <span><i class="fas fa-clock"></i> Full-time</span>
+                                <span><i class="fas fa-dollar-sign"></i> $40,000 - $55,000</span>
+                            </div>
+                        </div>
+                        <button class="apply-btn">Apply Now</button>
+                    </div>
+                    <p class="job-description">Join our content team as a Pet Care Writer, creating informative and engaging articles about dog training, cat behavior, nutrition, and general pet care.</p>
+                    <div class="job-requirements">
+                        <h4>Requirements:</h4>
+                        <ul>
+                            <li>2+ years of professional writing experience</li>
+                            <li>Strong knowledge of pet care and animal behavior</li>
+                            <li>SEO writing experience preferred</li>
+                            <li>Ability to research and verify scientific information</li>
+                            <li>Passion for animal welfare and education</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Job 3 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-title">
+                            <h3>Veterinary Consultant</h3>
+                            <div class="job-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Remote</span>
+                                <span><i class="fas fa-clock"></i> Part-time</span>
+                                <span><i class="fas fa-dollar-sign"></i> Contract</span>
+                            </div>
+                        </div>
+                        <button class="apply-btn">Apply Now</button>
+                    </div>
+                    <p class="job-description">We're looking for a licensed veterinarian to consult on content accuracy, review articles, and provide expert insights for our pet care resources.</p>
+                    <div class="job-requirements">
+                        <h4>Requirements:</h4>
+                        <ul>
+                            <li>DVM degree and active license</li>
+                            <li>5+ years of clinical experience</li>
+                            <li>Special interest in behavior or nutrition</li>
+                            <li>Excellent communication skills</li>
+                            <li>Ability to explain complex topics simply</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h2>How to Apply</h2>
+            <p>Ready to join our team? Send your resume and cover letter to <strong>careers@petcarepro.com</strong>. Please include the position you're applying for in the subject line.</p>
+            <p>We review applications on a rolling basis and will contact qualified candidates for interviews within 2-3 weeks of application.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>PetCare Pro</h3>
+                    <p style="color: #B0B7C3; margin-bottom: 25px;">Your trusted resource for professional pet care advice and premium products.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="articles.html">Articles</a></li>
+                        <li><a href="about-us.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li style="color: #B0B7C3;"><i class="fas fa-envelope"></i> hello@petcarepro.com</li>
+                        <li style="color: #B0B7C3;"><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li style="color: #B0B7C3;"><i class="fas fa-map-marker-alt"></i> 123 Pet Care Ave, City</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PetCare Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Apply button functionality
+        document.querySelectorAll('.apply-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const jobTitle = this.closest('.job-card').querySelector('h3').textContent;
+                alert(`Thank you for your interest in the "${jobTitle}" position! Please send your application to careers@petcarepro.com`);
+            });
+        });
+    </script>
+</body>
+</html>
