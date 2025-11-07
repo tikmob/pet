@@ -274,15 +274,6 @@
             box-shadow: 0 6px 15px rgba(74, 111, 255, 0.3);
         }
 
-        body.menu-open .sidebar {
-    display: none;                /* إخفاء كامل */
-}
-
-body.menu-open .sidebar {
-    position: static !important;  /* إلغاء اللزوجة أثناء فتح المينو */
-}
-
-
         .mobile-menu {
             display: none;
             font-size: 1.5rem;
@@ -1361,7 +1352,13 @@ body.menu-open .sidebar {
         // Setup search functionality
         setupSearch();
 
-       
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            document.getElementById('main-nav').classList.toggle('active');
+            
+            // Prevent scrolling when menu is open
+            document.body.style.overflow = document.getElementById('main-nav').classList.contains('active') ? 'hidden' : '';
+        });
 
         // Share functionality
         document.addEventListener('click', function(e) {
@@ -1383,16 +1380,6 @@ body.menu-open .sidebar {
                 }
             }
         });
-
-        // ====== Mobile Menu Fix ======
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mainNav    = document.getElementById('main-nav');
-
-    mobileMenu.addEventListener('click', () => {
-        const isOpen = mainNav.classList.toggle('active');
-        document.body.classList.toggle('menu-open', isOpen);
-        document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
 
         // Header scroll effect
         window.addEventListener('scroll', function() {
