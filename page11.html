@@ -1361,13 +1361,7 @@ body.menu-open .sidebar {
         // Setup search functionality
         setupSearch();
 
-        // Mobile Menu Toggle
-        document.getElementById('mobile-menu').addEventListener('click', function() {
-            document.getElementById('main-nav').classList.toggle('active');
-            
-            // Prevent scrolling when menu is open
-            document.body.style.overflow = document.getElementById('main-nav').classList.contains('active') ? 'hidden' : '';
-        });
+       
 
         // Share functionality
         document.addEventListener('click', function(e) {
