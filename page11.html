@@ -65,15 +65,6 @@
             padding: 18px 0;
         }
 
-        .article-header {
-  position: sticky;
-  top: 60px; /* عدّلها حسب ارتفاع النافبار العلوي */
-  background: white;
-  z-index: 1000;
-  padding: 10px 0;
-}
-
-
         .logo {
             display: flex;
             align-items: center;
@@ -290,7 +281,48 @@
             color: var(--dark);
             z-index: 10000;
             position: relative;
+
         }
+
+            /* ===== القائمة الرئيسية (nav) تبقى فوق كل شيء ===== */
+#main-nav {
+  position: fixed;         /* تبقى ثابتة في الأعلى */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  z-index: 9999;           /* فوق كل العناصر */
+  border-bottom: 1px solid #ddd;
+}
+
+/* تعويض المساحة تحت القائمة حتى لا يغطي المحتوى */
+body {
+  padding-top: 65px; /* عدّلها حسب ارتفاع القائمة */
+}
+
+/* ===== العنوان الثاني ثابت ===== */
+.article-header {
+  position: sticky;
+  top: 65px;               /* نفس ارتفاع القائمة */
+  background: #fff;
+  z-index: 9998;           /* تحت القائمة بقليل */
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+/* ===== تحسين العرض في الهاتف ===== */
+@media (max-width: 768px) {
+  #main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .article-header {
+    top: 55px; /* اضبطها حسب حجم القائمة في الهاتف */
+  }
+}
+
 
         /* Article Layout */
         .article-layout {
@@ -712,16 +744,6 @@
             #main-nav a {
                 font-size: 1.3rem;
             }
-
-            #main-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: white;
-  z-index: 9999; /* يجعل القائمة فوق كل شيء */
-}
-
 
             .mobile-menu {
                 display: block;
