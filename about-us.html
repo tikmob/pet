@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - PetCare Pro | Your Trusted Pet Care Partner</title>
+    <meta name="description" content="Learn about PetCare Pro's mission to provide expert pet care advice, training resources, and premium products for dog and cat owners worldwide.">
+    <meta name="keywords" content="about petcare pro, pet care company, dog training experts, cat care specialists, our mission">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yourdomain.com/about-us.html">
+    <meta name="author" content="PetCare Pro Team">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="About Us - PetCare Pro">
+    <meta property="og:description" content="Your trusted partner in pet care since 2023">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1450778869180-41d0601e046e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:url" content="https://yourdomain.com/about-us.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About Us - PetCare Pro">
+    <meta name="twitter:description" content="Your trusted partner in pet care since 2023">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1450778869180-41d0601e046e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "About PetCare Pro",
+        "description": "Your trusted partner in pet care since 2023",
+        "url": "https://yourdomain.com/about-us.html",
+        "publisher": {
+            "@type": "Organization",
+            "name": "PetCare Pro",
+            "logo": "https://petcarepro.com/logo.png"
+        }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4A6FFF;
+            --secondary: #FF6B8B;
+            --accent: #00D4AA;
+            --light: #F8FAFF;
+            --dark: #1A1D29;
+            --gray: #6C7486;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--accent);
+            font-size: 1.9rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            font-size: 1.05rem;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a.active {
+            color: var(--primary);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* Page Content */
+        .page-hero {
+            background: linear-gradient(135deg, var(--primary), #6A8AFF);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .page-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .page-hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            background: white;
+            padding: 60px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 50px;
+        }
+
+        .content-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .content-section h3 {
+            font-size: 1.5rem;
+            margin: 40px 0 20px;
+            color: var(--primary);
+        }
+
+        .content-section p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .value-card {
+            background: var(--light);
+            padding: 40px 30px;
+            border-radius: var(--radius);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+
+        .value-card i {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .value-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: #B0B7C3;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #B0B7C3;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .page-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .content-section {
+                padding: 40px 30px;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-paw"></i>
+                <span>PetCare Pro</span>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Dogs</a></li>
+                    <li><a href="#">Cats</a></li>
+                    <li><a href="articles.html">Articles</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="about-us.html" class="active">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>About PetCare Pro</h1>
+            <p>Your trusted partner in pet care since 2023</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content-section">
+            <h2>Our Story</h2>
+            <p>Founded in 2023, PetCare Pro emerged from a simple belief: every pet deserves the best care possible. Our journey began when our founders, passionate pet owners themselves, noticed a gap in reliable, expert-driven pet care information online.</p>
+            
+            <p>What started as a small blog has grown into a comprehensive platform trusted by thousands of pet owners worldwide. We combine scientific research with practical experience to bring you the most effective pet care solutions.</p>
+
+            <h2>Our Mission</h2>
+            <p>To empower pet owners with expert knowledge, practical training techniques, and premium products that enhance the well-being of their beloved companions while strengthening the human-animal bond.</p>
+
+            <div class="values-grid">
+                <div class="value-card">
+                    <i class="fas fa-heart"></i>
+                    <h4>Compassion First</h4>
+                    <p>Every piece of advice is rooted in genuine care for animal welfare and happiness.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h4>Expert Driven</h4>
+                    <p>All content is reviewed by certified veterinarians and professional trainers.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>Trust & Safety</h4>
+                    <p>We prioritize safe, proven methods that put your pet's health first.</p>
+                </div>
+            </div>
+
+            <h2>Our Team</h2>
+            <p>Our diverse team includes certified dog trainers, feline behavior specialists, veterinary consultants, and passionate pet enthusiasts. Each member brings unique expertise while sharing a common goal: improving the lives of pets and their owners.</p>
+
+            <h2>Why Choose PetCare Pro?</h2>
+            <p>Unlike generic pet advice websites, we focus on evidence-based methods that have been proven effective through scientific research and real-world application. Our commitment to accuracy and practical implementation sets us apart in the pet care industry.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>PetCare Pro</h3>
+                    <p style="color: #B0B7C3; margin-bottom: 25px;">Your trusted resource for professional pet care advice and premium products.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="articles.html">Articles</a></li>
+                        <li><a href="about-us.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li style="color: #B0B7C3;"><i class="fas fa-envelope"></i> hello@petcarepro.com</li>
+                        <li style="color: #B0B7C3;"><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li style="color: #B0B7C3;"><i class="fas fa-map-marker-alt"></i> 123 Pet Care Ave, City</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PetCare Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
