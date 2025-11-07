@@ -691,8 +691,6 @@
                 backdrop-filter: blur(10px);
                 position: fixed !important; /* ✅ بدل absolute */
                  top: 60px;
-                position: fixed !important;
-                z-index: 99999 !important;
 
                 
             }
@@ -713,6 +711,17 @@
             #main-nav a {
                 font-size: 1.3rem;
             }
+
+            #main-nav {
+    position: fixed !important;
+    z-index: 99999 !important;
+  }
+
+  .article-header {
+    position: relative;
+    z-index: 1;
+  }
+}
 
             .mobile-menu {
                 display: block;
