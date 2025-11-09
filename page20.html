@@ -33,356 +33,325 @@
     <script type="application/ld+json" id="breadcrumb-data">
     </script>
     
-    <!-- نظام الإعلانات الذكي المحسن -->
-    <script>
-        class AdSystem {
-            constructor() {
-                this.adsData = null;
-                this.adContainers = {};
-                this.initialized = false;
-                this.retryCount = 0;
-                this.maxRetries = 5;
-            }
+    <!-- نظام الإعلانات الذكي - الإصدار المصحح -->
+  <script>
+    // نظام تحميل الإعلانات من ملف JSON - الإصدار المحسن والمصحح
+    class AdSystem {
+        constructor() {
+            this.adsData = null;
+            this.adContainers = {};
+            this.initialized = false;
+            this.inArticleAdsInjected = false; // متغير لتتبع حقن إعلانات المقال
+            this.init();
+        }
 
-            async init() {
-                try {
-                    await this.loadAdsData();
-                    await this.waitForDOM();
-                    this.createAdContainers();
-                    this.injectStaticAds();
-                    this.setupAutoAds();
-                    this.initialized = true;
-                    console.log('✅ نظام الإعلانات جاهز');
-                    
-                    this.tryInjectInArticleAds();
-                } catch (error) {
-                    console.error('❌ خطأ في نظام الإعلانات:', error);
-                    this.retryInit();
-                }
+        // تهيئة النظام
+        async init() {
+            try {
+                await this.loadAdsData();
+                this.createAdContainers();
+                this.injectStaticAds();
+                this.setupAutoAds();
+                this.initialized = true;
+                console.log('✅ نظام الإعلانات جاهز');
+                
+                // محاولة حقن الإعلانات داخل المقال إذا كان المحتوى متاحاً
+                setTimeout(() => this.tryInjectInArticleAds(), 1000);
+            } catch (error) {
+                console.error('❌ خطأ في نظام الإعلانات:', error);
             }
+        }
 
-            async waitForDOM() {
-                return new Promise((resolve) => {
-                    const checkDOM = () => {
-                        if (document.body && document.querySelector('.container')) {
-                            resolve();
-                        } else {
-                            setTimeout(checkDOM, 100);
+        // تحميل بيانات الإعلانات من ملف JSON
+        async loadAdsData() {
+            try {
+                const response = await fetch('ads.json');
+                this.adsData = await response.json();
+                console.log('✅ بيانات الإعلانات محملة');
+            } catch (error) {
+                console.error('❌ خطأ في تحميل ads.json:', error);
+                this.adsData = this.getDefaultAdsData();
+            }
+        }
+
+        // بيانات الإعلانات الافتراضية
+        getDefaultAdsData() {
+            return {
+                "autoAds": {
+                    "enabled": false,
+                    "scripts": [
+                        {
+                            "type": "google_auto_ads",
+                            "code": "<!-- مثال على كود جوجل أوتو ads -->\n<script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-EXAMPLE' crossorigin='anonymous'><\/script>"
                         }
-                    };
-                    checkDOM();
-                });
-            }
-
-            retryInit() {
-                if (this.retryCount < this.maxRetries) {
-                    this.retryCount++;
-                    console.log(`🔄 إعادة المحاولة ${this.retryCount}/${this.maxRetries}`);
-                    setTimeout(() => this.init(), 1000 * this.retryCount);
-                }
-            }
-
-            async loadAdsData() {
-                try {
-                    const response = await fetch('ads.json');
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    this.adsData = await response.json();
-                    console.log('✅ بيانات الإعلانات محملة من ads.json');
-                } catch (error) {
-                    console.error('❌ خطأ في تحميل ads.json:', error);
-                    this.adsData = this.getDefaultAdsData();
-                }
-            }
-
-            getDefaultAdsData() {
-                return {
-                    "autoAds": {
+                    ]
+                },
+                "bannerAds": {
+                    "header": {
                         "enabled": true,
-                        "scripts": [
-                            {
-                                "type": "google_auto_ads",
-                                "code": "<!-- Example Google Auto Ads Code -->\n<script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-EXAMPLE' crossorigin='anonymous'><\/script>"
-                            }
-                        ]
+                        "code": "<!-- إعلان هيدر -->\n<div class='ad-container ad-header' id='ad-header'>\n    <div class='ad-placeholder'>إعلان علوي (728x90)</div>\n</div>",
+                        "width": 728,
+                        "height": 90
                     },
-                    "bannerAds": {
-                        "header": {
-                            "enabled": true,
-                            "code": "<!-- Header Banner Ad -->\n<div class='ad-container ad-header'>\n    <div class='ad-placeholder'>Header Banner Ad (728x90)</div>\n</div>",
-                            "width": 728,
-                            "height": 90
+                    "footer": {
+                        "enabled": true,
+                        "code": "<!-- إعلان فوتر -->\n<div class='ad-container ad-footer' id='ad-footer'>\n    <div class='ad-placeholder'>إعلان سفلي (728x90)</div>\n</div>",
+                        "width": 728,
+                        "height": 90
+                    }
+                },
+                "sidebarAds": {
+                    "enabled": true,
+                    "code": "<!-- إعلان سايدبار -->\n<div class='ad-container ad-sidebar' id='ad-sidebar'>\n    <div class='ad-placeholder'>إعلان جانبي (300x600)</div>\n</div>",
+                    "width": 300,
+                    "height": 600
+                },
+                "inArticleAds": {
+                    "enabled": true,
+                    "positions": [
+                        {
+                            "position": "after_paragraph",
+                            "paragraphIndex": 2,
+                            "code": "<!-- إعلان داخل المقال 1 -->\n<div class='ad-container ad-in-article' id='ad-in-article-1'>\n    <div class='ad-placeholder'>إعلان داخل المقال (300x250)</div>\n</div>",
+                            "width": 300,
+                            "height": 250
                         },
-                        "footer": {
-                            "enabled": true,
-                            "code": "<!-- Footer Banner Ad -->\n<div class='ad-container ad-footer'>\n    <div class='ad-placeholder'>Footer Banner Ad (728x90)</div>\n</div>",
-                            "width": 728,
-                            "height": 90
+                        {
+                            "position": "after_paragraph", 
+                            "paragraphIndex": 5,
+                            "code": "<!-- إعلان داخل المقال 2 -->\n<div class='ad-container ad-in-article' id='ad-in-article-2'>\n    <div class='ad-placeholder'>إعلان داخل المقال (300x250)</div>\n</div>",
+                            "width": 300,
+                            "height": 250
                         }
-                    },
-                    "sidebarAds": {
-                        "enabled": true,
-                        "code": "<!-- Sidebar Ad -->\n<div class='ad-container ad-sidebar'>\n    <div class='ad-placeholder'>Sidebar Ad (300x600)</div>\n</div>",
-                        "width": 300,
-                        "height": 600
-                    },
-                    "inArticleAds": {
-                        "enabled": true,
-                        "positions": [
-                            {
-                                "position": "after_paragraph",
-                                "paragraphIndex": 2,
-                                "code": "<!-- In-Article Ad 1 -->\n<div class='ad-container ad-in-article'>\n    <div class='ad-placeholder'>In-Article Ad (300x250)</div>\n</div>",
-                                "width": 300,
-                                "height": 250
-                            },
-                            {
-                                "position": "after_paragraph",
-                                "paragraphIndex": 5,
-                                "code": "<!-- In-Article Ad 2 -->\n<div class='ad-container ad-in-article'>\n    <div class='ad-placeholder'>In-Article Ad (300x250)</div>\n</div>",
-                                "width": 300,
-                                "height": 250
-                            }
-                        ]
-                    },
-                    "popupAds": {
-                        "enabled": false,
-                        "delay": 5000,
-                        "code": "<!-- Popup Ad -->\n<div id='popup-ad' class='ad-popup'>\n    <div class='popup-content'>\n        <button class='close-popup' onclick='closePopup()'>×</button>\n        <div class='ad-placeholder'>Popup Ad (400x300)</div>\n    </div>\n</div>",
-                        "width": 400,
-                        "height": 300
-                    }
-                };
+                    ]
+                },
+                "popupAds": {
+                    "enabled": false,
+                    "delay": 5000,
+                    "code": "<!-- إعلان منبثق -->\n<div id='popup-ad' class='ad-popup' style='display:none'>\n    <div class='popup-content'>\n        <button class='close-popup' onclick='closePopup()'>×</button>\n        <div class='ad-placeholder'>إعلان منبثق (400x300)</div>\n    </div>\n</div>",
+                    "width": 400,
+                    "height": 300
+                }
+            };
+        }
+
+        // إنشاء حاويات الإعلانات في الصفحة - مصحح
+        createAdContainers() {
+            // حاوية الإعلان العلوي - بعد الهيدر مباشرة
+            const headerAdContainer = document.createElement('div');
+            headerAdContainer.id = 'ad-header-container';
+            headerAdContainer.className = 'ad-section';
+            document.querySelector('header').after(headerAdContainer);
+
+            // حاوية الإعلان الجانبي - داخل السايدبار
+            const sidebarAdContainer = document.createElement('div');
+            sidebarAdContainer.id = 'ad-sidebar-container';
+            sidebarAdContainer.className = 'ad-section';
+            const sidebarContent = document.getElementById('sidebar-content');
+            if (sidebarContent) {
+                sidebarContent.prepend(sidebarAdContainer);
             }
 
-            createAdContainers() {
-                const container = document.querySelector('.container');
-                if (!container) {
-                    throw new Error('Container not found');
-                }
+            // حاوية الإعلان السفلي - قبل النيوزليتر
+            const footerAdContainer = document.createElement('div');
+            footerAdContainer.id = 'ad-footer-container';
+            footerAdContainer.className = 'ad-section';
+            const newsletter = document.querySelector('.newsletter');
+            if (newsletter) {
+                newsletter.before(footerAdContainer);
+            }
 
-                // حاوية الإعلان العلوي
-                const headerAdContainer = document.createElement('div');
-                headerAdContainer.id = 'ad-header-container';
-                headerAdContainer.className = 'ad-section header-ad-section';
-                container.parentNode.insertBefore(headerAdContainer, container);
+            this.adContainers = {
+                header: headerAdContainer,
+                sidebar: sidebarAdContainer,
+                footer: footerAdContainer
+            };
+        }
 
-                // حاوية الإعلان الجانبي
-                const sidebarAdContainer = document.createElement('div');
-                sidebarAdContainer.id = 'ad-sidebar-container';
-                sidebarAdContainer.className = 'ad-section sidebar-ad-section';
+        // حقن الإعلانات الثابتة (التي تظهر دائماً) - مصحح
+        injectStaticAds() {
+            if (!this.adsData) {
+                console.log('❌ لا توجد بيانات إعلانات');
+                return;
+            }
+
+            console.log('🔄 حقن الإعلانات الثابتة...');
+
+            // إعلانات البانر العلوية
+            if (this.adsData.bannerAds.header.enabled && this.adContainers.header) {
+                this.injectAd('header', this.adsData.bannerAds.header.code);
+                console.log('✅ الإعلان العلوي مضاف');
+            }
+
+            // إعلانات البانر السفلية
+            if (this.adsData.bannerAds.footer.enabled && this.adContainers.footer) {
+                this.injectAd('footer', this.adsData.bannerAds.footer.code);
+                console.log('✅ الإعلان السفلي مضاف');
+            }
+
+            // إعلانات الشريط الجانبي
+            if (this.adsData.sidebarAds.enabled && this.adContainers.sidebar) {
+                this.injectAd('sidebar', this.adsData.sidebarAds.code);
+                console.log('✅ الإعلان الجانبي مضاف');
+            }
+
+            // الإعلانات المنبثقة
+            if (this.adsData.popupAds.enabled) {
+                this.setupPopupAd();
+            }
+        }
+
+        // حقن إعلان في حاوية محددة - مصحح
+        injectAd(containerId, adCode) {
+            if (this.adContainers[containerId]) {
+                this.adContainers[containerId].innerHTML = adCode;
+                this.executeScripts(this.adContainers[containerId]);
+                // تأكيد ظهور الإعلان
+                this.adContainers[containerId].style.display = 'flex';
+                this.adContainers[containerId].style.visibility = 'visible';
+                this.adContainers[containerId].style.opacity = '1';
+            }
+        }
+
+        // محاولة حقن الإعلانات داخل المقال - مصحح
+        tryInjectInArticleAds() {
+            // منع التكرار - إذا تم حقن الإعلانات بالفعل، لا تعيد حقنها
+            if (this.inArticleAdsInjected) {
+                console.log('⚠️ إعلانات المقال مضافّة مسبقًا');
+                return;
+            }
+            
+            const articleContent = document.querySelector('.article-content');
+            if (articleContent && this.adsData.inArticleAds.enabled) {
+                this.injectInArticleAds(articleContent);
+                console.log('✅ إعلانات المقال مضافّة');
+                this.inArticleAdsInjected = true; // وضع علامة أن الإعلانات تم حقنها
+            } else {
+                // إعادة المحاولة بعد وقت إذا لم يكن المحتوى جاهزاً
+                setTimeout(() => this.tryInjectInArticleAds(), 500);
+            }
+        }
+
+        // حقن الإعلانات داخل المقال - مصحح لمنع التكرار
+        injectInArticleAds(articleContent) {
+            if (!this.adsData.inArticleAds.enabled || !articleContent) {
+                console.log('❌ إعلانات المقال معطلة أو المحتوى غير موجود');
+                return;
+            }
+
+            // التحقق من أن الإعلانات لم تُحقن مسبقاً
+            const existingAds = articleContent.querySelectorAll('.ad-in-article-container');
+            if (existingAds.length > 0) {
+                console.log('⚠️ إعلانات المقال موجودة مسبقًا، تخطي الحقن');
+                return;
+            }
+
+            console.log('🔄 حقن إعلانات داخل المقال...');
+
+            const paragraphs = articleContent.querySelectorAll('p');
+            console.log(`📝 عدد الفقرات الموجودة: ${paragraphs.length}`);
+
+            this.adsData.inArticleAds.positions.forEach((position, index) => {
+                const targetIndex = position.paragraphIndex;
+                console.log(`🔍 البحث عن الفقرة رقم: ${targetIndex}`);
                 
-                const sidebar = document.getElementById('sidebar-content');
-                if (sidebar) {
-                    sidebar.prepend(sidebarAdContainer);
+                if (paragraphs[targetIndex]) {
+                    // التحقق من عدم وجود إعلان مسبق في هذا الموقع
+                    const existingAd = document.getElementById(`ad-in-article-${index + 1}`);
+                    if (existingAd) {
+                        console.log(`⚠️ الإعلان ${index + 1} موجود مسبقًا، تخطي`);
+                        return;
+                    }
+                    
+                    const adElement = document.createElement('div');
+                    adElement.className = 'ad-in-article-container';
+                    adElement.id = `ad-in-article-${index + 1}`;
+                    adElement.innerHTML = position.code;
+                    
+                    // إدراج الإعلان بعد الفقرة المحددة
+                    paragraphs[targetIndex].after(adElement);
+                    this.executeScripts(adElement);
+                    
+                    console.log(`✅ إعلان المقال ${index + 1} مضاف بعد الفقرة ${targetIndex}`);
                 } else {
-                    this.createFallbackSidebar(sidebarAdContainer);
+                    console.log(`❌ الفقرة ${targetIndex} غير موجودة للإعلان ${index + 1}`);
                 }
+            });
+        }
 
-                // حاوية الإعلان السفلي
-                const footerAdContainer = document.createElement('div');
-                footerAdContainer.id = 'ad-footer-container';
-                footerAdContainer.className = 'ad-section footer-ad-section';
-                
-                const newsletter = document.querySelector('.newsletter');
-                if (newsletter) {
-                    document.body.insertBefore(footerAdContainer, newsletter);
-                } else {
-                    const footer = document.querySelector('footer');
-                    if (footer) {
-                        document.body.insertBefore(footerAdContainer, footer);
-                    }
-                }
-
-                this.adContainers = {
-                    header: headerAdContainer,
-                    sidebar: sidebarAdContainer,
-                    footer: footerAdContainer
-                };
-            }
-
-            createFallbackSidebar(adContainer) {
-                const articleLayout = document.querySelector('.article-layout');
-                if (articleLayout && !document.querySelector('.sidebar')) {
-                    const sidebar = document.createElement('aside');
-                    sidebar.className = 'sidebar';
-                    sidebar.id = 'sidebar-content';
-                    sidebar.appendChild(adContainer);
-                    articleLayout.appendChild(sidebar);
-                }
-            }
-
-            injectStaticAds() {
-                if (!this.adsData) {
-                    console.log('❌ لا توجد بيانات إعلانات');
-                    return;
-                }
-
-                console.log('🔄 حقن الإعلانات الثابتة...');
-
-                if (this.adsData.bannerAds.header.enabled && this.adContainers.header) {
-                    this.injectAd('header', this.adsData.bannerAds.header.code);
-                    console.log('✅ الإعلان العلوي مضاف');
-                }
-
-                if (this.adsData.bannerAds.footer.enabled && this.adContainers.footer) {
-                    this.injectAd('footer', this.adsData.bannerAds.footer.code);
-                    console.log('✅ الإعلان السفلي مضاف');
-                }
-
-                if (this.adsData.sidebarAds.enabled && this.adContainers.sidebar) {
-                    this.injectAd('sidebar', this.adsData.sidebarAds.code);
-                    console.log('✅ الإعلان الجانبي مضاف');
-                }
-
-                if (this.adsData.popupAds && this.adsData.popupAds.enabled) {
-                    this.setupPopupAd();
-                }
-            }
-
-            injectAd(containerId, adCode) {
-                if (this.adContainers[containerId]) {
-                    this.adContainers[containerId].innerHTML = adCode;
-                    this.executeScripts(this.adContainers[containerId]);
-                    
-                    const container = this.adContainers[containerId];
-                    container.style.display = 'flex';
-                    container.style.visibility = 'visible';
-                    container.style.opacity = '1';
-                    
-                    console.log(`✅ إعلان ${containerId} معروض`);
-                }
-            }
-
-            tryInjectInArticleAds() {
-                const checkContent = () => {
-                    const articleContent = document.querySelector('.article-content');
-                    if (articleContent && this.adsData.inArticleAds.enabled) {
-                        const paragraphs = articleContent.querySelectorAll('p');
-                        if (paragraphs.length > 0) {
-                            this.injectInArticleAds(articleContent);
-                            console.log('✅ إعلانات المقال مضافّة');
-                        } else {
-                            setTimeout(checkContent, 500);
-                        }
-                    } else {
-                        setTimeout(() => this.tryInjectInArticleAds(), 1000);
-                    }
-                };
-                checkContent();
-            }
-
-            injectInArticleAds(articleContent) {
-                if (!this.adsData.inArticleAds.enabled || !articleContent) {
-                    console.log('❌ إعلانات المقال معطلة أو المحتوى غير موجود');
-                    return;
-                }
-
-                console.log('🔄 حقن إعلانات داخل المقال...');
-
-                const paragraphs = articleContent.querySelectorAll('p');
-                console.log(`📝 عدد الفقرات الموجودة: ${paragraphs.length}`);
-
-                this.adsData.inArticleAds.positions.forEach((position, index) => {
-                    const targetIndex = position.paragraphIndex;
-                    
-                    if (paragraphs[targetIndex]) {
-                        const adElement = document.createElement('div');
-                        adElement.className = 'ad-in-article-container';
-                        adElement.id = `ad-in-article-${index + 1}`;
-                        adElement.innerHTML = position.code;
-                        
-                        paragraphs[targetIndex].after(adElement);
-                        this.executeScripts(adElement);
-                        
-                        console.log(`✅ إعلان المقال ${index + 1} مضاف بعد الفقرة ${targetIndex}`);
-                    } else if (paragraphs.length > 0) {
-                        const lastParagraph = paragraphs[paragraphs.length - 1];
-                        const adElement = document.createElement('div');
-                        adElement.className = 'ad-in-article-container';
-                        adElement.id = `ad-in-article-${index + 1}`;
-                        adElement.innerHTML = position.code;
-                        
-                        lastParagraph.after(adElement);
-                        this.executeScripts(adElement);
-                        
-                        console.log(`✅ إعلان المقال ${index + 1} مضاف في النهاية`);
-                    }
+        // إعداد الإعلانات التلقائية
+        setupAutoAds() {
+            if (this.adsData.autoAds.enabled && this.adsData.autoAds.scripts) {
+                this.adsData.autoAds.scripts.forEach(script => {
+                    const scriptElement = document.createElement('div');
+                    scriptElement.innerHTML = script.code;
+                    document.head.appendChild(scriptElement);
                 });
+                console.log('✅ الإعلانات التلقائية مضافّة');
             }
+        }
 
-            setupAutoAds() {
-                if (this.adsData.autoAds && this.adsData.autoAds.enabled && this.adsData.autoAds.scripts) {
-                    this.adsData.autoAds.scripts.forEach(script => {
-                        const scriptElement = document.createElement('div');
-                        scriptElement.innerHTML = script.code;
-                        document.head.appendChild(scriptElement);
-                    });
-                    console.log('✅ الإعلانات التلقائية مضافّة');
+        // إعداد الإعلانات المنبثقة
+        setupPopupAd() {
+            const popupHtml = this.adsData.popupAds.code;
+            document.body.insertAdjacentHTML('beforeend', popupHtml);
+            
+            setTimeout(() => {
+                const popup = document.getElementById('popup-ad');
+                if (popup) {
+                    popup.style.display = 'flex';
                 }
-            }
+            }, this.adsData.popupAds.delay);
+        }
 
-            setupPopupAd() {
-                if (!this.adsData.popupAds || !this.adsData.popupAds.enabled) return;
-                
-                const popupHtml = this.adsData.popupAds.code;
-                document.body.insertAdjacentHTML('beforeend', popupHtml);
-                
-                setTimeout(() => {
-                    const popup = document.getElementById('popup-ad');
-                    if (popup) {
-                        popup.style.display = 'flex';
-                    }
-                }, this.adsData.popupAds.delay);
-            }
-
-            executeScripts(container) {
-                const scripts = container.getElementsByTagName('script');
-                for (let i = 0; i < scripts.length; i++) {
-                    const newScript = document.createElement('script');
-                    if (scripts[i].src) {
-                        newScript.src = scripts[i].src;
-                    } else {
-                        newScript.textContent = scripts[i].textContent;
-                    }
-                    document.head.appendChild(newScript).parentNode.removeChild(newScript);
+        // تنفيذ السكريبتات داخل كود الإعلان
+        executeScripts(container) {
+            const scripts = container.getElementsByTagName('script');
+            for (let i = 0; i < scripts.length; i++) {
+                const newScript = document.createElement('script');
+                if (scripts[i].src) {
+                    newScript.src = scripts[i].src;
+                } else {
+                    newScript.textContent = scripts[i].textContent;
                 }
+                document.head.appendChild(newScript).parentNode.removeChild(newScript);
             }
         }
+    }
 
-        function closePopup() {
-            const popup = document.getElementById('popup-ad');
-            if (popup) {
-                popup.style.display = 'none';
-            }
+    // دالة إغلاق الإعلان المنبثق
+    function closePopup() {
+        const popup = document.getElementById('popup-ad');
+        if (popup) {
+            popup.style.display = 'none';
         }
+    }
 
-        let adSystem;
+    // تهيئة نظام الإعلانات عند تحميل الصفحة
+    let adSystem;
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚀 بدء تحميل نظام الإعلانات...');
+        adSystem = new AdSystem();
+        
+        // جعل النظام متاحاً globally للتصحيح
+        window.adSystem = adSystem;
+    });
 
-        function initializeAdSystem() {
-            console.log('🚀 بدء تحميل نظام الإعلانات...');
-            adSystem = new AdSystem();
-            adSystem.init();
-            window.adSystem = adSystem;
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('📄 DOM محمل، بدء تهيئة المحتوى...');
-            setTimeout(initializeAdSystem, 1000);
-        });
-
-        window.checkAdsStatus = function() {
-            console.log('📊 حالة الإعلانات:');
-            console.log('- الإعلان العلوي:', document.getElementById('ad-header-container')?.innerHTML ? '🟢 موجود' : '🔴 مفقود');
-            console.log('- الإعلان الجانبي:', document.getElementById('ad-sidebar-container')?.innerHTML ? '🟢 موجود' : '🔴 مفقود');
-            console.log('- الإعلان السفلي:', document.getElementById('ad-footer-container')?.innerHTML ? '🟢 موجود' : '🔴 مفقود');
-            console.log('- إعلان المقال 1:', document.getElementById('ad-in-article-1') ? '🟢 موجود' : '🔴 مفقود');
-            console.log('- إعلان المقال 2:', document.getElementById('ad-in-article-2') ? '🟢 موجود' : '🔴 مفقود');
-        };
-    </script>
+    // دالة مساعدة للتحقق من حالة الإعلانات
+    window.checkAdsStatus = function() {
+        console.log('📊 حالة الإعلانات:');
+        console.log('- الإعلان العلوي:', document.getElementById('ad-header-container')?.innerHTML ? '🟢 موجود' : '🔴 مفقود');
+        console.log('- الإعلان الجانبي:', document.getElementById('ad-sidebar-container')?.innerHTML ? '🟢 موجود' : '🔴 مفقود');
+        console.log('- الإعلان السفلي:', document.getElementById('ad-footer-container')?.innerHTML ? '🟢 موجود' : '🔴 مفقود');
+        console.log('- إعلان المقال 1:', document.getElementById('ad-in-article-1') ? '🟢 موجود' : '🔴 مفقود');
+        console.log('- إعلان المقال 2:', document.getElementById('ad-in-article-2') ? '🟢 موجود' : '🔴 مفقود');
+    };
+</script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* جميع أنماط CSS الأصلية تبقى كما هي مع تحسينات بسيطة */
         :root {
             --primary: #4A6FFF;
             --secondary: #FF6B8B;
@@ -416,28 +385,13 @@
             padding: 0 20px;
         }
 
-        /* تحسينات الإعلانات */
+        /* أنماط الإعلانات المحسنة */
         .ad-section {
             margin: 20px 0;
-            display: flex !important;
+            display: flex;
             justify-content: center;
             align-items: center;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-
-        .header-ad-section {
-            margin-top: 20px;
-            margin-bottom: 40px;
-        }
-
-        .footer-ad-section {
-            margin-top: 40px;
-            margin-bottom: 20px;
-        }
-
-        .sidebar-ad-section {
-            margin: 0 0 30px 0;
+            width: 100%;
         }
 
         .ad-container {
@@ -445,11 +399,9 @@
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             overflow: hidden;
-            display: flex !important;
+            display: flex;
             justify-content: center;
             align-items: center;
-            visibility: visible !important;
-            opacity: 1 !important;
         }
 
         .ad-header {
@@ -468,12 +420,14 @@
             width: 300px;
             height: 600px;
             max-width: 100%;
+            margin-bottom: 30px;
         }
 
         .ad-in-article {
             width: 300px;
             height: 250px;
             max-width: 100%;
+            margin: 30px auto;
         }
 
         .ad-placeholder {
@@ -490,24 +444,13 @@
         }
 
         .ad-in-article-container {
-            display: flex !important;
+            display: flex;
             justify-content: center;
             margin: 30px 0;
-            visibility: visible !important;
-            opacity: 1 !important;
+            width: 100%;
         }
 
-        /* تأكيد ظهور جميع الإعلانات */
-        #ad-header-container,
-        #ad-sidebar-container,
-        #ad-footer-container,
-        .ad-in-article-container,
-        .ad-container {
-            display: flex !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-
+        /* أنماط الإعلان المنبثق */
         .ad-popup {
             display: none;
             position: fixed;
@@ -1212,6 +1155,7 @@
                 z-index: 10000;
             }
 
+            /* ✅ إظهار زر البحث في الموبايل */
             .header-actions {
                 display: flex !important;
             }
@@ -1250,21 +1194,21 @@
 
             /* تحسينات الإعلانات للجوال */
             .ad-header, .ad-footer {
-                width: 100% !important;
-                max-width: 320px !important;
-                height: 100px !important;
+                width: 100%;
+                height: auto;
+                min-height: 90px;
             }
 
             .ad-sidebar {
-                width: 100% !important;
-                max-width: 300px !important;
-                height: 250px !important;
+                width: 100%;
+                height: auto;
+                min-height: 250px;
             }
 
             .ad-in-article {
-                width: 100% !important;
-                max-width: 300px !important;
-                height: 250px !important;
+                width: 100%;
+                height: auto;
+                min-height: 250px;
             }
         }
 
@@ -1385,6 +1329,56 @@
             color: #B0B7C3;
             font-size: 0.95rem;
         }
+
+        @media (max-width: 576px) {
+            .article-title {
+                font-size: 1.8rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            /* تأكيد ظهور الإعلانات */
+.ad-section {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin: 20px 0;
+}
+
+.ad-container {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+.ad-in-article-container {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+/* تأكيد ظهور العناصر المحددة */
+#ad-header-container,
+#ad-sidebar-container, 
+#ad-footer-container,
+#ad-in-article-1,
+#ad-in-article-2 {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+        }
     </style>
 </head>
 <body>
@@ -1489,7 +1483,7 @@
                     <h3>Dog Resources</h3>
                     <ul>
                         <li><a href="Dog-Training.html">Dog Training</a></li>
-                        <li><a href="Dog-Food.html">Dog Food</a></li>
+                        <li><a href=">Dog-Food.html">Dog Food</a></li>
                         <li><a href="Dog-Breeds.html">Dog Breeds</a></li>
                         <li><a href="Dog-Grooming.html">Dog Grooming</a></li>
                         <li><a href="Dog-toys.html">Dog Toys</a></li>
@@ -1516,6 +1510,7 @@
                         <li><a href="careers.html">Careers</a></li>
                         <li><a href="privacy-policy.html">Privacy Policy</a></li>
                         <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        
                     </ul>
                 </div>
             </div>
@@ -1527,372 +1522,404 @@
     </footer>
 
     <script>
-        let allArticles = [];
+    let allArticles = [];
 
-        async function loadAllArticles() {
-            try {
-                const response = await fetch('articles.json');
-                const data = await response.json();
-                allArticles = data.articles;
-                console.log('Articles loaded successfully:', allArticles);
-            } catch (error) {
-                console.error('Error loading articles:', error);
+    // Function to load all articles from JSON
+    async function loadAllArticles() {
+        try {
+            const response = await fetch('articles.json');
+            const data = await response.json();
+            allArticles = data.articles;
+            console.log('Articles loaded successfully:', allArticles);
+        } catch (error) {
+            console.error('Error loading articles:', error);
+        }
+    }
+
+    // Function to get current article from URL
+    function loadArticleData() {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id') || 'positive-reinforcement-dog-training';
+        console.log('Looking for article with ID:', id);
+        
+        const article = allArticles.find(a => a.id === id);
+        console.log('Found article:', article);
+        return article;
+    }
+
+    // Function to get related articles
+    function getRelatedArticles(currentId, count = 3) {
+        const filtered = allArticles.filter(article => article.id !== currentId);
+        const shuffled = [...filtered].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, count);
+    }
+
+    // Helper function to format date
+    function formatDate(dateString) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString('en-US', options);
+    }
+
+    // Function to render article content
+    function renderArticle(articleData) {
+        if (!articleData) {
+            document.getElementById('article-content').innerHTML = '<p>Error loading article content.</p>';
+            return;
+        }
+
+        console.log('Rendering article:', articleData);
+
+        // Update page metadata
+        document.title = articleData.title;
+        document.getElementById('meta-description').setAttribute('content', articleData.description);
+        document.getElementById('meta-keywords').setAttribute('content', articleData.keywords);
+        document.getElementById('meta-author').setAttribute('content', articleData.author.name);
+        
+        // Update canonical URL
+        const canonicalUrl = window.location.href;
+        document.getElementById('canonical-url').setAttribute('href', canonicalUrl);
+        
+        // Update Open Graph tags
+        document.getElementById('og-title').setAttribute('content', articleData.title);
+        document.getElementById('og-description').setAttribute('content', articleData.description);
+        document.getElementById('og-image').setAttribute('content', articleData.featuredImage.url);
+        document.getElementById('og-url').setAttribute('content', canonicalUrl);
+        
+        // Update Twitter Card tags
+        document.getElementById('twitter-title').setAttribute('content', articleData.title);
+        document.getElementById('twitter-description').setAttribute('content', articleData.description);
+        document.getElementById('twitter-image').setAttribute('content', articleData.featuredImage.url);
+
+        // Update structured data
+        const structuredData = {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": articleData.title,
+            "description": articleData.description,
+            "image": articleData.featuredImage.url,
+            "author": {
+                "@type": "Person",
+                "name": articleData.author.name,
+                "url": articleData.author.url || "https://petcarepro.com/authors/" + articleData.author.name.replace(/\s+/g, '-').toLowerCase()
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": articleData.publisher.name,
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": articleData.publisher.logo
+                }
+            },
+            "datePublished": articleData.datePublished + "T00:00:00+00:00",
+            "dateModified": articleData.dateModified + "T00:00:00+00:00",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": canonicalUrl
+            },
+            "articleSection": articleData.category,
+            "keywords": articleData.keywords,
+            "url": canonicalUrl
+        };
+        document.getElementById('structured-data').textContent = JSON.stringify(structuredData);
+
+        // Create breadcrumb schema
+        const breadcrumbData = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://petcarepro.com"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Articles",
+                    "item": "https://petcarepro.com/articles.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": articleData.category,
+                    "item": "https://petcarepro.com/categories/" + articleData.category.toLowerCase().replace(/\s+/g, '-')
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "name": articleData.title,
+                    "item": canonicalUrl
+                }
+            ]
+        };
+        document.getElementById('breadcrumb-data').textContent = JSON.stringify(breadcrumbData);
+
+        // Build article header
+        const articleHeader = `
+            <header class="article-header">
+                <span class="article-category">${articleData.category}</span>
+                <h1 class="article-title">${articleData.title}</h1>
+                <div class="article-meta">
+                    <span><i class="far fa-user"></i> By ${articleData.author.name}</span>
+                    <span><i class="far fa-calendar"></i> ${formatDate(articleData.datePublished)}</span>
+                    <span><i class="far fa-clock"></i> ${articleData.readTime}</span>
+                    <span><i class="far fa-eye"></i> ${articleData.views} views</span>
+                </div>
+            </header>
+            <div class="featured-image">
+                <img src="${articleData.featuredImage.url}" alt="${articleData.featuredImage.alt}" loading="lazy">
+            </div>
+        `;
+
+        // Build article content
+        let articleContent = '<div class="article-content">';
+        
+        if (articleData.content && Array.isArray(articleData.content)) {
+            articleData.content.forEach(item => {
+                switch(item.type) {
+                    case 'paragraph':
+                        articleContent += `<p>${item.text}</p>`;
+                        break;
+                    case 'heading':
+                        articleContent += `<h${item.level}>${item.text}</h${item.level}>`;
+                        break;
+                    case 'image':
+                        const altText = item.alt || item.caption || articleData.title;
+                        articleContent += `
+                            <div class="image-with-caption">
+                                <div class="article-image">
+                                    <img src="${item.url}" alt="${altText}" loading="lazy">
+                                </div>
+                                ${item.caption ? `<p class="image-caption">${item.caption}</p>` : ''}
+                            </div>
+                        `;
+                        break;
+                    case 'list':
+                        const listTag = item.style === 'ordered' ? 'ol' : 'ul';
+                        articleContent += `<${listTag}>`;
+                        item.items.forEach(listItem => {
+                            articleContent += `<li>${listItem}</li>`;
+                        });
+                        articleContent += `</${listTag}>`;
+                        break;
+                    case 'infoBox':
+                        articleContent += `
+                            <div class="info-box">
+                                <h4>${item.title}</h4>
+                                <p>${item.content}</p>
+                            </div>
+                        `;
+                        break;
+                }
+            });
+        }
+
+        // Add conclusion if exists
+        if (articleData.conclusion) {
+            articleContent += `
+                <div class="conclusion">
+                    <h3>${articleData.conclusion.title}</h3>
+                    <p>${articleData.conclusion.content}</p>
+                </div>
+            `;
+        }
+
+        // Add tags if exist
+        if (articleData.tags && articleData.tags.length > 0) {
+            articleContent += '<div class="article-tags">';
+            articleData.tags.forEach(tag => {
+                articleContent += `<span class="tag">#${tag}</span>`;
+            });
+            articleContent += '</div>';
+        }
+
+        // Add actions
+        articleContent += `
+            <div class="article-actions">
+                <button class="share-btn"><i class="fas fa-share-alt"></i> Share</button>
+                <button class="share-btn"><i class="far fa-bookmark"></i> Save</button>
+                <button class="share-btn"><i class="far fa-thumbs-up"></i> Like</button>
+            </div>
+        `;
+
+        articleContent += '</div>';
+
+        // Update the article content
+        document.getElementById('article-content').innerHTML = articleHeader + articleContent;
+
+        // حقن الإعلانات داخل المقال بعد تحميل المحتوى - باستخدام النظام المصحح
+        if (window.adSystem) {
+            window.adSystem.tryInjectInArticleAds();
+        }
+
+        // Build sidebar
+        const relatedArticles = getRelatedArticles(articleData.id);
+        
+        const sidebarContent = `
+            <div class="author-card">
+                <div class="author-avatar">
+                    <img src="${articleData.author.avatar}" alt="${articleData.author.name}" loading="lazy">
+                </div>
+                <h3>${articleData.author.name}</h3>
+                <p class="author-title">${articleData.author.title}</p>
+                <p class="author-bio">${articleData.author.bio}</p>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3>Related Articles</h3>
+                <ul class="related-articles">
+                    ${relatedArticles.map(art => `
+                        <li class="related-article">
+                            <img src="${art.featuredImage.url}" alt="${art.title}" loading="lazy">
+                            <div class="related-article-content">
+                                <h4><a href="article.html?id=${art.id}">${art.title}</a></h4>
+                                <div class="related-article-meta">${formatDate(art.datePublished)} • ${art.readTime}</div>
+                            </div>
+                        </li>
+                    `).join('')}
+                </ul>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3>Popular Categories</h3>
+                <ul>
+                    <li><a href="dog-training.html">Dog Training</a></li>
+                    <li><a href="ouppy-care.html">Puppy Care</a></li>
+                    <li><a href="behavior-issues.html">Behavior Issues</a></li>
+                    <li><a href="health-&-nutrition.html">Health & Nutrition</a></li>
+                    <li><a href="product-reviews.html">Product Reviews</a></li>
+                </ul>
+            </div>
+        `;
+
+        // Update the sidebar
+        document.getElementById('sidebar-content').innerHTML = sidebarContent;
+    }
+
+    // Search functionality
+    function setupSearch() {
+        const searchBtn = document.getElementById('search-btn');
+        const searchModal = document.getElementById('search-modal');
+        const closeSearch = document.getElementById('close-search');
+        const searchForm = document.getElementById('search-form');
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+
+        // Open search modal
+        searchBtn.addEventListener('click', () => {
+            searchModal.classList.add('active');
+            searchInput.focus();
+        });
+
+        // Close search modal
+        closeSearch.addEventListener('click', () => {
+            searchModal.classList.remove('active');
+        });
+
+        // Close modal when clicking outside
+        searchModal.addEventListener('click', (e) => {
+            if (e.target === searchModal) {
+                searchModal.classList.remove('active');
             }
-        }
+        });
 
-        function loadArticleData() {
-            const params = new URLSearchParams(window.location.search);
-            const id = params.get('id') || 'positive-reinforcement-dog-training';
-            console.log('Looking for article with ID:', id);
+        // Handle search form submission
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const query = searchInput.value.trim().toLowerCase();
             
-            const article = allArticles.find(a => a.id === id);
-            console.log('Found article:', article);
-            return article;
-        }
-
-        function getRelatedArticles(currentId, count = 3) {
-            const filtered = allArticles.filter(article => article.id !== currentId);
-            const shuffled = [...filtered].sort(() => 0.5 - Math.random());
-            return shuffled.slice(0, count);
-        }
-
-        function formatDate(dateString) {
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            return new Date(dateString).toLocaleDateString('en-US', options);
-        }
-
-        function renderArticle(articleData) {
-            if (!articleData) {
-                document.getElementById('article-content').innerHTML = '<p>Error loading article content.</p>';
+            if (query.length < 2) {
+                searchResults.innerHTML = '<p class="search-result-item">Please enter at least 2 characters</p>';
                 return;
             }
-
-            console.log('Rendering article:', articleData);
-
-            document.title = articleData.title;
-            document.getElementById('meta-description').setAttribute('content', articleData.description);
-            document.getElementById('meta-keywords').setAttribute('content', articleData.keywords);
-            document.getElementById('meta-author').setAttribute('content', articleData.author.name);
             
-            const canonicalUrl = window.location.href;
-            document.getElementById('canonical-url').setAttribute('href', canonicalUrl);
+            // Filter articles based on search query
+            const results = allArticles.filter(article => 
+                article.title.toLowerCase().includes(query) || 
+                article.description.toLowerCase().includes(query) ||
+                article.keywords.toLowerCase().includes(query)
+            );
             
-            document.getElementById('og-title').setAttribute('content', articleData.title);
-            document.getElementById('og-description').setAttribute('content', articleData.description);
-            document.getElementById('og-image').setAttribute('content', articleData.featuredImage.url);
-            document.getElementById('og-url').setAttribute('content', canonicalUrl);
-            
-            document.getElementById('twitter-title').setAttribute('content', articleData.title);
-            document.getElementById('twitter-description').setAttribute('content', articleData.description);
-            document.getElementById('twitter-image').setAttribute('content', articleData.featuredImage.url);
-
-            const structuredData = {
-                "@context": "https://schema.org",
-                "@type": "Article",
-                "headline": articleData.title,
-                "description": articleData.description,
-                "image": articleData.featuredImage.url,
-                "author": {
-                    "@type": "Person",
-                    "name": articleData.author.name,
-                    "url": articleData.author.url || "https://petcarepro.com/authors/" + articleData.author.name.replace(/\s+/g, '-').toLowerCase()
-                },
-                "publisher": {
-                    "@type": "Organization",
-                    "name": articleData.publisher.name,
-                    "logo": {
-                        "@type": "ImageObject",
-                        "url": articleData.publisher.logo
-                    }
-                },
-                "datePublished": articleData.datePublished + "T00:00:00+00:00",
-                "dateModified": articleData.dateModified + "T00:00:00+00:00",
-                "mainEntityOfPage": {
-                    "@type": "WebPage",
-                    "@id": canonicalUrl
-                },
-                "articleSection": articleData.category,
-                "keywords": articleData.keywords,
-                "url": canonicalUrl
-            };
-            document.getElementById('structured-data').textContent = JSON.stringify(structuredData);
-
-            const breadcrumbData = {
-                "@context": "https://schema.org",
-                "@type": "BreadcrumbList",
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "name": "Home",
-                        "item": "https://petcarepro.com"
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 2,
-                        "name": "Articles",
-                        "item": "https://petcarepro.com/articles.html"
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 3,
-                        "name": articleData.category,
-                        "item": "https://petcarepro.com/categories/" + articleData.category.toLowerCase().replace(/\s+/g, '-')
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 4,
-                        "name": articleData.title,
-                        "item": canonicalUrl
-                    }
-                ]
-            };
-            document.getElementById('breadcrumb-data').textContent = JSON.stringify(breadcrumbData);
-
-            const articleHeader = `
-                <header class="article-header">
-                    <span class="article-category">${articleData.category}</span>
-                    <h1 class="article-title">${articleData.title}</h1>
-                    <div class="article-meta">
-                        <span><i class="far fa-user"></i> By ${articleData.author.name}</span>
-                        <span><i class="far fa-calendar"></i> ${formatDate(articleData.datePublished)}</span>
-                        <span><i class="far fa-clock"></i> ${articleData.readTime}</span>
-                        <span><i class="far fa-eye"></i> ${articleData.views} views</span>
+            // Display results
+            if (results.length === 0) {
+                searchResults.innerHTML = '<p class="search-result-item">No articles found. Try different keywords.</p>';
+            } else {
+                searchResults.innerHTML = results.map(article => `
+                    <div class="search-result-item" data-id="${article.id}">
+                        <h4>${article.title}</h4>
+                        <p>${article.description}</p>
                     </div>
-                </header>
-                <div class="featured-image">
-                    <img src="${articleData.featuredImage.url}" alt="${articleData.featuredImage.alt}" loading="lazy">
-                </div>
-            `;
-
-            let articleContent = '<div class="article-content">';
-            
-            if (articleData.content && Array.isArray(articleData.content)) {
-                articleData.content.forEach(item => {
-                    switch(item.type) {
-                        case 'paragraph':
-                            articleContent += `<p>${item.text}</p>`;
-                            break;
-                        case 'heading':
-                            articleContent += `<h${item.level}>${item.text}</h${item.level}>`;
-                            break;
-                        case 'image':
-                            const altText = item.alt || item.caption || articleData.title;
-                            articleContent += `
-                                <div class="image-with-caption">
-                                    <div class="article-image">
-                                        <img src="${item.url}" alt="${altText}" loading="lazy">
-                                    </div>
-                                    ${item.caption ? `<p class="image-caption">${item.caption}</p>` : ''}
-                                </div>
-                            `;
-                            break;
-                        case 'list':
-                            const listTag = item.style === 'ordered' ? 'ol' : 'ul';
-                            articleContent += `<${listTag}>`;
-                            item.items.forEach(listItem => {
-                                articleContent += `<li>${listItem}</li>`;
-                            });
-                            articleContent += `</${listTag}>`;
-                            break;
-                        case 'infoBox':
-                            articleContent += `
-                                <div class="info-box">
-                                    <h4>${item.title}</h4>
-                                    <p>${item.content}</p>
-                                </div>
-                            `;
-                            break;
-                    }
+                `).join('');
+                
+                // Add click event to result items
+                document.querySelectorAll('.search-result-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        const articleId = item.getAttribute('data-id');
+                        window.location.href = `article.html?id=${articleId}`;
+                    });
                 });
             }
+        });
+    }
 
-            if (articleData.conclusion) {
-                articleContent += `
-                    <div class="conclusion">
-                        <h3>${articleData.conclusion.title}</h3>
-                        <p>${articleData.conclusion.content}</p>
-                    </div>
-                `;
-            }
-
-            if (articleData.tags && articleData.tags.length > 0) {
-                articleContent += '<div class="article-tags">';
-                articleData.tags.forEach(tag => {
-                    articleContent += `<span class="tag">#${tag}</span>`;
-                });
-                articleContent += '</div>';
-            }
-
-            articleContent += `
-                <div class="article-actions">
-                    <button class="share-btn"><i class="fas fa-share-alt"></i> Share</button>
-                    <button class="share-btn"><i class="far fa-bookmark"></i> Save</button>
-                    <button class="share-btn"><i class="far fa-thumbs-up"></i> Like</button>
-                </div>
-            `;
-
-            articleContent += '</div>';
-
-            document.getElementById('article-content').innerHTML = articleHeader + articleContent;
-
-            if (window.adSystem) {
-                setTimeout(() => {
-                    const articleContentElement = document.querySelector('.article-content');
-                    if (articleContentElement) {
-                        window.adSystem.injectInArticleAds(articleContentElement);
-                    }
-                }, 500);
-            }
-
-            const relatedArticles = getRelatedArticles(articleData.id);
-            
-            const sidebarContent = `
-                <div class="author-card">
-                    <div class="author-avatar">
-                        <img src="${articleData.author.avatar}" alt="${articleData.author.name}" loading="lazy">
-                    </div>
-                    <h3>${articleData.author.name}</h3>
-                    <p class="author-title">${articleData.author.title}</p>
-                    <p class="author-bio">${articleData.author.bio}</p>
-                </div>
-
-                <div class="sidebar-widget">
-                    <h3>Related Articles</h3>
-                    <ul class="related-articles">
-                        ${relatedArticles.map(art => `
-                            <li class="related-article">
-                                <img src="${art.featuredImage.url}" alt="${art.title}" loading="lazy">
-                                <div class="related-article-content">
-                                    <h4><a href="article.html?id=${art.id}">${art.title}</a></h4>
-                                    <div class="related-article-meta">${formatDate(art.datePublished)} • ${art.readTime}</div>
-                                </div>
-                            </li>
-                        `).join('')}
-                    </ul>
-                </div>
-
-                <div class="sidebar-widget">
-                    <h3>Popular Categories</h3>
-                    <ul>
-                        <li><a href="dog-training.html">Dog Training</a></li>
-                        <li><a href="puppy-care.html">Puppy Care</a></li>
-                        <li><a href="behavior-issues.html">Behavior Issues</a></li>
-                        <li><a href="health-nutrition.html">Health & Nutrition</a></li>
-                        <li><a href="product-reviews.html">Product Reviews</a></li>
-                    </ul>
-                </div>
-            `;
-
-            document.getElementById('sidebar-content').innerHTML = sidebarContent;
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', async function() {
+        console.log('DOM loaded, initializing...');
+        
+        await loadAllArticles();
+        const articleData = loadArticleData();
+        
+        if (articleData) {
+            renderArticle(articleData);
+        } else {
+            document.getElementById('article-content').innerHTML = '<p>Article not found. Please check the URL.</p>';
         }
 
-        function setupSearch() {
-            const searchBtn = document.getElementById('search-btn');
-            const searchModal = document.getElementById('search-modal');
-            const closeSearch = document.getElementById('close-search');
-            const searchForm = document.getElementById('search-form');
-            const searchInput = document.getElementById('search-input');
-            const searchResults = document.getElementById('search-results');
+        // Setup search functionality
+        setupSearch();
 
-            searchBtn.addEventListener('click', () => {
-                searchModal.classList.add('active');
-                searchInput.focus();
-            });
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            document.getElementById('main-nav').classList.toggle('active');
+            
+            // Prevent scrolling when menu is open
+            document.body.style.overflow = document.getElementById('main-nav').classList.contains('active') ? 'hidden' : '';
+        });
 
-            closeSearch.addEventListener('click', () => {
-                searchModal.classList.remove('active');
-            });
-
-            searchModal.addEventListener('click', (e) => {
-                if (e.target === searchModal) {
-                    searchModal.classList.remove('active');
-                }
-            });
-
-            searchForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const query = searchInput.value.trim().toLowerCase();
-                
-                if (query.length < 2) {
-                    searchResults.innerHTML = '<p class="search-result-item">Please enter at least 2 characters</p>';
-                    return;
-                }
-                
-                const results = allArticles.filter(article => 
-                    article.title.toLowerCase().includes(query) || 
-                    article.description.toLowerCase().includes(query) ||
-                    article.keywords.toLowerCase().includes(query)
-                );
-                
-                if (results.length === 0) {
-                    searchResults.innerHTML = '<p class="search-result-item">No articles found. Try different keywords.</p>';
+        // Share functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.share-btn') && e.target.closest('.share-btn').textContent.includes('Share')) {
+                if (navigator.share) {
+                    navigator.share({
+                        title: document.title,
+                        url: window.location.href
+                    });
                 } else {
-                    searchResults.innerHTML = results.map(article => `
-                        <div class="search-result-item" data-id="${article.id}">
-                            <h4>${article.title}</h4>
-                            <p>${article.description}</p>
-                        </div>
-                    `).join('');
-                    
-                    document.querySelectorAll('.search-result-item').forEach(item => {
-                        item.addEventListener('click', () => {
-                            const articleId = item.getAttribute('data-id');
-                            window.location.href = `article.html?id=${articleId}`;
-                        });
+                    // Fallback for browsers that don't support Web Share API
+                    const shareUrl = window.location.href;
+                    navigator.clipboard.writeText(shareUrl).then(() => {
+                        alert('Link copied to clipboard!');
+                    }).catch(() => {
+                        // If clipboard API fails, show the URL
+                        prompt('Copy this URL to share:', shareUrl);
                     });
                 }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', async function() {
-            console.log('📄 DOM loaded, initializing...');
-            
-            await loadAllArticles();
-            const articleData = loadArticleData();
-            
-            if (articleData) {
-                renderArticle(articleData);
-            } else {
-                document.getElementById('article-content').innerHTML = '<p>Article not found. Please check the URL.</p>';
             }
-
-            setupSearch();
-
-            document.getElementById('mobile-menu').addEventListener('click', function() {
-                document.getElementById('main-nav').classList.toggle('active');
-                document.body.style.overflow = document.getElementById('main-nav').classList.contains('active') ? 'hidden' : '';
-            });
-
-            document.addEventListener('click', function(e) {
-                if (e.target.closest('.share-btn') && e.target.closest('.share-btn').textContent.includes('Share')) {
-                    if (navigator.share) {
-                        navigator.share({
-                            title: document.title,
-                            url: window.location.href
-                        });
-                    } else {
-                        const shareUrl = window.location.href;
-                        navigator.clipboard.writeText(shareUrl).then(() => {
-                            alert('Link copied to clipboard!');
-                        }).catch(() => {
-                            prompt('Copy this URL to share:', shareUrl);
-                        });
-                    }
-                }
-            });
-
-            window.addEventListener('scroll', function() {
-                const header = document.querySelector('header');
-                if (window.scrollY > 100) {
-                    header.style.background = 'rgba(255, 255, 255, 0.98)';
-                    header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
-                } else {
-                    header.style.background = 'rgba(255, 255, 255, 0.95)';
-                    header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-                }
-            });
         });
-    </script>
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+    });
+</script>
 </body>
 </html>
