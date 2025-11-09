@@ -143,14 +143,7 @@
             headerAdContainer.className = 'ad-section';
             document.querySelector('header').after(headerAdContainer);
 
-            // حاوية الإعلان الجانبي - داخل السايدبار
-            const sidebarAdContainer = document.createElement('div');
-            sidebarAdContainer.id = 'ad-sidebar-container';
-            sidebarAdContainer.className = 'ad-section';
-            const sidebarContent = document.getElementById('sidebar-content');
-            if (sidebarContent) {
-                sidebarContent.prepend(sidebarAdContainer);
-            }
+           
 
             // حاوية الإعلان السفلي - قبل النيوزليتر
             const footerAdContainer = document.createElement('div');
@@ -1440,11 +1433,16 @@
                 </article>
             </main>
 
-            <!-- Sidebar -->
-            <aside class="sidebar" id="sidebar-content">
-                <!-- حاوية الإعلان الجانبي - سيتم إنشاؤها تلقائياً -->
-                <!-- Sidebar content will be loaded dynamically from JSON -->
-            </aside>
+            <aside class="sidebar">
+    
+    <!-- ✅ ثابت دائماً ولا يتم مسحه -->
+    <div id="ad-sidebar-container" class="ad-section"></div>
+
+    <!-- ✅ هذا الجزء فقط يتم تغييره -->
+    <div id="sidebar-content"></div>
+
+</aside>
+
         </div>
     </div>
 
