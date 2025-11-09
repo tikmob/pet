@@ -1,0 +1,57 @@
+{
+  "autoAds": {
+    "enabled": true,
+    "scripts": [
+      {
+        "type": "google_auto_ads",
+        "code": "<!-- Example Google Auto Ads Code -->\n<script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-EXAMPLE' crossorigin='anonymous'><\/script>"
+      }
+    ]
+  },
+  "bannerAds": {
+    "header": {
+      "enabled": true,
+      "code": "<!-- Header Banner Ad -->\n<div class='ad-container ad-header'>\n    <div class='ad-placeholder'>Header Banner Ad (728x90)</div>\n</div>",
+      "width": 728,
+      "height": 90
+    },
+    "footer": {
+      "enabled": true,
+      "code": "<!-- Footer Banner Ad -->\n<div class='ad-container ad-footer'>\n    <div class='ad-placeholder'>Footer Banner Ad (728x90)</div>\n</div>",
+      "width": 728,
+      "height": 90
+    }
+  },
+  "sidebarAds": {
+    "enabled": true,
+    "code": "<!-- Sidebar Ad -->\n<div class='ad-container ad-sidebar'>\n    <div class='ad-placeholder'>Sidebar Ad (300x600)</div>\n</div>",
+    "width": 300,
+    "height": 600
+  },
+  "inArticleAds": {
+    "enabled": true,
+    "positions": [
+      {
+        "position": "after_paragraph",
+        "paragraphIndex": 2,
+        "code": "<!-- In-Article Ad 1 -->\n<div class='ad-container ad-in-article'>\n    <div class='ad-placeholder'>In-Article Ad (300x250)</div>\n</div>",
+        "width": 300,
+        "height": 250
+      },
+      {
+        "position": "after_paragraph",
+        "paragraphIndex": 5,
+        "code": "<!-- In-Article Ad 2 -->\n<div class='ad-container ad-in-article'>\n    <div class='ad-placeholder'>In-Article Ad (300x250)</div>\n</div>",
+        "width": 300,
+        "height": 250
+      }
+    ]
+  },
+  "popupAds": {
+    "enabled": false,
+    "delay": 5000,
+    "code": "<!-- Popup Ad -->\n<div id='popup-ad' class='ad-popup'>\n    <div class='popup-content'>\n        <button class='close-popup' onclick='closePopup()'>×</button>\n        <div class='ad-placeholder'>Popup Ad (400x300)</div>\n    </div>\n</div>",
+    "width": 400,
+    "height": 300
+  }
+}
