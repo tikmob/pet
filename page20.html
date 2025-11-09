@@ -1795,6 +1795,10 @@
         document.getElementById('sidebar-content').innerHTML = sidebarContent;
     }
 
+        if (window.adSystem?.adsData?.sidebarAds?.enabled) {
+    window.adSystem.injectAd('sidebar', window.adSystem.adsData.sidebarAds.code);
+}
+
     // Search functionality
     function setupSearch() {
         const searchBtn = document.getElementById('search-btn');
