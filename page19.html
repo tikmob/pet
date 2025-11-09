@@ -34,228 +34,297 @@
     </script>
     
     <!-- نظام الإعلانات الذكي -->
-    <script>
-        // نظام تحميل الإعلانات من ملف JSON
-        class AdSystem {
-            constructor() {
-                this.adsData = null;
-                this.adContainers = {};
-                this.init();
-            }
+  <script>
+    // نظام تحميل الإعلانات من ملف JSON - الإصدار المحسن
+    class AdSystem {
+        constructor() {
+            this.adsData = null;
+            this.adContainers = {};
+            this.initialized = false;
+            this.init();
+        }
 
-            // تهيئة النظام
-            async init() {
-                try {
-                    await this.loadAdsData();
-                    this.createAdContainers();
-                    this.injectAds();
-                    this.setupAutoAds();
-                } catch (error) {
-                    console.error('Error initializing ad system:', error);
-                }
-            }
-
-            // تحميل بيانات الإعلانات من ملف JSON
-            async loadAdsData() {
-                try {
-                    const response = await fetch('ads.json');
-                    this.adsData = await response.json();
-                    console.log('Ads data loaded successfully');
-                } catch (error) {
-                    console.error('Error loading ads data:', error);
-                    // استخدام بيانات افتراضية في حالة فشل التحميل
-                    this.adsData = this.getDefaultAdsData();
-                }
-            }
-
-            // بيانات الإعلانات الافتراضية
-            getDefaultAdsData() {
-                return {
-                    "autoAds": {
-                        "enabled": true,
-                        "scripts": [
-                            {
-                                "type": "google_auto_ads",
-                                "code": "<!-- Example Google Auto Ads Code -->\n<script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-EXAMPLE' crossorigin='anonymous'><\/script>"
-                            }
-                        ]
-                    },
-                    "bannerAds": {
-                        "header": {
-                            "enabled": true,
-                            "code": "<!-- Header Banner Ad -->\n<div class='ad-container ad-header'>\n    <div class='ad-placeholder'>Header Banner Ad (728x90)</div>\n</div>",
-                            "width": 728,
-                            "height": 90
-                        },
-                        "footer": {
-                            "enabled": true,
-                            "code": "<!-- Footer Banner Ad -->\n<div class='ad-container ad-footer'>\n    <div class='ad-placeholder'>Footer Banner Ad (728x90)</div>\n</div>",
-                            "width": 728,
-                            "height": 90
-                        }
-                    },
-                    "sidebarAds": {
-                        "enabled": true,
-                        "code": "<!-- Sidebar Ad -->\n<div class='ad-container ad-sidebar'>\n    <div class='ad-placeholder'>Sidebar Ad (300x600)</div>\n</div>",
-                        "width": 300,
-                        "height": 600
-                    },
-                    "inArticleAds": {
-                        "enabled": true,
-                        "positions": [
-                            {
-                                "position": "after_paragraph",
-                                "paragraphIndex": 2,
-                                "code": "<!-- In-Article Ad 1 -->\n<div class='ad-container ad-in-article'>\n    <div class='ad-placeholder'>In-Article Ad (300x250)</div>\n</div>",
-                                "width": 300,
-                                "height": 250
-                            },
-                            {
-                                "position": "after_paragraph",
-                                "paragraphIndex": 5,
-                                "code": "<!-- In-Article Ad 2 -->\n<div class='ad-container ad-in-article'>\n    <div class='ad-placeholder'>In-Article Ad (300x250)</div>\n</div>",
-                                "width": 300,
-                                "height": 250
-                            }
-                        ]
-                    },
-                    "popupAds": {
-                        "enabled": false,
-                        "delay": 5000,
-                        "code": "<!-- Popup Ad -->\n<div id='popup-ad' class='ad-popup'>\n    <div class='popup-content'>\n        <button class='close-popup' onclick='closePopup()'>×</button>\n        <div class='ad-placeholder'>Popup Ad (400x300)</div>\n    </div>\n</div>",
-                        "width": 400,
-                        "height": 300
-                    }
-                };
-            }
-
-            // إنشاء حاويات الإعلانات في الصفحة
-            createAdContainers() {
-                // حاوية الإعلان العلوي
-                const headerAdContainer = document.createElement('div');
-                headerAdContainer.id = 'ad-header-container';
-                headerAdContainer.className = 'ad-section';
-                document.querySelector('header').after(headerAdContainer);
-
-                // حاوية الإعلان الجانبي
-                const sidebarAdContainer = document.createElement('div');
-                sidebarAdContainer.id = 'ad-sidebar-container';
-                sidebarAdContainer.className = 'ad-section';
-                document.getElementById('sidebar-content').prepend(sidebarAdContainer);
-
-                // حاوية الإعلان السفلي
-                const footerAdContainer = document.createElement('div');
-                footerAdContainer.id = 'ad-footer-container';
-                footerAdContainer.className = 'ad-section';
-                document.querySelector('.newsletter').before(footerAdContainer);
-
-                // تخزين الحاويات للاستخدام لاحقًا
-                this.adContainers = {
-                    header: headerAdContainer,
-                    sidebar: sidebarAdContainer,
-                    footer: footerAdContainer
-                };
-            }
-
-            // حقن الإعلانات في الحاويات
-            injectAds() {
-                if (!this.adsData) return;
-
-                // إعلانات البانر العلوية
-                if (this.adsData.bannerAds.header.enabled) {
-                    this.injectAd('header', this.adsData.bannerAds.header.code);
-                }
-
-                // إعلانات البانر السفلية
-                if (this.adsData.bannerAds.footer.enabled) {
-                    this.injectAd('footer', this.adsData.bannerAds.footer.code);
-                }
-
-                // إعلانات الشريط الجانبي
-                if (this.adsData.sidebarAds.enabled) {
-                    this.injectAd('sidebar', this.adsData.sidebarAds.code);
-                }
-
-                // إعداد الإعلانات المنبثقة
-                if (this.adsData.popupAds.enabled) {
-                    this.setupPopupAd();
-                }
-            }
-
-            // حقن إعلان في حاوية محددة
-            injectAd(containerId, adCode) {
-                if (this.adContainers[containerId]) {
-                    this.adContainers[containerId].innerHTML = adCode;
-                    this.executeScripts(this.adContainers[containerId]);
-                }
-            }
-
-            // إعداد الإعلانات التلقائية
-            setupAutoAds() {
-                if (this.adsData.autoAds.enabled && this.adsData.autoAds.scripts) {
-                    this.adsData.autoAds.scripts.forEach(script => {
-                        const scriptElement = document.createElement('div');
-                        scriptElement.innerHTML = script.code;
-                        document.head.appendChild(scriptElement);
-                    });
-                }
-            }
-
-            // إعداد الإعلانات المنبثقة
-            setupPopupAd() {
-                const popupHtml = this.adsData.popupAds.code;
-                document.body.insertAdjacentHTML('beforeend', popupHtml);
+        // تهيئة النظام
+        async init() {
+            try {
+                await this.loadAdsData();
+                this.createAdContainers();
+                this.injectStaticAds();
+                this.setupAutoAds();
+                this.initialized = true;
+                console.log('✅ نظام الإعلانات جاهز');
                 
-                setTimeout(() => {
-                    document.getElementById('popup-ad').style.display = 'flex';
-                }, this.adsData.popupAds.delay);
+                // محاولة حقن الإعلانات داخل المقال إذا كان المحتوى متاحاً
+                setTimeout(() => this.tryInjectInArticleAds(), 1000);
+            } catch (error) {
+                console.error('❌ خطأ في نظام الإعلانات:', error);
             }
+        }
 
-            // تنفيذ السكريبتات داخل كود الإعلان
-            executeScripts(container) {
-                const scripts = container.getElementsByTagName('script');
-                for (let i = 0; i < scripts.length; i++) {
-                    const newScript = document.createElement('script');
-                    if (scripts[i].src) {
-                        newScript.src = scripts[i].src;
-                    } else {
-                        newScript.textContent = scripts[i].textContent;
+        // تحميل بيانات الإعلانات من ملف JSON
+        async loadAdsData() {
+            try {
+                const response = await fetch('ads.json');
+                this.adsData = await response.json();
+                console.log('✅ بيانات الإعلانات محملة');
+            } catch (error) {
+                console.error('❌ خطأ في تحميل ads.json:', error);
+                this.adsData = this.getDefaultAdsData();
+            }
+        }
+
+        // بيانات الإعلانات الافتراضية
+        getDefaultAdsData() {
+            return {
+                "autoAds": {
+                    "enabled": false,
+                    "scripts": [
+                        {
+                            "type": "google_auto_ads",
+                            "code": "<!-- مثال على كود جوجل أوتو ads -->\n<script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-EXAMPLE' crossorigin='anonymous'><\/script>"
+                        }
+                    ]
+                },
+                "bannerAds": {
+                    "header": {
+                        "enabled": true,
+                        "code": "<!-- إعلان هيدر -->\n<div class='ad-container ad-header' id='ad-header'>\n    <div class='ad-placeholder'>إعلان علوي (728x90)</div>\n</div>",
+                        "width": 728,
+                        "height": 90
+                    },
+                    "footer": {
+                        "enabled": true,
+                        "code": "<!-- إعلان فوتر -->\n<div class='ad-container ad-footer' id='ad-footer'>\n    <div class='ad-placeholder'>إعلان سفلي (728x90)</div>\n</div>",
+                        "width": 728,
+                        "height": 90
                     }
-                    document.head.appendChild(newScript).parentNode.removeChild(newScript);
+                },
+                "sidebarAds": {
+                    "enabled": true,
+                    "code": "<!-- إعلان سايدبار -->\n<div class='ad-container ad-sidebar' id='ad-sidebar'>\n    <div class='ad-placeholder'>إعلان جانبي (300x600)</div>\n</div>",
+                    "width": 300,
+                    "height": 600
+                },
+                "inArticleAds": {
+                    "enabled": true,
+                    "positions": [
+                        {
+                            "position": "after_paragraph",
+                            "paragraphIndex": 2,
+                            "code": "<!-- إعلان داخل المقال 1 -->\n<div class='ad-container ad-in-article' id='ad-in-article-1'>\n    <div class='ad-placeholder'>إعلان داخل المقال (300x250)</div>\n</div>",
+                            "width": 300,
+                            "height": 250
+                        },
+                        {
+                            "position": "after_paragraph", 
+                            "paragraphIndex": 5,
+                            "code": "<!-- إعلان داخل المقال 2 -->\n<div class='ad-container ad-in-article' id='ad-in-article-2'>\n    <div class='ad-placeholder'>إعلان داخل المقال (300x250)</div>\n</div>",
+                            "width": 300,
+                            "height": 250
+                        }
+                    ]
+                },
+                "popupAds": {
+                    "enabled": false,
+                    "delay": 5000,
+                    "code": "<!-- إعلان منبثق -->\n<div id='popup-ad' class='ad-popup' style='display:none'>\n    <div class='popup-content'>\n        <button class='close-popup' onclick='closePopup()'>×</button>\n        <div class='ad-placeholder'>إعلان منبثق (400x300)</div>\n    </div>\n</div>",
+                    "width": 400,
+                    "height": 300
                 }
+            };
+        }
+
+        // إنشاء حاويات الإعلانات في الصفحة
+        createAdContainers() {
+            // حاوية الإعلان العلوي - بعد الهيدر مباشرة
+            const headerAdContainer = document.createElement('div');
+            headerAdContainer.id = 'ad-header-container';
+            headerAdContainer.className = 'ad-section';
+            document.querySelector('header').after(headerAdContainer);
+
+            // حاوية الإعلان الجانبي - داخل السايدبار
+            const sidebarAdContainer = document.createElement('div');
+            sidebarAdContainer.id = 'ad-sidebar-container';
+            sidebarAdContainer.className = 'ad-section';
+            const sidebarContent = document.getElementById('sidebar-content');
+            if (sidebarContent) {
+                sidebarContent.prepend(sidebarAdContainer);
             }
 
-            // حقن الإعلانات داخل المقال
-            injectInArticleAds(articleContent) {
-                if (!this.adsData.inArticleAds.enabled || !articleContent) return;
+            // حاوية الإعلان السفلي - قبل النيوزليتر
+            const footerAdContainer = document.createElement('div');
+            footerAdContainer.id = 'ad-footer-container';
+            footerAdContainer.className = 'ad-section';
+            const newsletter = document.querySelector('.newsletter');
+            if (newsletter) {
+                newsletter.before(footerAdContainer);
+            }
 
-                const paragraphs = articleContent.querySelectorAll('p');
-                this.adsData.inArticleAds.positions.forEach(position => {
-                    if (paragraphs[position.paragraphIndex]) {
-                        const adElement = document.createElement('div');
-                        adElement.className = 'ad-in-article-container';
-                        adElement.innerHTML = position.code;
-                        paragraphs[position.paragraphIndex].after(adElement);
-                        this.executeScripts(adElement);
-                    }
+            this.adContainers = {
+                header: headerAdContainer,
+                sidebar: sidebarAdContainer,
+                footer: footerAdContainer
+            };
+        }
+
+        // حقن الإعلانات الثابتة (التي تظهر دائماً)
+        injectStaticAds() {
+            if (!this.adsData) {
+                console.log('❌ لا توجد بيانات إعلانات');
+                return;
+            }
+
+            console.log('🔄 حقن الإعلانات الثابتة...');
+
+            // إعلانات البانر العلوية
+            if (this.adsData.bannerAds.header.enabled && this.adContainers.header) {
+                this.injectAd('header', this.adsData.bannerAds.header.code);
+                console.log('✅ الإعلان العلوي مضاف');
+            }
+
+            // إعلانات البانر السفلية
+            if (this.adsData.bannerAds.footer.enabled && this.adContainers.footer) {
+                this.injectAd('footer', this.adsData.bannerAds.footer.code);
+                console.log('✅ الإعلان السفلي مضاف');
+            }
+
+            // إعلانات الشريط الجانبي
+            if (this.adsData.sidebarAds.enabled && this.adContainers.sidebar) {
+                this.injectAd('sidebar', this.adsData.sidebarAds.code);
+                console.log('✅ الإعلان الجانبي مضاف');
+            }
+
+            // الإعلانات المنبثقة
+            if (this.adsData.popupAds.enabled) {
+                this.setupPopupAd();
+            }
+        }
+
+        // حقن إعلان في حاوية محددة
+        injectAd(containerId, adCode) {
+            if (this.adContainers[containerId]) {
+                this.adContainers[containerId].innerHTML = adCode;
+                this.executeScripts(this.adContainers[containerId]);
+                // تأكيد ظهور الإعلان
+                this.adContainers[containerId].style.display = 'block';
+                this.adContainers[containerId].style.visibility = 'visible';
+                this.adContainers[containerId].style.opacity = '1';
+            }
+        }
+
+        // محاولة حقن الإعلانات داخل المقال
+        tryInjectInArticleAds() {
+            const articleContent = document.querySelector('.article-content');
+            if (articleContent && this.adsData.inArticleAds.enabled) {
+                this.injectInArticleAds(articleContent);
+                console.log('✅ إعلانات المقال مضافّة');
+            } else {
+                // إعادة المحاولة بعد وقت إذا لم يكن المحتوى جاهزاً
+                setTimeout(() => this.tryInjectInArticleAds(), 500);
+            }
+        }
+
+        // حقن الإعلانات داخل المقال
+        injectInArticleAds(articleContent) {
+            if (!this.adsData.inArticleAds.enabled || !articleContent) {
+                console.log('❌ إعلانات المقال معطلة أو المحتوى غير موجود');
+                return;
+            }
+
+            console.log('🔄 حقن إعلانات داخل المقال...');
+
+            const paragraphs = articleContent.querySelectorAll('p');
+            console.log(`📝 عدد الفقرات الموجودة: ${paragraphs.length}`);
+
+            this.adsData.inArticleAds.positions.forEach((position, index) => {
+                const targetIndex = position.paragraphIndex;
+                console.log(`🔍 البحث عن الفقرة رقم: ${targetIndex}`);
+                
+                if (paragraphs[targetIndex]) {
+                    const adElement = document.createElement('div');
+                    adElement.className = 'ad-in-article-container';
+                    adElement.id = `ad-in-article-${index + 1}`;
+                    adElement.innerHTML = position.code;
+                    
+                    // إدراج الإعلان بعد الفقرة المحددة
+                    paragraphs[targetIndex].after(adElement);
+                    this.executeScripts(adElement);
+                    
+                    console.log(`✅ إعلان المقال ${index + 1} مضاف بعد الفقرة ${targetIndex}`);
+                } else {
+                    console.log(`❌ الفقرة ${targetIndex} غير موجودة للإعلان ${index + 1}`);
+                }
+            });
+        }
+
+        // إعداد الإعلانات التلقائية
+        setupAutoAds() {
+            if (this.adsData.autoAds.enabled && this.adsData.autoAds.scripts) {
+                this.adsData.autoAds.scripts.forEach(script => {
+                    const scriptElement = document.createElement('div');
+                    scriptElement.innerHTML = script.code;
+                    document.head.appendChild(scriptElement);
                 });
+                console.log('✅ الإعلانات التلقائية مضافّة');
             }
         }
 
-        // دالة إغلاق الإعلان المنبثق
-        function closePopup() {
-            const popup = document.getElementById('popup-ad');
-            if (popup) {
-                popup.style.display = 'none';
-            }
+        // إعداد الإعلانات المنبثقة
+        setupPopupAd() {
+            const popupHtml = this.adsData.popupAds.code;
+            document.body.insertAdjacentHTML('beforeend', popupHtml);
+            
+            setTimeout(() => {
+                const popup = document.getElementById('popup-ad');
+                if (popup) {
+                    popup.style.display = 'flex';
+                }
+            }, this.adsData.popupAds.delay);
         }
 
-        // تهيئة نظام الإعلانات عند تحميل الصفحة
-        let adSystem;
-        document.addEventListener('DOMContentLoaded', function() {
-            adSystem = new AdSystem();
-        });
-    </script>
+        // تنفيذ السكريبتات داخل كود الإعلان
+        executeScripts(container) {
+            const scripts = container.getElementsByTagName('script');
+            for (let i = 0; i < scripts.length; i++) {
+                const newScript = document.createElement('script');
+                if (scripts[i].src) {
+                    newScript.src = scripts[i].src;
+                } else {
+                    newScript.textContent = scripts[i].textContent;
+                }
+                document.head.appendChild(newScript).parentNode.removeChild(newScript);
+            }
+        }
+    }
+
+    // دالة إغلاق الإعلان المنبثق
+    function closePopup() {
+        const popup = document.getElementById('popup-ad');
+        if (popup) {
+            popup.style.display = 'none';
+        }
+    }
+
+    // تهيئة نظام الإعلانات عند تحميل الصفحة
+    let adSystem;
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚀 بدء تحميل نظام الإعلانات...');
+        adSystem = new AdSystem();
+        
+        // جعل النظام متاحاً globally للتصحيح
+        window.adSystem = adSystem;
+    });
+
+    // دالة مساعدة للتحقق من حالة الإعلانات
+    window.checkAdsStatus = function() {
+        console.log('📊 حالة الإعلانات:');
+        console.log('- الإعلان العلوي:', document.getElementById('ad-header-container')?.innerHTML ? '🟢 موجود' : '🔴 مفقود');
+        console.log('- الإعلان الجانبي:', document.getElementById('ad-sidebar-container')?.innerHTML ? '🟢 موجود' : '🔴 مفقود');
+        console.log('- الإعلان السفلي:', document.getElementById('ad-footer-container')?.innerHTML ? '🟢 موجود' : '🔴 مفقود');
+        console.log('- إعلان المقال 1:', document.getElementById('ad-in-article-1') ? '🟢 موجود' : '🔴 مفقود');
+        console.log('- إعلان المقال 2:', document.getElementById('ad-in-article-2') ? '🟢 موجود' : '🔴 مفقود');
+    };
+</script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
