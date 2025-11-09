@@ -1315,6 +1315,45 @@
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
+
+            /* تأكيد ظهور الإعلانات */
+.ad-section {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin: 20px 0;
+}
+
+.ad-container {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+.ad-in-article-container {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+/* تأكيد ظهور العناصر المحددة */
+#ad-header-container,
+#ad-sidebar-container, 
+#ad-footer-container,
+#ad-in-article-1,
+#ad-in-article-2 {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
         }
     </style>
 </head>
