@@ -62,20 +62,6 @@
             }
         }
 
-        // دالة منفصلة تُحقن الإعلان الجانبي متى ما استُدعيت
-injectSidebarAd() {
-    if (!this.adsData?.sidebarAds?.enabled) return;
-    const cont = this.adContainers.sidebar;
-    if (cont && !cont.querySelector('.ad-sidebar')) {   // حقّن مرة واحدة فقط
-        cont.innerHTML = this.adsData.sidebarAds.code;
-        this.executeScripts(cont);
-        cont.style.display = 'flex';
-        cont.style.visibility = 'visible';
-        cont.style.opacity = '1';
-        console.log('✅ الإعلان الجانبي أُعيد حقنه بعد ملء السايدبار');
-    }
-}
-
         // تحميل بيانات الإعلانات من ملف JSON
         async loadAdsData() {
             try {
@@ -203,7 +189,11 @@ injectSidebarAd() {
                 console.log('✅ الإعلان السفلي مضاف');
             }
 
-        
+            // إعلانات الشريط الجانبي
+            if (this.adsData.sidebarAds.enabled && this.adContainers.sidebar) {
+                this.injectAd('sidebar', this.adsData.sidebarAds.code);
+                console.log('✅ الإعلان الجانبي مضاف');
+            }
 
             // الإعلانات المنبثقة
             if (this.adsData.popupAds.enabled) {
@@ -1805,17 +1795,7 @@ injectSidebarAd() {
 
         // Update the sidebar
         document.getElementById('sidebar-content').innerHTML = sidebarContent;
-        if (window.adSystem) window.adSystem.injectSidebarAd();
     }
-    // أعد حقن الإعلان الجانبي يدوياً في أول السايدبار
-if (window.adSystem && window.adSystem.adsData?.sidebarAds?.enabled) {
-    const adCode = window.adSystem.adsData.sidebarAds.code;
-    const firstChild = document.getElementById('sidebar-content').firstChild;
-    const adWrapper = document.createElement('div');
-    adWrapper.innerHTML = adCode;
-    document.getElementById('sidebar-content').insertBefore(adWrapper, firstChild);
-    window.adSystem.executeScripts(adWrapper);
-}
 
     // Search functionality
     function setupSearch() {
