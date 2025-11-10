@@ -6,13 +6,13 @@
   "bannerAds": {
     "header": {
       "enabled": true,
-      "code": "<div class='ad-container ad-header'><a href='https://example.com' target='_blank' rel='noopener'><img src='https://theonlineadvertisingguide.com/ad-size-guide/728x90/' alt='Header Ad' style='width:100%;height:auto;border-radius:8px;'></a></div>",
+      "code": "<div class='ad-container ad-header'><a href='https://example.com' target='_blank' rel='noopener'><img src='https://worldmarine.media/images/banner-728x90.png?20241104' alt='Header Ad' style='width:100%;height:auto;border-radius:8px;'></a></div>",
       "width": 728,
       "height": 90
     },
     "footer": {
       "enabled": true,
-      "code": "<div class='ad-container ad-footer'><a href='https://example.com' target='_blank' rel='noopener'><img src='https://theonlineadvertisingguide.com/ad-size-guide/728x90/' alt='Footer Ad' style='width:100%;height:auto;border-radius:8px;'></a></div>",
+      "code": "<div class='ad-container ad-footer'><a href='https://example.com' target='_blank' rel='noopener'><img src='https://worldmarine.media/images/banner-728x90.png?20241104' alt='Footer Ad' style='width:100%;height:auto;border-radius:8px;'></a></div>",
       "width": 728,
       "height": 90
     }
