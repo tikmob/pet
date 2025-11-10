@@ -3,27 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Articles - Pet Lovers Hub</title>
+    <title>Dog Articles - Pet Lovers Hub</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Discover expert articles on pet care, training, health, and nutrition for dogs, cats, and other pets">
-    <meta name="keywords" content="pet articles, dog training, cat care, pet health, animal nutrition">
+    <meta name="description" content="Expert dog training, health, and care articles for all dog lovers">
+    <meta name="keywords" content="dog training, dog health, puppy care, dog nutrition">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Pet Lovers Hub">
     
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="Pet Articles - Pet Lovers Hub">
-    <meta property="og:description" content="Discover expert articles on pet care, training, health, and nutrition">
+    <meta property="og:title" content="Dog Articles - Pet Lovers Hub">
+    <meta property="og:description" content="Expert dog training, health, and care articles">
     <meta property="og:type" content="website">
     
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Pet Articles - Pet Lovers Hub">
-    <meta name="twitter:description" content="Discover expert articles on pet care, training, health, and nutrition">
+    <meta name="twitter:title" content="Dog Articles - Pet Lovers Hub">
+    <meta name="twitter:description" content="Expert dog training, health, and care articles">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* جميع الأنماط السابقة تبقى كما هي */
         :root {
             --primary: #4A6FFF;
             --secondary: #FF6B8B;
@@ -144,6 +145,118 @@
         .search-btn:hover {
             color: var(--primary);
             background-color: rgba(74, 111, 255, 0.1);
+        }
+
+        /* Search Modal */
+        .search-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-modal.active {
+            display: flex;
+        }
+
+        .search-container {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-header h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+
+        .close-search {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-search:hover {
+            color: var(--primary);
+        }
+
+        .search-form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .search-form input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #f0f0f0;
+            border-radius: var(--radius) 0 0 var(--radius);
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .search-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .search-form button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .search-form button:hover {
+            background: #3A5FEF;
+        }
+
+        .search-results {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .search-result-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-result-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .search-result-item h4 {
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .search-result-item p {
+            color: var(--gray);
+            font-size: 0.9rem;
         }
 
         .mobile-menu {
@@ -600,9 +713,9 @@
             <nav id="main-nav">
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="dogs.html">Dogs</a></li>
+                    <li><a href="dogs.html" class="active">Dogs</a></li>
                     <li><a href="cats.html">Cats</a></li>
-                    <li><a href="articles.html" class="active">Articles</a></li>
+                    <li><a href="articles.html">Articles</a></li>
                     <li><a href="product.html">Products</a></li>
                     <li><a href="about-us.html">About Us</a></li>
                 </ul>
@@ -618,11 +731,28 @@
         </div>
     </header>
 
+    <!-- Search Modal -->
+    <div class="search-modal" id="search-modal">
+        <div class="search-container">
+            <div class="search-header">
+                <h3>Search Dog Articles</h3>
+                <button class="close-search" id="close-search"><i class="fas fa-times"></i></button>
+            </div>
+            <form class="search-form" id="search-form">
+                <input type="text" placeholder="Search dog training, health, care..." id="search-input">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+            <div class="search-results" id="search-results">
+                <!-- Search results will appear here -->
+            </div>
+        </div>
+    </div>
+
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
-            <h1 class="page-title">Pet Articles & Guides</h1>
-            <p class="page-description">Discover expert advice, training tips, health information, and nutrition guides for all your beloved pets</p>
+            <h1 class="page-title">Dog Articles & Guides</h1>
+            <p class="page-description">Expert advice on dog training, health, nutrition, and care for all dog lovers</p>
             
             <!-- Category Filter -->
             <div class="category-filter" id="category-filter">
@@ -643,7 +773,7 @@
     <!-- Newsletter Section -->
     <section class="newsletter">
         <div class="container newsletter-content">
-            <h2>Get More Pet Care Tips</h2>
+            <h2>Get More Dog Care Tips</h2>
             <p>Subscribe to our newsletter for weekly expert advice, training tips, and exclusive content</p>
             
             <form class="newsletter-form">
@@ -712,47 +842,36 @@
 
     <script>
         let allArticles = [];
-        let currentCategory = 'dog';
+        let currentCategory = 'all';
+        let pageType = 'dogs'; // 'dogs', 'cats', or 'all'
 
         // Function to load all articles from JSON
         async function loadAllArticles() {
             try {
-                // In a real implementation, you would fetch from a JSON file
-                // For this example, we'll use the JSON structure you provided
+                // في التطبيق الحقيقي، ستجلب البيانات من ملف JSON
+                const response = await fetch('articles.json');
+                const articlesData = await response.json();
+                
+                allArticles = articlesData.articles;
+                console.log('Articles loaded successfully:', allArticles);
+                return allArticles;
+            } catch (error) {
+                console.error('Error loading articles:', error);
+                // استخدام بيانات افتراضية للاختبار
                 const articlesData = {
                     "articles": [
                         {
                             "id": "positive-reinforcement-dog-training",
                             "title": "The Complete Guide to Positive Reinforcement Dog Training",
-                            "description": "Learn professional positive reinforcement techniques for dog training. Step-by-step guide to teach commands, solve behavior issues, and strengthen your bond with your dog.",
+                            "description": "Learn professional positive reinforcement techniques for dog training.",
                             "category": "Dog Training",
-                            "author": {
-                                "name": "Pet Lovers Hub",
-                                "title": "Pet Training Expert"
-                            },
+                            "author": {"name": "Pet Lovers Hub", "title": "Pet Training Expert"},
                             "datePublished": "2023-05-20",
                             "readTime": "12 min read",
                             "views": "2,847",
                             "featuredImage": {
-                                "url": "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-                                "alt": "Professional dog trainer working with a golden retriever using positive reinforcement techniques"
-                            }
-                        },
-                        {
-                            "id": "cat-behavior-understanding",
-                            "title": "Understanding Cat Behavior: A Complete Guide",
-                            "description": "Decode your cat's mysterious behaviors and learn how to respond to their needs effectively.",
-                            "category": "Cat Behavior",
-                            "author": {
-                                "name": "Pet Lovers Hub",
-                                "title": "Feline Behavior Specialist"
-                            },
-                            "datePublished": "2023-06-15",
-                            "readTime": "10 min read",
-                            "views": "1,923",
-                            "featuredImage": {
-                                "url": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-                                "alt": "Beautiful cat looking curiously at the camera"
+                                "url": "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                                "alt": "Dog training"
                             }
                         },
                         {
@@ -760,33 +879,13 @@
                             "title": "Puppy Training Basics: The First 30 Days",
                             "description": "Essential training tips for your new puppy's first month at home.",
                             "category": "Dog Training",
-                            "author": {
-                                "name": "Pet Lovers Hub",
-                                "title": "Puppy Training Expert"
-                            },
+                            "author": {"name": "Pet Lovers Hub", "title": "Puppy Training Expert"},
                             "datePublished": "2023-07-10",
                             "readTime": "8 min read",
                             "views": "3,421",
                             "featuredImage": {
-                                "url": "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-                                "alt": "Adorable puppy playing in the grass"
-                            }
-                        },
-                        {
-                            "id": "cat-nutrition-guide",
-                            "title": "Complete Cat Nutrition Guide: What to Feed Your Feline",
-                            "description": "Learn about the nutritional needs of cats at different life stages.",
-                            "category": "Cat Nutrition",
-                            "author": {
-                                "name": "Pet Lovers Hub",
-                                "title": "Veterinary Nutritionist"
-                            },
-                            "datePublished": "2023-08-05",
-                            "readTime": "15 min read",
-                            "views": "2,156",
-                            "featuredImage": {
-                                "url": "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-                                "alt": "Cat eating from a bowl"
+                                "url": "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                                "alt": "Puppy training"
                             }
                         },
                         {
@@ -794,55 +893,95 @@
                             "title": "Dog Health Checklist: Annual Vet Visits & Preventive Care",
                             "description": "Keep your dog healthy with this comprehensive health checklist.",
                             "category": "Dog Health",
-                            "author": {
-                                "name": "Pet Lovers Hub",
-                                "title": "Veterinarian"
-                            },
+                            "author": {"name": "Pet Lovers Hub", "title": "Veterinarian"},
                             "datePublished": "2023-09-12",
                             "readTime": "11 min read",
                             "views": "1,874",
                             "featuredImage": {
-                                "url": "https://images.unsplash.com/photo-1554692918-08fa0fdc9db3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-                                "alt": "Veterinarian examining a dog"
+                                "url": "https://images.unsplash.com/photo-1554692918-08fa0fdc9db3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                                "alt": "Dog health"
                             }
                         },
                         {
-                            "id": "cat-grooming-tips",
-                            "title": "Cat Grooming Tips: Keeping Your Feline Clean and Healthy",
-                            "description": "Learn how to properly groom your cat for optimal health and comfort.",
-                            "category": "Cat Grooming",
-                            "author": {
-                                "name": "Pet Lovers Hub",
-                                "title": "Professional Groomer"
-                            },
+                            "id": "dog-nutrition-guide",
+                            "title": "Complete Dog Nutrition Guide",
+                            "description": "Learn about the nutritional needs of dogs at different life stages.",
+                            "category": "Dog Nutrition",
+                            "author": {"name": "Pet Lovers Hub", "title": "Veterinary Nutritionist"},
+                            "datePublished": "2023-08-05",
+                            "readTime": "15 min read",
+                            "views": "2,156",
+                            "featuredImage": {
+                                "url": "https://images.unsplash.com/photo-1558788353-f76d92427f16?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                                "alt": "Dog nutrition"
+                            }
+                        },
+                        {
+                            "id": "dog-grooming-tips",
+                            "title": "Dog Grooming Tips: Keeping Your Dog Clean and Healthy",
+                            "description": "Learn how to properly groom your dog for optimal health and comfort.",
+                            "category": "Dog Grooming",
+                            "author": {"name": "Pet Lovers Hub", "title": "Professional Groomer"},
                             "datePublished": "2023-10-18",
                             "readTime": "9 min read",
                             "views": "1,532",
                             "featuredImage": {
-                                "url": "https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-                                "alt": "Person grooming a cat"
+                                "url": "https://images.unsplash.com/photo-1517423568366-8b83523034fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                                "alt": "Dog grooming"
+                            }
+                        },
+                        {
+                            "id": "dog-behavior-problems",
+                            "title": "Solving Common Dog Behavior Problems",
+                            "description": "Learn how to address common behavior issues in dogs.",
+                            "category": "Dog Behavior",
+                            "author": {"name": "Pet Lovers Hub", "title": "Behavior Specialist"},
+                            "datePublished": "2023-11-20",
+                            "readTime": "14 min read",
+                            "views": "2,345",
+                            "featuredImage": {
+                                "url": "https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                                "alt": "Dog behavior"
                             }
                         }
                     ]
                 };
-                
                 allArticles = articlesData.articles;
-                console.log('Articles loaded successfully:', allArticles);
                 return allArticles;
-            } catch (error) {
-                console.error('Error loading articles:', error);
-                return [];
             }
         }
 
         // Function to get unique categories from articles
         function getCategories() {
-            const categories = ['all']; // Always include 'all' category
+            // تحديد نوع الصفحة من عنوان URL
+            const path = window.location.pathname;
+            if (path.includes('dogs.html')) {
+                pageType = 'dogs';
+            } else if (path.includes('cats.html')) {
+                pageType = 'cats';
+            } else {
+                pageType = 'all';
+            }
+
+            let categories = ['all']; // Always include 'all' category
+            
+            // إضافة الفئات بناءً على نوع الصفحة
             allArticles.forEach(article => {
-                if (!categories.includes(article.category)) {
-                    categories.push(article.category);
+                if (pageType === 'dogs' && article.category.includes('Dog')) {
+                    if (!categories.includes(article.category)) {
+                        categories.push(article.category);
+                    }
+                } else if (pageType === 'cats' && article.category.includes('Cat')) {
+                    if (!categories.includes(article.category)) {
+                        categories.push(article.category);
+                    }
+                } else if (pageType === 'all') {
+                    if (!categories.includes(article.category)) {
+                        categories.push(article.category);
+                    }
                 }
             });
+            
             return categories;
         }
 
@@ -853,7 +992,14 @@
             
             filterContainer.innerHTML = categories.map(category => {
                 const isActive = category === currentCategory ? 'active' : '';
-                const displayName = category === 'all' ? 'All Articles' : category;
+                let displayName = category;
+                
+                if (category === 'all') {
+                    if (pageType === 'dogs') displayName = 'All Dog Articles';
+                    else if (pageType === 'cats') displayName = 'All Cat Articles';
+                    else displayName = 'All Articles';
+                }
+                
                 return `<button class="category-btn ${isActive}" data-category="${category}">${displayName}</button>`;
             }).join('');
             
@@ -879,10 +1025,20 @@
                 }
             });
             
-            // Filter articles
-            const filteredArticles = category === 'all' 
-                ? allArticles 
-                : allArticles.filter(article => article.category === category);
+            // Filter articles based on page type and category
+            let filteredArticles = allArticles;
+            
+            // First filter by page type
+            if (pageType === 'dogs') {
+                filteredArticles = allArticles.filter(article => article.category.includes('Dog'));
+            } else if (pageType === 'cats') {
+                filteredArticles = allArticles.filter(article => article.category.includes('Cat'));
+            }
+            
+            // Then filter by selected category
+            if (category !== 'all') {
+                filteredArticles = filteredArticles.filter(article => article.category === category);
+            }
             
             // Render filtered articles
             renderArticles(filteredArticles);
@@ -899,7 +1055,7 @@
             const gridContainer = document.getElementById('articles-grid');
             
             if (articles.length === 0) {
-                gridContainer.innerHTML = '<p class="no-articles">No articles found in this category.</p>';
+                gridContainer.innerHTML = '<p class="no-articles" style="text-align: center; grid-column: 1/-1; padding: 40px; color: var(--gray);">No articles found in this category.</p>';
                 return;
             }
             
@@ -922,19 +1078,98 @@
             `).join('');
         }
 
+        // Search functionality
+        function setupSearch() {
+            const searchBtn = document.getElementById('search-btn');
+            const searchModal = document.getElementById('search-modal');
+            const closeSearch = document.getElementById('close-search');
+            const searchForm = document.getElementById('search-form');
+            const searchInput = document.getElementById('search-input');
+            const searchResults = document.getElementById('search-results');
+
+            // Open search modal
+            searchBtn.addEventListener('click', () => {
+                searchModal.classList.add('active');
+                searchInput.focus();
+            });
+
+            // Close search modal
+            closeSearch.addEventListener('click', () => {
+                searchModal.classList.remove('active');
+            });
+
+            // Close modal when clicking outside
+            searchModal.addEventListener('click', (e) => {
+                if (e.target === searchModal) {
+                    searchModal.classList.remove('active');
+                }
+            });
+
+            // Handle search form submission
+            searchForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const query = searchInput.value.trim().toLowerCase();
+                
+                if (query.length < 2) {
+                    searchResults.innerHTML = '<p class="search-result-item">Please enter at least 2 characters</p>';
+                    return;
+                }
+                
+                // Filter articles based on search query and page type
+                let results = allArticles.filter(article => 
+                    (article.title.toLowerCase().includes(query) || 
+                     article.description.toLowerCase().includes(query) ||
+                     article.category.toLowerCase().includes(query)) &&
+                    (pageType === 'all' || 
+                     (pageType === 'dogs' && article.category.includes('Dog')) ||
+                     (pageType === 'cats' && article.category.includes('Cat')))
+                );
+                
+                // Display results
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<p class="search-result-item">No articles found. Try different keywords.</p>';
+                } else {
+                    searchResults.innerHTML = results.map(article => `
+                        <div class="search-result-item" data-id="${article.id}">
+                            <h4>${article.title}</h4>
+                            <p>${article.description}</p>
+                            <small>${article.category} • ${formatDate(article.datePublished)}</small>
+                        </div>
+                    `).join('');
+                    
+                    // Add click event to result items
+                    document.querySelectorAll('.search-result-item').forEach(item => {
+                        item.addEventListener('click', () => {
+                            const articleId = item.getAttribute('data-id');
+                            window.location.href = `article.html?id=${articleId}`;
+                        });
+                    });
+                }
+            });
+        }
+
         // Initialize the page
         document.addEventListener('DOMContentLoaded', async function() {
             console.log('DOM loaded, initializing...');
             
             await loadAllArticles();
             renderCategoryFilter();
-            renderArticles(allArticles);
+            
+            // Show only dog articles by default for dogs page
+            if (pageType === 'dogs') {
+                filterArticles('all');
+            } else if (pageType === 'cats') {
+                filterArticles('all');
+            } else {
+                renderArticles(allArticles);
+            }
+
+            // Setup search functionality
+            setupSearch();
 
             // Mobile Menu Toggle
             document.getElementById('mobile-menu').addEventListener('click', function() {
                 document.getElementById('main-nav').classList.toggle('active');
-                
-                // Prevent scrolling when menu is open
                 document.body.style.overflow = document.getElementById('main-nav').classList.contains('active') ? 'hidden' : '';
             });
 
