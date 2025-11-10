@@ -1,0 +1,52 @@
+{
+  "autoAds": {
+    "enabled": false,
+    "scripts": []
+  },
+  "bannerAds": {
+    "header": {
+      "enabled": true,
+      "code": "<div class='ad-container ad-header'><a href='https://example.com' target='_blank' rel='noopener'><img src='https://theonlineadvertisingguide.com/ad-size-guide/728x90/' alt='Header Ad' style='width:100%;height:auto;border-radius:8px;'></a></div>",
+      "width": 728,
+      "height": 90
+    },
+    "footer": {
+      "enabled": true,
+      "code": "<div class='ad-container ad-footer'><a href='https://example.com' target='_blank' rel='noopener'><img src='https://theonlineadvertisingguide.com/ad-size-guide/728x90/' alt='Footer Ad' style='width:100%;height:auto;border-radius:8px;'></a></div>",
+      "width": 728,
+      "height": 90
+    }
+  },
+  "sidebarAds": {
+    "enabled": true,
+    "code": "<div class='ad-container ad-sidebar'><a href='https://example.com' target='_blank' rel='noopener'><img src='https://setupad.com/wp-content/uploads/2022/01/300x600-interstitial.png' alt='Sidebar Ad' style='width:100%;height:auto;border-radius:8px;'></a></div>",
+    "width": 300,
+    "height": 600
+  },
+  "inArticleAds": {
+    "enabled": true,
+    "positions": [
+      {
+        "position": "after_paragraph",
+        "paragraphIndex": 2,
+        "code": "<div class='ad-container ad-in-article'><a href='https://example.com' target='_blank' rel='noopener'><img src='https://worldmarine.media/images/banner-300x250.png?20241104' style='width:100%;height:auto;border-radius:8px;'></a></div>",
+        "width": 300,
+        "height": 250
+      },
+      {
+        "position": "after_paragraph",
+        "paragraphIndex": 5,
+        "code": "<div class='ad-container ad-in-article'><a href='https://example.com' target='_blank' rel='noopener'><img src='https://worldmarine.media/images/banner-300x250.png?20241104' style='width:100%;height:auto;border-radius:8px;'></a></div>",
+        "width": 300,
+        "height": 250
+      }
+    ]
+  },
+  "popupAds": {
+    "enabled": false,
+    "delay": 5000,
+    "code": "<div id='popup-ad' class='ad-popup'><div class='popup-content'><button class='close-popup' onclick='closePopup()'>×</button><a href='https://example.com' target='_blank' rel='noopener'><img src='https://www.soundstore.ie/the-vesa-mounting-standard-explained?srsltid=AfmBOop7tSRW8p2Di51SFipD-K-bo7EpjGwJIscV4Ek7KY8JMEw-gKq8' alt='Popup Ad' style='width:100%;height:auto;border-radius:8px;'></a></div></div>",
+    "width": 400,
+    "height": 300
+  }
+}
