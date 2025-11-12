@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Articles - Pet Lovers Hub</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Expert dog training, health, and care articles for all dog lovers">
+    <meta name="keywords" content="dog training, dog health, puppy care, dog nutrition">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Pet Lovers Hub">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Dog Articles - Pet Lovers Hub">
+    <meta property="og:description" content="Expert dog training, health, and care articles">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dog Articles - Pet Lovers Hub">
+    <meta name="twitter:description" content="Expert dog training, health, and care articles">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* جميع الأنماط السابقة تبقى كما هي */
+        :root {
+            --primary: #4A6FFF;
+            --secondary: #FF6B8B;
+            --accent: #00D4AA;
+            --light: #F8FAFF;
+            --dark: #1A1D29;
+            --gray: #6C7486;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--accent);
+            font-size: 1.9rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            font-size: 1.05rem;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a.active {
+            color: var(--primary);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .search-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 8px;
+            border-radius: 50%;
+        }
+
+        .search-btn:hover {
+            color: var(--primary);
+            background-color: rgba(74, 111, 255, 0.1);
+        }
+
+        /* Search Modal */
+        .search-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-modal.active {
+            display: flex;
+        }
+
+        .search-container {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-header h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+
+        .close-search {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-search:hover {
+            color: var(--primary);
+        }
+
+        .search-form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .search-form input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #f0f0f0;
+            border-radius: var(--radius) 0 0 var(--radius);
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .search-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .search-form button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .search-form button:hover {
+            background: #3A5FEF;
+        }
+
+        .search-results {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .search-result-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-result-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .search-result-item h4 {
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .search-result-item p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+            z-index: 10000;
+            position: relative;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .page-description {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        /* Category Filter */
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .category-btn {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--gray);
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(74, 111, 255, 0.3);
+        }
+
+        /* Articles Grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .article-card:hover .article-image img {
+            transform: scale(1.05);
+        }
+
+        .article-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            align-self: flex-start;
+        }
+
+        .article-title {
+            font-size: 1.3rem;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .article-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            align-self: flex-start;
+        }
+
+        .read-more:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary), #6A8AFF);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg '%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        .newsletter-content {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .newsletter p {
+            margin-bottom: 40px;
+            opacity: 0.9;
+            font-size: 1.2rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 18px 25px;
+            border: none;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+        }
+
+        .newsletter-form button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0 35px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form button:hover {
+            background: #00C19A;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: #B0B7C3;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .footer-about p {
+            color: #B0B7C3;
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #B0B7C3;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .articles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.2rem;
+            }
+            
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            #main-nav {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: #fff;
+                z-index: 9999;
+                text-align: center;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            #main-nav ul {
+                flex-direction: column;
+                margin: 0;
+                padding: 10px 0;
+            }
+
+            #main-nav.active {
+                display: block;
+            }
+
+            #main-nav {
+                position: fixed !important;
+                z-index: 99999 !important;
+            }
+
+            .mobile-menu {
+                display: block;
+                font-size: 1.5rem;
+                z-index: 10000;
+            }
+
+            .header-actions {
+                display: flex !important;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                border-radius: var(--radius);
+            }
+
+            .newsletter-form input {
+                border-radius: var(--radius) var(--radius) 0 0;
+                margin-bottom: 1px;
+            }
+
+            .newsletter-form button {
+                border-radius: 0 0 var(--radius) var(--radius);
+                padding: 18px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-menu {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
+                position: static !important;
+                z-index: 0 !important;
+            }
+
+            #main-nav {
+                display: flex;
+                justify-content: center;
+            }
+
+            #main-nav ul {
+                display: flex;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            #main-nav li {
+                margin: 0 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-title {
+                font-size: 1.8rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .category-filter {
+                gap: 10px;
+            }
+            
+            .category-btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-paw"></i>
+                <span>Pet-Lovers Hub</span>
+            </a>
+            
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="horse.html"class="active">cats</a></li>
+                    <li><a href="articles.html">Articles</a></li>
+                    <li><a href="product.html">Products</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <button class="search-btn" id="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="mobile-menu" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="search-modal">
+        <div class="search-container">
+            <div class="search-header">
+                <h3>Search Dog Articles</h3>
+                <button class="close-search" id="close-search"><i class="fas fa-times"></i></button>
+            </div>
+            <form class="search-form" id="search-form">
+                <input type="text" placeholder="Search dog training, health, care..." id="search-input">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+            <div class="search-results" id="search-results">
+                <!-- Search results will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Dog Articles & Guides</h1>
+            <p class="page-description">Expert advice on dog training, health, nutrition, and care for all dog lovers</p>
+            
+            <!-- Category Filter -->
+            <div class="category-filter" id="category-filter">
+                <!-- Categories will be generated dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Articles Grid -->
+    <section class="articles-section">
+        <div class="container">
+            <div class="articles-grid" id="articles-grid">
+                <!-- Articles will be loaded dynamically from JSON -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container newsletter-content">
+            <h2>Get More Dog Care Tips</h2>
+            <p>Subscribe to our newsletter for weekly expert advice, training tips, and exclusive content</p>
+            
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column footer-about">
+                    <h3>PetCare Pro</h3>
+                    <p>Your trusted resource for professional pet care advice, training guides, and premium products for dogs, cats, and all your beloved pets.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Dog Resources</h3>
+                    <ul>
+                        <li><a href="Dog-Training.html">Dog Training</a></li>
+                        <li><a href="Dog-Food.html">Dog Food</a></li>
+                        <li><a href="Dog-Breeds.html">Dog Breeds</a></li>
+                        <li><a href="Dog-Grooming.html">Dog Grooming</a></li>
+                        <li><a href="Dog-toys.html">Dog Toys</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Cat Resources</h3>
+                    <ul>
+                        <li><a href="Cat-Behavior.html">Cat Behavior</a></li>
+                        <li><a href="Cat-Food.html">Cat Food</a></li>
+                        <li><a href="Cat-Breeds.html">Cat Breeds</a></li>
+                        <li><a href="Cat-Litter.html">Cat Litter</a></li>
+                        <li><a href="Cat-Toys.html">Cat Toys</a></li>
+                        <li><a href="Cat-Grooming.html">Cat Grooming</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about-us.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 PetCare Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let allArticles = [];
+        let currentCategory = 'all';
+        let pageType = 'horse'; // 'dogs', 'cats', or 'all'
+
+        // Function to load all articles from JSON
+        async function loadAllArticles() {
+            try {
+                // في التطبيق الحقيقي، ستجلب البيانات من ملف JSON
+                const response = await fetch('articles.json');
+                const articlesData = await response.json();
+                
+                allArticles = articlesData.articles;
+                console.log('Articles loaded successfully:', allArticles);
+                return allArticles;
+            } catch (error) {
+                console.error('Error loading articles:', error);
+                // استخدام بيانات افتراضية للاختبار
+                const articlesData = {
+                    "articles": [
+                        {
+                            "id": "positive-reinforcement-dog-training",
+                            "title": "The Complete Guide to Positive Reinforcement Dog Training",
+                            "description": "Learn professional positive reinforcement techniques for dog training.",
+                            "category": "Dog Training",
+                            "author": {"name": "Pet Lovers Hub", "title": "Pet Training Expert"},
+                            "datePublished": "2023-05-20",
+                            "readTime": "12 min read",
+                            "views": "2,847",
+                            "featuredImage": {
+                                "url": "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                                "alt": "Dog training"
+                            }
+                        },
+                        {
+                            "id": "puppy-training-basics",
+                            "title": "Puppy Training Basics: The First 30 Days",
+                            "description": "Essential training tips for your new puppy's first month at home.",
+                            "category": "Dog Training",
+                            "author": {"name": "Pet Lovers Hub", "title": "Puppy Training Expert"},
+                            "datePublished": "2023-07-10",
+                            "readTime": "8 min read",
+                            "views": "3,421",
+                            "featuredImage": {
+                                "url": "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                                "alt": "Puppy training"
+                            }
+                        },
+                        {
+                            "id": "dog-health-checklist",
+                            "title": "Dog Health Checklist: Annual Vet Visits & Preventive Care",
+                            "description": "Keep your dog healthy with this comprehensive health checklist.",
+                            "category": "Dog Health",
+                            "author": {"name": "Pet Lovers Hub", "title": "Veterinarian"},
+                            "datePublished": "2023-09-12",
+                            "readTime": "11 min read",
+                            "views": "1,874",
+                            "featuredImage": {
+                                "url": "https://images.unsplash.com/photo-1554692918-08fa0fdc9db3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                                "alt": "Dog health"
+                            }
+                        },
+                        {
+                            "id": "dog-nutrition-guide",
+                            "title": "Complete Dog Nutrition Guide",
+                            "description": "Learn about the nutritional needs of dogs at different life stages.",
+                            "category": "Dog Nutrition",
+                            "author": {"name": "Pet Lovers Hub", "title": "Veterinary Nutritionist"},
+                            "datePublished": "2023-08-05",
+                            "readTime": "15 min read",
+                            "views": "2,156",
+                            "featuredImage": {
+                                "url": "https://images.unsplash.com/photo-1558788353-f76d92427f16?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                                "alt": "Dog nutrition"
+                            }
+                        },
+                        {
+                            "id": "dog-grooming-tips",
+                            "title": "Dog Grooming Tips: Keeping Your Dog Clean and Healthy",
+                            "description": "Learn how to properly groom your dog for optimal health and comfort.",
+                            "category": "Dog Grooming",
+                            "author": {"name": "Pet Lovers Hub", "title": "Professional Groomer"},
+                            "datePublished": "2023-10-18",
+                            "readTime": "9 min read",
+                            "views": "1,532",
+                            "featuredImage": {
+                                "url": "https://images.unsplash.com/photo-1517423568366-8b83523034fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                                "alt": "Dog grooming"
+                            }
+                        },
+                        {
+                            "id": "dog-behavior-problems",
+                            "title": "Solving Common Dog Behavior Problems",
+                            "description": "Learn how to address common behavior issues in dogs.",
+                            "category": "Dog Behavior",
+                            "author": {"name": "Pet Lovers Hub", "title": "Behavior Specialist"},
+                            "datePublished": "2023-11-20",
+                            "readTime": "14 min read",
+                            "views": "2,345",
+                            "featuredImage": {
+                                "url": "https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                                "alt": "Dog behavior"
+                            }
+                        }
+                    ]
+                };
+                allArticles = articlesData.articles;
+                return allArticles;
+            }
+        }
+
+        // Function to get unique categories from articles
+        function getCategories() {
+            // تحديد نوع الصفحة من عنوان URL
+            const path = window.location.pathname;
+            if (path.includes('dogs.html')) {
+                pageType = 'dogs';
+            } else if (path.includes('cats.html')) {
+                pageType = 'cats';
+            } else {
+                pageType = 'all';
+            }
+
+            let categories = ['all']; // Always include 'all' category
+            
+            // إضافة الفئات بناءً على نوع الصفحة
+            allArticles.forEach(article => {
+                if (pageType === 'dogs' && article.category.includes('Dog')) {
+                    if (!categories.includes(article.category)) {
+                        categories.push(article.category);
+                    }
+                } else if (pageType === 'cats' && article.category.includes('Cat')) {
+                    if (!categories.includes(article.category)) {
+                        categories.push(article.category);
+                    }
+                } else if (pageType === 'all') {
+                    if (!categories.includes(article.category)) {
+                        categories.push(article.category);
+                    }
+                }
+            });
+            
+            return categories;
+        }
+
+        // Function to render category filter buttons
+        function renderCategoryFilter() {
+            const categories = getCategories();
+            const filterContainer = document.getElementById('category-filter');
+            
+            filterContainer.innerHTML = categories.map(category => {
+                const isActive = category === currentCategory ? 'active' : '';
+                let displayName = category;
+                
+                if (category === 'all') {
+                    if (pageType === 'dogs') displayName = 'All Dog Articles';
+                    else if (pageType === 'cats') displayName = 'All Cat Articles';
+                    else displayName = 'All Articles';
+                }
+                
+                return `<button class="category-btn ${isActive}" data-category="${category}">${displayName}</button>`;
+            }).join('');
+            
+            // Add event listeners to category buttons
+            document.querySelectorAll('.category-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    filterArticles(category);
+                });
+            });
+        }
+
+        // Function to filter articles by category
+        function filterArticles(category) {
+            currentCategory = category;
+            
+            // Update active state of category buttons
+            document.querySelectorAll('.category-btn').forEach(button => {
+                if (button.getAttribute('data-category') === category) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+            
+            // Filter articles based on page type and category
+            let filteredArticles = allArticles;
+            
+            // First filter by page type
+            if (pageType === 'dogs') {
+                filteredArticles = allArticles.filter(article => article.category.includes('Dog'));
+            } else if (pageType === 'cats') {
+                filteredArticles = allArticles.filter(article => article.category.includes('Cat'));
+            }
+            
+            // Then filter by selected category
+            if (category !== 'all') {
+                filteredArticles = filteredArticles.filter(article => article.category === category);
+            }
+            
+            // Render filtered articles
+            renderArticles(filteredArticles);
+        }
+
+        // Helper function to format date
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+
+        // Function to render articles in grid
+        function renderArticles(articles) {
+            const gridContainer = document.getElementById('articles-grid');
+            
+            if (articles.length === 0) {
+                gridContainer.innerHTML = '<p class="no-articles" style="text-align: center; grid-column: 1/-1; padding: 40px; color: var(--gray);">No articles found in this category.</p>';
+                return;
+            }
+            
+            gridContainer.innerHTML = articles.map(article => `
+                <div class="article-card">
+                    <div class="article-image">
+                        <img src="${article.featuredImage.url}" alt="${article.featuredImage.alt}" loading="lazy">
+                    </div>
+                    <div class="article-content">
+                        <span class="article-category">${article.category}</span>
+                        <h3 class="article-title">${article.title}</h3>
+                        <p class="article-description">${article.description}</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar"></i> ${formatDate(article.datePublished)}</span>
+                            <span><i class="far fa-clock"></i> ${article.readTime}</span>
+                        </div>
+                        <a href="article.html?id=${article.id}" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Search functionality
+        function setupSearch() {
+            const searchBtn = document.getElementById('search-btn');
+            const searchModal = document.getElementById('search-modal');
+            const closeSearch = document.getElementById('close-search');
+            const searchForm = document.getElementById('search-form');
+            const searchInput = document.getElementById('search-input');
+            const searchResults = document.getElementById('search-results');
+
+            // Open search modal
+            searchBtn.addEventListener('click', () => {
+                searchModal.classList.add('active');
+                searchInput.focus();
+            });
+
+            // Close search modal
+            closeSearch.addEventListener('click', () => {
+                searchModal.classList.remove('active');
+            });
+
+            // Close modal when clicking outside
+            searchModal.addEventListener('click', (e) => {
+                if (e.target === searchModal) {
+                    searchModal.classList.remove('active');
+                }
+            });
+
+            // Handle search form submission
+            searchForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const query = searchInput.value.trim().toLowerCase();
+                
+                if (query.length < 2) {
+                    searchResults.innerHTML = '<p class="search-result-item">Please enter at least 2 characters</p>';
+                    return;
+                }
+                
+                // Filter articles based on search query and page type
+                let results = allArticles.filter(article => 
+                    (article.title.toLowerCase().includes(query) || 
+                     article.description.toLowerCase().includes(query) ||
+                     article.category.toLowerCase().includes(query)) &&
+                    (pageType === 'all' || 
+                     (pageType === 'dogs' && article.category.includes('Dog')) ||
+                     (pageType === 'cats' && article.category.includes('Cat')))
+                );
+                
+                // Display results
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<p class="search-result-item">No articles found. Try different keywords.</p>';
+                } else {
+                    searchResults.innerHTML = results.map(article => `
+                        <div class="search-result-item" data-id="${article.id}">
+                            <h4>${article.title}</h4>
+                            <p>${article.description}</p>
+                            <small>${article.category} • ${formatDate(article.datePublished)}</small>
+                        </div>
+                    `).join('');
+                    
+                    // Add click event to result items
+                    document.querySelectorAll('.search-result-item').forEach(item => {
+                        item.addEventListener('click', () => {
+                            const articleId = item.getAttribute('data-id');
+                            window.location.href = `article.html?id=${articleId}`;
+                        });
+                    });
+                }
+            });
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('DOM loaded, initializing...');
+            
+            await loadAllArticles();
+            renderCategoryFilter();
+            
+            // Show only dog articles by default for dogs page
+            if (pageType === 'dogs') {
+                filterArticles('all');
+            } else if (pageType === 'cats') {
+                filterArticles('all');
+            } else {
+                renderArticles(allArticles);
+            }
+
+            // Setup search functionality
+            setupSearch();
+
+            // Mobile Menu Toggle
+            document.getElementById('mobile-menu').addEventListener('click', function() {
+                document.getElementById('main-nav').classList.toggle('active');
+                document.body.style.overflow = document.getElementById('main-nav').classList.contains('active') ? 'hidden' : '';
+            });
+
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(255, 255, 255, 0.98)';
+                    header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+                } else {
+                    header.style.background = 'rgba(255, 255, 255, 0.95)';
+                    header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
