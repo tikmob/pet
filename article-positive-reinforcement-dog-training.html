@@ -1994,11 +1994,33 @@
     document.addEventListener('DOMContentLoaded', async function() {
         console.log('DOM loaded, initializing...');
         
-        // تعطيل تحميل المقال الديناميكي
-    console.log('✅ المحتوى مضمن مسبقاً');
+        await loadAllArticles();
+        const articleData = loadArticleData();
+        
+        if (articleData) {
+            renderArticle(articleData);
+        } else {
+            console.log('المحتوى موجود مسبقاً');
+        }
+
+        // Setup search functionality
+        // إصلاح دالة البحث
+    const originalSetupSearch = setupSearch;
+    setupSearch = function() {
+        // تأكد من أن بيانات البحث متوفرة
+        if (typeof allArticles === 'undefined' || allArticles.length === 0) {
+            console.log('⚠️ تحذير: بيانات البحث غير متوفرة، جاري التحميل...');
+            allArticles = window.preloadedSearchData || [];
+        }
+        return originalSetupSearch.apply(this, arguments);
+    };
+
+    // تأكد من تهيئة البحث بعد تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(setupSearch, 100);
+    });
     
-    // Setup search functionality
-    setupSearch();
+    setupSearch(); // هذا السطر المهم - استدعاء الدالة
 
         // Mobile Menu Toggle
         document.getElementById('mobile-menu').addEventListener('click', function() {
