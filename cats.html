@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dog Articles - Pet Lovers Hub</title>
+    <!-- تغيير السطر التالي فقط لتغيير نوع المحتوى -->
+    <title data-page-type="cats">Cat Articles - Pet Lovers Hub</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Expert dog training, health, and care articles for all dog lovers">
-    <meta name="keywords" content="dog training, dog health, puppy care, dog nutrition">
+    <meta name="description" data-page-type="cats" content="Expert cat behavior, health, and care articles for all cat lovers">
+    <meta name="keywords" data-page-type="cats" content="cat behavior, cat health, kitten care, cat nutrition">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Pet Lovers Hub">
     
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="Dog Articles - Pet Lovers Hub">
-    <meta property="og:description" content="Expert dog training, health, and care articles">
+    <meta property="og:title" data-page-type="cats" content="Cat Articles - Pet Lovers Hub">
+    <meta property="og:description" data-page-type="cats" content="Expert cat behavior, health, and care articles">
     <meta property="og:type" content="website">
     
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Dog Articles - Pet Lovers Hub">
-    <meta name="twitter:description" content="Expert dog training, health, and care articles">
+    <meta name="twitter:title" data-page-type="cats" content="Cat Articles - Pet Lovers Hub">
+    <meta name="twitter:description" data-page-type="cats" content="Expert cat behavior, health, and care articles">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -714,7 +715,7 @@
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="dogs.html">Dogs</a></li>
-                    <li><a href="cats.html"class="active">Cats</a></li>
+                    <li><a href="cats.html" class="active">Cats</a></li>
                     <li><a href="articles.html">Articles</a></li>
                     <li><a href="product.html">Products</a></li>
                     <li><a href="about-us.html">About Us</a></li>
@@ -735,11 +736,11 @@
     <div class="search-modal" id="search-modal">
         <div class="search-container">
             <div class="search-header">
-                <h3>Search Dog Articles</h3>
+                <h3 id="search-title">Search Cat Articles</h3>
                 <button class="close-search" id="close-search"><i class="fas fa-times"></i></button>
             </div>
             <form class="search-form" id="search-form">
-                <input type="text" placeholder="Search dog training, health, care..." id="search-input">
+                <input type="text" placeholder="Search cat behavior, health, care..." id="search-input">
                 <button type="submit"><i class="fas fa-search"></i></button>
             </form>
             <div class="search-results" id="search-results">
@@ -751,8 +752,8 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
-            <h1 class="page-title">Dog Articles & Guides</h1>
-            <p class="page-description">Expert advice on dog training, health, nutrition, and care for all dog lovers</p>
+            <h1 class="page-title" id="page-title">Cat Articles & Guides</h1>
+            <p class="page-description" id="page-description">Expert advice on cat behavior, health, nutrition, and care for all cat lovers</p>
             
             <!-- Category Filter -->
             <div class="category-filter" id="category-filter">
@@ -773,8 +774,8 @@
     <!-- Newsletter Section -->
     <section class="newsletter">
         <div class="container newsletter-content">
-            <h2>Get More Dog Care Tips</h2>
-            <p>Subscribe to our newsletter for weekly expert advice, training tips, and exclusive content</p>
+            <h2 id="newsletter-title">Get More Cat Care Tips</h2>
+            <p id="newsletter-description">Subscribe to our newsletter for weekly expert advice, behavior tips, and exclusive content</p>
             
             <form class="newsletter-form">
                 <input type="email" placeholder="Enter your email address">
@@ -841,9 +842,96 @@
     </footer>
 
     <script>
+        // =============================================
+        // السطر الوحيد الذي تحتاج لتغييره
+        // =============================================
+        const PAGE_TYPE = 'cats'; // 'dogs', 'cats', 'horses', 'products'
+        // =============================================
+
+        // إعدادات الصفحة لكل نوع
+        const PAGE_CONFIG = {
+            dogs: {
+                title: "Dog Articles & Guides",
+                description: "Expert advice on dog training, health, nutrition, and care for all dog lovers",
+                searchTitle: "Search Dog Articles",
+                searchPlaceholder: "Search dog training, health, care...",
+                newsletterTitle: "Get More Dog Care Tips",
+                newsletterDescription: "Subscribe to our newsletter for weekly expert advice, training tips, and exclusive content",
+                metaDescription: "Expert dog training, health, and care articles for all dog lovers",
+                metaKeywords: "dog training, dog health, puppy care, dog nutrition",
+                ogTitle: "Dog Articles - Pet Lovers Hub",
+                ogDescription: "Expert dog training, health, and care articles",
+                twitterTitle: "Dog Articles - Pet Lovers Hub",
+                twitterDescription: "Expert dog training, health, and care articles"
+            },
+            cats: {
+                title: "Cat Articles & Guides",
+                description: "Expert advice on cat behavior, health, nutrition, and care for all cat lovers",
+                searchTitle: "Search Cat Articles",
+                searchPlaceholder: "Search cat behavior, health, care...",
+                newsletterTitle: "Get More Cat Care Tips",
+                newsletterDescription: "Subscribe to our newsletter for weekly expert advice, behavior tips, and exclusive content",
+                metaDescription: "Expert cat behavior, health, and care articles for all cat lovers",
+                metaKeywords: "cat behavior, cat health, kitten care, cat nutrition",
+                ogTitle: "Cat Articles - Pet Lovers Hub",
+                ogDescription: "Expert cat behavior, health, and care articles",
+                twitterTitle: "Cat Articles - Pet Lovers Hub",
+                twitterDescription: "Expert cat behavior, health, and care articles"
+            },
+            horses: {
+                title: "Horse Articles & Guides",
+                description: "Expert advice on horse training, health, nutrition, and care for all horse lovers",
+                searchTitle: "Search Horse Articles",
+                searchPlaceholder: "Search horse training, health, care...",
+                newsletterTitle: "Get More Horse Care Tips",
+                newsletterDescription: "Subscribe to our newsletter for weekly expert advice, training tips, and exclusive content",
+                metaDescription: "Expert horse training, health, and care articles for all horse lovers",
+                metaKeywords: "horse training, horse health, horse care, horse nutrition",
+                ogTitle: "Horse Articles - Pet Lovers Hub",
+                ogDescription: "Expert horse training, health, and care articles",
+                twitterTitle: "Horse Articles - Pet Lovers Hub",
+                twitterDescription: "Expert horse training, health, and care articles"
+            },
+            products: {
+                title: "Pet Products & Reviews",
+                description: "Honest reviews and recommendations for the best pet products, toys, and accessories",
+                searchTitle: "Search Pet Products",
+                searchPlaceholder: "Search pet products, toys, accessories...",
+                newsletterTitle: "Get More Product Reviews",
+                newsletterDescription: "Subscribe to our newsletter for weekly product reviews, deals, and exclusive content",
+                metaDescription: "Honest reviews and recommendations for the best pet products, toys, and accessories",
+                metaKeywords: "pet products, dog toys, cat accessories, pet supplies",
+                ogTitle: "Pet Products - Pet Lovers Hub",
+                ogDescription: "Honest reviews and recommendations for the best pet products",
+                twitterTitle: "Pet Products - Pet Lovers Hub",
+                twitterDescription: "Honest reviews and recommendations for the best pet products"
+            }
+        };
+
         let allArticles = [];
         let currentCategory = 'all';
-        let pageType = 'cats'; // 'dogs', 'cats', or 'all'
+
+        // تحديث محتوى الصفحة بناءً على نوع الصفحة
+        function updatePageContent() {
+            const config = PAGE_CONFIG[PAGE_TYPE];
+            
+            // تحديث العناوين والنصوص
+            document.title = config.ogTitle;
+            document.getElementById('page-title').textContent = config.title;
+            document.getElementById('page-description').textContent = config.description;
+            document.getElementById('search-title').textContent = config.searchTitle;
+            document.getElementById('search-input').placeholder = config.searchPlaceholder;
+            document.getElementById('newsletter-title').textContent = config.newsletterTitle;
+            document.getElementById('newsletter-description').textContent = config.newsletterDescription;
+            
+            // تحدير meta tags
+            document.querySelector('meta[name="description"]').setAttribute('content', config.metaDescription);
+            document.querySelector('meta[name="keywords"]').setAttribute('content', config.metaKeywords);
+            document.querySelector('meta[property="og:title"]').setAttribute('content', config.ogTitle);
+            document.querySelector('meta[property="og:description"]').setAttribute('content', config.ogDescription);
+            document.querySelector('meta[name="twitter:title"]').setAttribute('content', config.twitterTitle);
+            document.querySelector('meta[name="twitter:description"]').setAttribute('content', config.twitterDescription);
+        }
 
         // Function to load all articles from JSON
         async function loadAllArticles() {
@@ -864,7 +952,7 @@
                             "id": "positive-reinforcement-dog-training",
                             "title": "The Complete Guide to Positive Reinforcement Dog Training",
                             "description": "Learn professional positive reinforcement techniques for dog training.",
-                            "category": "Dog Training",
+                            "category": "cats",
                             "author": {"name": "Pet Lovers Hub", "title": "Pet Training Expert"},
                             "datePublished": "2023-05-20",
                             "readTime": "12 min read",
@@ -889,59 +977,45 @@
                             }
                         },
                         {
-                            "id": "dog-health-checklist",
-                            "title": "Dog Health Checklist: Annual Vet Visits & Preventive Care",
-                            "description": "Keep your dog healthy with this comprehensive health checklist.",
-                            "category": "Dog Health",
-                            "author": {"name": "Pet Lovers Hub", "title": "Veterinarian"},
-                            "datePublished": "2023-09-12",
-                            "readTime": "11 min read",
-                            "views": "1,874",
+                            "id": "cat-behavior-guide",
+                            "title": "Understanding Cat Behavior: A Complete Guide",
+                            "description": "Learn how to interpret your cat's behavior and build a stronger bond.",
+                            "category": "Cat Behavior",
+                            "author": {"name": "Pet Lovers Hub", "title": "Feline Behavior Expert"},
+                            "datePublished": "2023-06-15",
+                            "readTime": "10 min read",
+                            "views": "2,134",
                             "featuredImage": {
-                                "url": "https://images.unsplash.com/photo-1554692918-08fa0fdc9db3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                                "alt": "Dog health"
+                                "url": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                                "alt": "Cat behavior"
                             }
                         },
                         {
-                            "id": "dog-nutrition-guide",
-                            "title": "Complete Dog Nutrition Guide",
-                            "description": "Learn about the nutritional needs of dogs at different life stages.",
-                            "category": "Dog Nutrition",
-                            "author": {"name": "Pet Lovers Hub", "title": "Veterinary Nutritionist"},
-                            "datePublished": "2023-08-05",
-                            "readTime": "15 min read",
-                            "views": "2,156",
-                            "featuredImage": {
-                                "url": "https://images.unsplash.com/photo-1558788353-f76d92427f16?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                                "alt": "Dog nutrition"
-                            }
-                        },
-                        {
-                            "id": "dog-grooming-tips",
-                            "title": "Dog Grooming Tips: Keeping Your Dog Clean and Healthy",
-                            "description": "Learn how to properly groom your dog for optimal health and comfort.",
-                            "category": "Dog Grooming",
-                            "author": {"name": "Pet Lovers Hub", "title": "Professional Groomer"},
-                            "datePublished": "2023-10-18",
-                            "readTime": "9 min read",
-                            "views": "1,532",
-                            "featuredImage": {
-                                "url": "https://images.unsplash.com/photo-1517423568366-8b83523034fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                                "alt": "Dog grooming"
-                            }
-                        },
-                        {
-                            "id": "dog-behavior-problems",
-                            "title": "Solving Common Dog Behavior Problems",
-                            "description": "Learn how to address common behavior issues in dogs.",
-                            "category": "Dog Behavior",
-                            "author": {"name": "Pet Lovers Hub", "title": "Behavior Specialist"},
-                            "datePublished": "2023-11-20",
+                            "id": "horse-care-basics",
+                            "title": "Horse Care Basics: Essential Guide for Beginners",
+                            "description": "Learn the fundamentals of proper horse care and management.",
+                            "category": "Horse Care",
+                            "author": {"name": "Pet Lovers Hub", "title": "Equine Specialist"},
+                            "datePublished": "2023-08-22",
                             "readTime": "14 min read",
-                            "views": "2,345",
+                            "views": "1,567",
                             "featuredImage": {
-                                "url": "https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                                "alt": "Dog behavior"
+                                "url": "https://images.unsplash.com/photo-1542728928-0017a6b13fe3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                                "alt": "Horse care"
+                            }
+                        },
+                        {
+                            "id": "best-dog-toys",
+                            "title": "Top 10 Best Dog Toys for 2023",
+                            "description": "Discover the best dog toys for entertainment, training, and dental health.",
+                            "category": "Products",
+                            "author": {"name": "Pet Lovers Hub", "title": "Product Reviewer"},
+                            "datePublished": "2023-09-05",
+                            "readTime": "7 min read",
+                            "views": "3,289",
+                            "featuredImage": {
+                                "url": "https://images.unsplash.com/photo-1554456854-55a089fd4cb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                                "alt": "Dog toys"
                             }
                         }
                     ]
@@ -953,31 +1027,35 @@
 
         // Function to get unique categories from articles
         function getCategories() {
-            // تحديد نوع الصفحة من عنوان URL
-            const path = window.location.pathname;
-            if (path.includes('dogs.html')) {
-                pageType = 'cats';
-            } else if (path.includes('cats.html')) {
-                pageType = 'cats';
-            } else {
-                pageType = 'all';
-            }
-
             let categories = ['all']; // Always include 'all' category
             
-            // إضافة الفئات بناءً على نوع الصفحة
+            // إضافة الفئات بناءً على نوع الصفحة (مرن أكثر)
             allArticles.forEach(article => {
-                if (pageType === 'dogs' && article.category.includes('Dog')) {
-                    if (!categories.includes(article.category)) {
-                        categories.push(article.category);
+                const category = article.category.toLowerCase();
+                
+                if (PAGE_TYPE === 'dogs') {
+                    if (category.includes('dog') || category.includes('puppy')) {
+                        if (!categories.includes(article.category)) {
+                            categories.push(article.category);
+                        }
                     }
-                } else if (pageType === 'cats' && article.category.includes('Cat')) {
-                    if (!categories.includes(article.category)) {
-                        categories.push(article.category);
+                } else if (PAGE_TYPE === 'cats') {
+                    if (category.includes('cat') || category.includes('kitten')) {
+                        if (!categories.includes(article.category)) {
+                            categories.push(article.category);
+                        }
                     }
-                } else if (pageType === 'all') {
-                    if (!categories.includes(article.category)) {
-                        categories.push(article.category);
+                } else if (PAGE_TYPE === 'horses') {
+                    if (category.includes('horse') || category.includes('equine')) {
+                        if (!categories.includes(article.category)) {
+                            categories.push(article.category);
+                        }
+                    }
+                } else if (PAGE_TYPE === 'products') {
+                    if (category.includes('product') || category.includes('toy') || category.includes('accessory')) {
+                        if (!categories.includes(article.category)) {
+                            categories.push(article.category);
+                        }
                     }
                 }
             });
@@ -995,9 +1073,7 @@
                 let displayName = category;
                 
                 if (category === 'all') {
-                    if (pageType === 'dogs') displayName = 'All Dog Articles';
-                    else if (pageType === 'cats') displayName = 'All Cat Articles';
-                    else displayName = 'All Articles';
+                    displayName = `All ${PAGE_TYPE.charAt(0).toUpperCase() + PAGE_TYPE.slice(1)} ${PAGE_TYPE === 'products' ? '' : 'Articles'}`;
                 }
                 
                 return `<button class="category-btn ${isActive}" data-category="${category}">${displayName}</button>`;
@@ -1028,9 +1104,27 @@
             // Filter articles based on page type and category
             let filteredArticles = allArticles;
             
-            // First filter by page type
-            filteredArticles = allArticles.filter(article => article.category.includes('Cat'));
-
+            // First filter by page type (مرن أكثر)
+            if (PAGE_TYPE === 'dogs') {
+                filteredArticles = allArticles.filter(article => {
+                    const cat = article.category.toLowerCase();
+                    return cat.includes('dog') || cat.includes('puppy');
+                });
+            } else if (PAGE_TYPE === 'cats') {
+                filteredArticles = allArticles.filter(article => {
+                    const cat = article.category.toLowerCase();
+                    return cat.includes('cat') || cat.includes('kitten');
+                });
+            } else if (PAGE_TYPE === 'horses') {
+                filteredArticles = allArticles.filter(article => {
+                    const cat = article.category.toLowerCase();
+                    return cat.includes('horse') || cat.includes('equine');
+                });
+            } else if (PAGE_TYPE === 'products') {
+                filteredArticles = allArticles.filter(article => {
+                    const cat = article.category.toLowerCase();
+                    return cat.includes('product') || cat.includes('toy') || cat.includes('accessory');
+                });
             }
             
             // Then filter by selected category
@@ -1053,7 +1147,7 @@
             const gridContainer = document.getElementById('articles-grid');
             
             if (articles.length === 0) {
-                gridContainer.innerHTML = '<p class="no-articles" style="text-align: center; grid-column: 1/-1; padding: 40px; color: var(--gray);">No articles found in this category.</p>';
+                gridContainer.innerHTML = `<p class="no-articles" style="text-align: center; grid-column: 1/-1; padding: 40px; color: var(--gray);">No ${PAGE_TYPE} articles found in this category.</p>`;
                 return;
             }
             
@@ -1114,14 +1208,29 @@
                 }
                 
                 // Filter articles based on search query and page type
-                let results = allArticles.filter(article => 
-                    (article.title.toLowerCase().includes(query) || 
-                     article.description.toLowerCase().includes(query) ||
-                     article.category.toLowerCase().includes(query)) &&
-                    (pageType === 'all' || 
-                     (pageType === 'dogs' && article.category.includes('Dog')) ||
-                     (pageType === 'cats' && article.category.includes('Cat')))
-                );
+                let results = allArticles.filter(article => {
+                    const matchesQuery = article.title.toLowerCase().includes(query) || 
+                                        article.description.toLowerCase().includes(query) ||
+                                        article.category.toLowerCase().includes(query);
+                    
+                    if (PAGE_TYPE === 'dogs') {
+                        const cat = article.category.toLowerCase();
+                        return matchesQuery && (cat.includes('dog') || cat.includes('puppy'));
+                    }
+                    if (PAGE_TYPE === 'cats') {
+                        const cat = article.category.toLowerCase();
+                        return matchesQuery && (cat.includes('cat') || cat.includes('kitten'));
+                    }
+                    if (PAGE_TYPE === 'horses') {
+                        const cat = article.category.toLowerCase();
+                        return matchesQuery && (cat.includes('horse') || cat.includes('equine'));
+                    }
+                    if (PAGE_TYPE === 'products') {
+                        const cat = article.category.toLowerCase();
+                        return matchesQuery && (cat.includes('product') || cat.includes('toy') || cat.includes('accessory'));
+                    }
+                    return matchesQuery;
+                });
                 
                 // Display results
                 if (results.length === 0) {
@@ -1150,17 +1259,14 @@
         document.addEventListener('DOMContentLoaded', async function() {
             console.log('DOM loaded, initializing...');
             
+            // تحديث محتوى الصفحة أولاً
+            updatePageContent();
+            
             await loadAllArticles();
             renderCategoryFilter();
             
-            // Show only dog articles by default for dogs page
-            if (pageType === 'dogs') {
-                filterArticles('all');
-            } else if (pageType === 'cats') {
-                filterArticles('all');
-            } else {
-                renderArticles(allArticles);
-            }
+            // عرض المقالات بناءً على نوع الصفحة
+            filterArticles('all');
 
             // Setup search functionality
             setupSearch();
