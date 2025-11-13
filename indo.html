@@ -1020,8 +1020,8 @@
             <p>Discover professional tips, training guides, and premium products for dogs, cats, and all your beloved pets.</p>
             
             <div class="hero-buttons">
-                <button class="btn btn-primary" id="explore-dog-guides"><i class="fas fa-dog"></i> Explore Dog Guides</button>
-                <button class="btn btn-outline" id="explore-cat-guides"><i class="cats.html"></i> Explore Cat Guides</button>
+                <a href="dog-guides.html" class="btn btn-primary"><i class="fas fa-dog"></i> Explore Dog Guides</a>
+                <a href="cat-guides.html" class="btn btn-outline"><i class="fas fa-cat"></i> Explore Cat Guides</a>
             </div>
         </div>
     </section>
@@ -1029,10 +1029,10 @@
     <!-- Search Section -->
     <section class="search-section">
         <div class="container search-container">
-            <div class="search-box">
-                <input type="text" id="search-input" placeholder="Search for dog training, cat grooming, pet products...">
-                <button id="search-button"><i class="fas fa-search"></i> Search</button>
-            </div>
+            <form class="search-box" id="search-form">
+                <input type="text" id="search-input" name="q" placeholder="Search for dog training, cat grooming, pet products...">
+                <button type="submit"><i class="fas fa-search"></i> Search</button>
+            </form>
             
             <div class="search-tags">
                 <span class="search-tag">dog training near me</span>
@@ -1061,7 +1061,7 @@
                     <div class="category-content">
                         <h3>Dog Care & Training</h3>
                         <p>Complete guides for dog training, nutrition, grooming, and health care.</p>
-                        <a href="#" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
+                        <a href="dog-care.html" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 
@@ -1072,7 +1072,7 @@
                     <div class="category-content">
                         <h3>Cat Care & Behavior</h3>
                         <p>Expert advice on cat nutrition, litter training, scratching, and health.</p>
-                        <a href="#" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
+                        <a href="cat-care.html" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 
@@ -1083,7 +1083,7 @@
                     <div class="category-content">
                         <h3>Pet Products</h3>
                         <p>Find the best food, toys, beds, crates, and grooming supplies.</p>
-                        <a href="#" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
+                        <a href="products.html" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -1121,7 +1121,7 @@
                             <span class="original-price">$74.99</span>
                         </div>
                         <div class="product-actions">
-                            <button class="btn btn-primary product-detail-btn">Product Detail</button>
+                            <a href="product-detail-1.html" class="btn btn-primary">Product Detail</a>
                             <button class="btn btn-outline"><i class="far fa-heart"></i></button>
                         </div>
                     </div>
@@ -1145,7 +1145,7 @@
                             <span class="current-price">$89.99</span>
                         </div>
                         <div class="product-actions">
-                            <button class="btn btn-primary product-detail-btn">Product Detail</button>
+                            <a href="product-detail-2.html" class="btn btn-primary">Product Detail</a>
                             <button class="btn btn-outline"><i class="far fa-heart"></i></button>
                         </div>
                     </div>
@@ -1171,7 +1171,7 @@
                             <span class="original-price">$159.99</span>
                         </div>
                         <div class="product-actions">
-                            <button class="btn btn-primary product-detail-btn">Product Detail</button>
+                            <a href="product-detail-3.html" class="btn btn-primary">Product Detail</a>
                             <button class="btn btn-outline"><i class="far fa-heart"></i></button>
                         </div>
                     </div>
@@ -1188,8 +1188,8 @@
             <h2>Join Our Pet Care Community</h2>
             <p>Get expert tips, exclusive deals, and the latest pet care news delivered to your inbox</p>
             
-            <form class="newsletter-form">
-                <input type="email" placeholder="Enter your email address">
+            <form class="newsletter-form" id="newsletter-form">
+                <input type="email" placeholder="Enter your email address" required>
                 <button type="submit">Subscribe</button>
             </form>
         </div>
@@ -1280,21 +1280,14 @@
         });
 
         // Search Functionality
-        document.getElementById('search-button').addEventListener('click', function() {
+        document.getElementById('search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
             const searchTerm = document.getElementById('search-input').value.trim();
             if (searchTerm) {
-                alert(`Searching for: "${searchTerm}"\n\nIn a real implementation, this would redirect to a search results page.`);
-                // In a real implementation, you would redirect to a search results page:
-                // window.location.href = `/search?q=${encodeURIComponent(searchTerm)}`;
+                // Redirect to search results page with query parameter
+                window.location.href = `search-results.html?q=${encodeURIComponent(searchTerm)}`;
             } else {
                 alert('Please enter a search term');
-            }
-        });
-
-        // Search on pressing Enter key
-        document.getElementById('search-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                document.getElementById('search-button').click();
             }
         });
 
@@ -1304,44 +1297,17 @@
             tag.addEventListener('click', function() {
                 const tagText = this.textContent;
                 document.getElementById('search-input').value = tagText;
-                document.getElementById('search-button').click();
-            });
-        });
-
-        // Explore Dog Guides button
-        document.getElementById('explore-dog-guides').addEventListener('click', function() {
-            alert('Redirecting to Dog Guides page...');
-            // In a real implementation, you would redirect to the dog guides page:
-            // window.location.href = '/dog-guides';
-        });
-
-        // Explore Cat Guides button
-        document.getElementById('explore-cat-guides').addEventListener('click', function() {
-            alert('Redirecting to Cat Guides page...');
-            // In a real implementation, you would redirect to the cat guides page:
-            // window.location.href = '/cat-guides';
-        });
-
-        // Product Detail buttons
-        const productDetailButtons = document.querySelectorAll('.product-detail-btn');
-        productDetailButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const productName = this.closest('.product-card').querySelector('h3').textContent;
-                alert(`Showing details for: "${productName}"\n\nIn a real implementation, this would open a product detail page.`);
-                // In a real implementation, you would redirect to a product detail page:
-                // window.location.href = `/product/${productId}`;
+                document.getElementById('search-form').dispatchEvent(new Event('submit'));
             });
         });
 
         // Newsletter form submission
-        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+        document.getElementById('newsletter-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const email = this.querySelector('input[type="email"]').value;
             if (email) {
                 alert(`Thank you for subscribing with: ${email}\n\nYou will receive our pet care newsletter soon!`);
                 this.reset();
-            } else {
-                alert('Please enter a valid email address');
             }
         });
     </script>
