@@ -956,7 +956,7 @@
             // تحديد نوع الصفحة من عنوان URL
             const path = window.location.pathname;
             if (path.includes('dogs.html')) {
-                pageType = 'dogs';
+                pageType = 'cats';
             } else if (path.includes('cats.html')) {
                 pageType = 'cats';
             } else {
@@ -1029,10 +1029,8 @@
             let filteredArticles = allArticles;
             
             // First filter by page type
-            if (pageType === 'dogs') {
-                filteredArticles = allArticles.filter(article => article.category.includes('Dog'));
-            } else if (pageType === 'cats') {
-                filteredArticles = allArticles.filter(article => article.category.includes('Cat'));
+            filteredArticles = allArticles.filter(article => article.category.includes('Cat'));
+
             }
             
             // Then filter by selected category
