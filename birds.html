@@ -1142,6 +1142,11 @@
             return new Date(dateString).toLocaleDateString('en-US', options);
         }
 
+        // Function to generate article URL
+        function generateArticleUrl(articleId) {
+            return `${articleId}.html`;
+        }
+
         // Function to render articles in grid
         function renderArticles(articles) {
             const gridContainer = document.getElementById('articles-grid');
@@ -1164,7 +1169,7 @@
                             <span><i class="far fa-calendar"></i> ${formatDate(article.datePublished)}</span>
                             <span><i class="far fa-clock"></i> ${article.readTime}</span>
                         </div>
-                        <a href="article.html?id=${article.id}" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        <a href="${generateArticleUrl(article.id)}" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             `).join('');
@@ -1248,7 +1253,7 @@
                     document.querySelectorAll('.search-result-item').forEach(item => {
                         item.addEventListener('click', () => {
                             const articleId = item.getAttribute('data-id');
-                            window.location.href = `article.html?id=${articleId}`;
+                            window.location.href = generateArticleUrl(articleId);
                         });
                     });
                 }
