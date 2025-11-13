@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- تغيير السطر التالي فقط لتغيير نوع المحتوى -->
-    <title data-page-type="dogs">Dog Articles - Pet Lovers Hub</title>
+    <title data-page-type="cats">Cat Articles - Pet Lovers Hub</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" data-page-type="dogs" content="Expert dog training, health, and care articles for all dog lovers">
-    <meta name="keywords" data-page-type="dogs" content="dog training, dog health, puppy care, dog nutrition">
+    <meta name="description" data-page-type="cats" content="Expert cat behavior, health, and care articles for all cat lovers">
+    <meta name="keywords" data-page-type="cats" content="cat behavior, cat health, kitten care, cat nutrition">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Pet Lovers Hub">
     
     <!-- Open Graph Tags -->
-    <meta property="og:title" data-page-type="dogs" content="Dog Articles - Pet Lovers Hub">
-    <meta property="og:description" data-page-type="dogs" content="Expert dog training, health, and care articles">
+    <meta property="og:title" data-page-type="cats" content="Cat Articles - Pet Lovers Hub">
+    <meta property="og:description" data-page-type="cats" content="Expert cat behavior, health, and care articles">
     <meta property="og:type" content="website">
     
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" data-page-type="dogs" content="Dog Articles - Pet Lovers Hub">
-    <meta name="twitter:description" data-page-type="dogs" content="Expert dog training, health, and care articles">
+    <meta name="twitter:title" data-page-type="cats" content="Cat Articles - Pet Lovers Hub">
+    <meta name="twitter:description" data-page-type="cats" content="Expert cat behavior, health, and care articles">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -714,8 +714,8 @@
             <nav id="main-nav">
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="dogs.html" class="active">Dogs</a></li>
-                    <li><a href="cats.html">Cats</a></li>
+                    <li><a href="dogs.html">Dogs</a></li>
+                    <li><a href="cats.html" class="active">Cats</a></li>
                     <li><a href="articles.html">Articles</a></li>
                     <li><a href="product.html">Products</a></li>
                     <li><a href="about-us.html">About Us</a></li>
@@ -736,11 +736,11 @@
     <div class="search-modal" id="search-modal">
         <div class="search-container">
             <div class="search-header">
-                <h3 id="search-title">Search Dog Articles</h3>
+                <h3 id="search-title">Search Cat Articles</h3>
                 <button class="close-search" id="close-search"><i class="fas fa-times"></i></button>
             </div>
             <form class="search-form" id="search-form">
-                <input type="text" placeholder="Search dog training, health, care..." id="search-input">
+                <input type="text" placeholder="Search cat behavior, health, care..." id="search-input">
                 <button type="submit"><i class="fas fa-search"></i></button>
             </form>
             <div class="search-results" id="search-results">
@@ -752,8 +752,8 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
-            <h1 class="page-title" id="page-title">Dog Articles & Guides</h1>
-            <p class="page-description" id="page-description">Expert advice on dog training, health, nutrition, and care for all dog lovers</p>
+            <h1 class="page-title" id="page-title">Cat Articles & Guides</h1>
+            <p class="page-description" id="page-description">Expert advice on cat behavior, health, nutrition, and care for all cat lovers</p>
             
             <!-- Category Filter -->
             <div class="category-filter" id="category-filter">
@@ -774,8 +774,8 @@
     <!-- Newsletter Section -->
     <section class="newsletter">
         <div class="container newsletter-content">
-            <h2 id="newsletter-title">Get More Dog Care Tips</h2>
-            <p id="newsletter-description">Subscribe to our newsletter for weekly expert advice, training tips, and exclusive content</p>
+            <h2 id="newsletter-title">Get More Cat Care Tips</h2>
+            <p id="newsletter-description">Subscribe to our newsletter for weekly expert advice, behavior tips, and exclusive content</p>
             
             <form class="newsletter-form">
                 <input type="email" placeholder="Enter your email address">
@@ -952,7 +952,7 @@
                             "id": "positive-reinforcement-dog-training",
                             "title": "The Complete Guide to Positive Reinforcement Dog Training",
                             "description": "Learn professional positive reinforcement techniques for dog training.",
-                            "category": "Dog Training",
+                            "category": "cats",
                             "author": {"name": "Pet Lovers Hub", "title": "Pet Training Expert"},
                             "datePublished": "2023-05-20",
                             "readTime": "12 min read",
@@ -1029,19 +1029,34 @@
         function getCategories() {
             let categories = ['all']; // Always include 'all' category
             
-            // إضافة الفئات بناءً على نوع الصفحة
+            // إضافة الفئات بناءً على نوع الصفحة (مرن أكثر)
             allArticles.forEach(article => {
-                const categoryPrefix = PAGE_TYPE === 'dogs' ? 'Dog' : 
-                                    PAGE_TYPE === 'cats' ? 'Cat' : 
-                                    PAGE_TYPE === 'horses' ? 'Horse' : 
-                                    PAGE_TYPE === 'products' ? 'Products' : '';
+                const category = article.category.toLowerCase();
                 
-                if (PAGE_TYPE === 'products') {
-                    if (article.category === 'Products' && !categories.includes(article.category)) {
-                        categories.push(article.category);
+                if (PAGE_TYPE === 'dogs') {
+                    if (category.includes('dog') || category.includes('puppy')) {
+                        if (!categories.includes(article.category)) {
+                            categories.push(article.category);
+                        }
                     }
-                } else if (article.category.startsWith(categoryPrefix) && !categories.includes(article.category)) {
-                    categories.push(article.category);
+                } else if (PAGE_TYPE === 'cats') {
+                    if (category.includes('cat') || category.includes('kitten')) {
+                        if (!categories.includes(article.category)) {
+                            categories.push(article.category);
+                        }
+                    }
+                } else if (PAGE_TYPE === 'horses') {
+                    if (category.includes('horse') || category.includes('equine')) {
+                        if (!categories.includes(article.category)) {
+                            categories.push(article.category);
+                        }
+                    }
+                } else if (PAGE_TYPE === 'products') {
+                    if (category.includes('product') || category.includes('toy') || category.includes('accessory')) {
+                        if (!categories.includes(article.category)) {
+                            categories.push(article.category);
+                        }
+                    }
                 }
             });
             
@@ -1089,15 +1104,27 @@
             // Filter articles based on page type and category
             let filteredArticles = allArticles;
             
-            // First filter by page type
+            // First filter by page type (مرن أكثر)
             if (PAGE_TYPE === 'dogs') {
-                filteredArticles = allArticles.filter(article => article.category.startsWith('Dog'));
+                filteredArticles = allArticles.filter(article => {
+                    const cat = article.category.toLowerCase();
+                    return cat.includes('dog') || cat.includes('puppy');
+                });
             } else if (PAGE_TYPE === 'cats') {
-                filteredArticles = allArticles.filter(article => article.category.startsWith('Cat'));
+                filteredArticles = allArticles.filter(article => {
+                    const cat = article.category.toLowerCase();
+                    return cat.includes('cat') || cat.includes('kitten');
+                });
             } else if (PAGE_TYPE === 'horses') {
-                filteredArticles = allArticles.filter(article => article.category.startsWith('Horse'));
+                filteredArticles = allArticles.filter(article => {
+                    const cat = article.category.toLowerCase();
+                    return cat.includes('horse') || cat.includes('equine');
+                });
             } else if (PAGE_TYPE === 'products') {
-                filteredArticles = allArticles.filter(article => article.category === 'Products');
+                filteredArticles = allArticles.filter(article => {
+                    const cat = article.category.toLowerCase();
+                    return cat.includes('product') || cat.includes('toy') || cat.includes('accessory');
+                });
             }
             
             // Then filter by selected category
@@ -1186,10 +1213,22 @@
                                         article.description.toLowerCase().includes(query) ||
                                         article.category.toLowerCase().includes(query);
                     
-                    if (PAGE_TYPE === 'dogs') return matchesQuery && article.category.startsWith('Dog');
-                    if (PAGE_TYPE === 'cats') return matchesQuery && article.category.startsWith('Cat');
-                    if (PAGE_TYPE === 'horses') return matchesQuery && article.category.startsWith('Horse');
-                    if (PAGE_TYPE === 'products') return matchesQuery && article.category === 'Products';
+                    if (PAGE_TYPE === 'dogs') {
+                        const cat = article.category.toLowerCase();
+                        return matchesQuery && (cat.includes('dog') || cat.includes('puppy'));
+                    }
+                    if (PAGE_TYPE === 'cats') {
+                        const cat = article.category.toLowerCase();
+                        return matchesQuery && (cat.includes('cat') || cat.includes('kitten'));
+                    }
+                    if (PAGE_TYPE === 'horses') {
+                        const cat = article.category.toLowerCase();
+                        return matchesQuery && (cat.includes('horse') || cat.includes('equine'));
+                    }
+                    if (PAGE_TYPE === 'products') {
+                        const cat = article.category.toLowerCase();
+                        return matchesQuery && (cat.includes('product') || cat.includes('toy') || cat.includes('accessory'));
+                    }
                     return matchesQuery;
                 });
                 
