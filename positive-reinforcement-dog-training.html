@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">Loading Article...</title>
-    <meta id="meta-description" name="description" content="">
-    <meta id="meta-keywords" name="keywords" content="">
+    <title>The Complete Guide to Positive Reinforcement Dog Training</title>
+    <meta id="meta-description" name="description" content="Learn professional positive reinforcement techniques for dog training. Step-by-step guide to teach commands, solve behavior issues, and strengthen your bond with your dog.">
+    <meta id="meta-keywords" name="keywords" content="dog training, positive reinforcement, puppy training, dog behavior, obedience training, pet training">
     
     <!-- SEO Meta Tags -->
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="" id="canonical-url">
-    <meta id="meta-author" name="author" content="">
+    <meta id="meta-author" name="author" content="Pet Lovers Hub">
     
     <!-- Open Graph Tags -->
     <meta property="og:title" content="" id="og-title">
@@ -27,16 +27,388 @@
     
     <!-- Structured Data for Article -->
     <script type="application/ld+json" id="structured-data">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "The Complete Guide to Positive Reinforcement Dog Training",
+    "description": "Learn professional positive reinforcement techniques for dog training. Step-by-step guide to teach commands, solve behavior issues, and strengthen your bond with your dog.",
+    "image": "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+    "author": {
+        "@type": "Person",
+        "name": "Pet Lovers Hub",
+        "url": "https://petcarepro.com/authors/pet-lovers-hub"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "PetCare Pro",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://tikmob.github.io/pet/images/logo.png"
+        }
+    },
+    "datePublished": "2023-05-20T00:00:00+00:00",
+    "dateModified": "2023-05-20T00:00:00+00:00",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://petcarepro.com/article-positive-reinforcement-dog-training.html"
+    },
+    "articleSection": "Dog Training",
+    "keywords": "dog training, positive reinforcement, puppy training, dog behavior, obedience training, pet training",
+    "url": "https://petcarepro.com/article-positive-reinforcement-dog-training.html"
+}
     </script>
     
     <!-- Breadcrumb Schema -->
     <script type="application/ld+json" id="breadcrumb-data">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://petcarepro.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Articles",
+            "item": "https://petcarepro.com/articles.html"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Dog Training",
+            "item": "https://petcarepro.com/categories/dog-training"
+        },
+        {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "The Complete Guide to Positive Reinforcement Dog Training",
+            "item": "https://petcarepro.com/article-positive-reinforcement-dog-training.html"
+        }
+    ]
+}
     </script>
+    
+<script>
+    // نظام الإعلانات الذكي - الإصدار المصحح والمحسن
+    class AdSystem {
+        constructor() {
+            this.adsData = null;
+            this.adContainers = {};
+            this.initialized = false;
+            this.inArticleAdsInjected = false;
+            this.init();
+        }
+
+        // تهيئة النظام
+        async init() {
+            try {
+                await this.loadAdsData();
+                this.createAdContainers();
+                this.injectStaticAds();
+                this.setupAutoAds();
+                this.initialized = true;
+                console.log('✅ نظام الإعلانات جاهز');
+                
+                // محاولة حقن الإعلانات داخل المقال
+                setTimeout(() => this.tryInjectInArticleAds(), 1500);
+            } catch (error) {
+                console.error('❌ خطأ في نظام الإعلانات:', error);
+            }
+        }
+
+        // تحميل بيانات الإعلانات
+        async loadAdsData() {
+            try {
+                const response = await fetch('ads.json');
+                this.adsData = await response.json();
+                console.log('✅ بيانات الإعلانات محملة');
+            } catch (error) {
+                console.error('❌ خطأ في تحميل ads.json:', error);
+                this.adsData = this.getDefaultAdsData();
+            }
+        }
+
+        // بيانات الإعلانات الافتراضية
+        getDefaultAdsData() {
+            return {
+                "bannerAds": {
+                    "header": {
+                        "enabled": true,
+                        "code": "<!-- إعلان هيدر -->\n<div class='ad-container ad-header' id='ad-header'>\n    <div class='ad-placeholder'>إعلان علوي (728x90)</div>\n</div>",
+                        "width": 728,
+                        "height": 90
+                    },
+                    "footer": {
+                        "enabled": true,
+                        "code": "<!-- إعلان فوتر -->\n<div class='ad-container ad-footer' id='ad-footer'>\n    <div class='ad-placeholder'>إعلان سفلي (728x90)</div>\n</div>",
+                        "width": 728,
+                        "height": 90
+                    }
+                },
+                "sidebarAds": {
+                    "enabled": true,
+                    "code": "<!-- إعلان سايدبار -->\n<div class='ad-container ad-sidebar' id='ad-sidebar'>\n    <div class='ad-placeholder'>إعلان جانبي (300x600)</div>\n</div>",
+                    "width": 300,
+                    "height": 600
+                },
+                "inArticleAds": {
+                    "enabled": true,
+                    "positions": [
+                        {
+                            "position": "after_paragraph",
+                            "paragraphIndex": 2,
+                            "code": "<!-- إعلان داخل المقال 1 -->\n<div class='ad-container ad-in-article' id='ad-in-article-1'>\n    <div class='ad-placeholder'>إعلان داخل المقال (300x250)</div>\n</div>",
+                            "width": 300,
+                            "height": 250
+                        },
+                        {
+                            "position": "after_paragraph", 
+                            "paragraphIndex": 5,
+                            "code": "<!-- إعلان داخل المقال 2 -->\n<div class='ad-container ad-in-article' id='ad-in-article-2'>\n    <div class='ad-placeholder'>إعلان داخل المقال (300x250)</div>\n</div>",
+                            "width": 300,
+                            "height": 250
+                        }
+                    ]
+                }
+            };
+        }
+
+        // إنشاء حاويات الإعلانات - الإصدار المصحح
+        createAdContainers() {
+            console.log('🔄 إنشاء حاويات الإعلانات...');
+            
+            // حاوية الإعلان العلوي
+            const headerAdContainer = document.createElement('div');
+            headerAdContainer.id = 'ad-header-container';
+            headerAdContainer.className = 'ad-section';
+            const header = document.querySelector('header');
+            if (header) {
+                header.after(headerAdContainer);
+                console.log('✅ حاوية الإعلان العلوي مضافة');
+            }
+
+            // حاوية الإعلان الجانبي - مصحح
+            const sidebarAdContainer = document.createElement('div');
+            sidebarAdContainer.id = 'ad-sidebar-container';
+            sidebarAdContainer.className = 'ad-section';
+            
+            // البحث عن السايدبار بطرق متعددة
+            const sidebar = document.querySelector('.sidebar') || document.getElementById('sidebar-content');
+            if (sidebar) {
+                sidebar.prepend(sidebarAdContainer);
+                console.log('✅ حاوية الإعلان الجانبي مضافة');
+            } else {
+                console.log('❌ لم يتم العثور على السايدبار');
+                // إنشاء السايدبار إذا لم يكن موجوداً
+                this.createSidebarFallback();
+            }
+
+            // حاوية الإعلان السفلي
+            const footerAdContainer = document.createElement('div');
+            footerAdContainer.id = 'ad-footer-container';
+            footerAdContainer.className = 'ad-section';
+            const newsletter = document.querySelector('.newsletter');
+            if (newsletter) {
+                newsletter.before(footerAdContainer);
+                console.log('✅ حاوية الإعلان السفلي مضافة');
+            }
+
+            this.adContainers = {
+                header: headerAdContainer,
+                sidebar: sidebarAdContainer,
+                footer: footerAdContainer
+            };
+        }
+
+        // إنشاء سايدبار بديل إذا لم يكن موجوداً
+        createSidebarFallback() {
+            console.log('🔄 محاولة إنشاء سايدبار بديل...');
+            const sidebarAdContainer = document.createElement('div');
+            sidebarAdContainer.id = 'ad-sidebar-container';
+            sidebarAdContainer.className = 'ad-section';
+            
+            // محاولة إضافة الإعلان الجانبي في مكان بديل
+            const articleLayout = document.querySelector('.article-layout');
+            if (articleLayout) {
+                // إنشاء سايدبار بديل
+                const fallbackSidebar = document.createElement('aside');
+                fallbackSidebar.className = 'sidebar';
+                fallbackSidebar.id = 'sidebar-content';
+                fallbackSidebar.appendChild(sidebarAdContainer);
+                
+                // إضافة السايدبار إلى التخطيط
+                articleLayout.appendChild(fallbackSidebar);
+                console.log('✅ تم إنشاء سايدبار بديل');
+            } else {
+                // إذا فشل كل شيء، أضف الإعلان في نهاية المقال
+                const articleMain = document.querySelector('.article-main');
+                if (articleMain) {
+                    articleMain.after(sidebarAdContainer);
+                    console.log('✅ تم إضافة الإعلان الجانبي بعد المقال');
+                }
+            }
+        }
+
+        // حقن الإعلانات الثابتة - مصحح
+        injectStaticAds() {
+            if (!this.adsData) {
+                console.log('❌ لا توجد بيانات إعلانات');
+                return;
+            }
+
+            console.log('🔄 حقن الإعلانات الثابتة...');
+
+            // إعلان العلوي
+            if (this.adsData.bannerAds.header.enabled && this.adContainers.header) {
+                this.injectAd('header', this.adsData.bannerAds.header.code);
+                console.log('✅ الإعلان العلوي مضاف');
+            }
+
+            // إعلان السفلي
+            if (this.adsData.bannerAds.footer.enabled && this.adContainers.footer) {
+                this.injectAd('footer', this.adsData.bannerAds.footer.code);
+                console.log('✅ الإعلان السفلي مضاف');
+            }
+
+            // إعلان الجانبي - تأكيد الحقن
+            if (this.adsData.sidebarAds.enabled && this.adContainers.sidebar) {
+                this.injectAd('sidebar', this.adsData.sidebarAds.code);
+                console.log('✅ الإعلان الجانبي مضاف');
+                
+                // تأكيد إضافي على ظهور الإعلان الجانبي
+                setTimeout(() => {
+                    const sidebarAd = document.getElementById('ad-sidebar-container');
+                    if (sidebarAd) {
+                        sidebarAd.style.display = 'flex';
+                        sidebarAd.style.visibility = 'visible';
+                        sidebarAd.style.opacity = '1';
+                        console.log('✅ تأكيد ظهور الإعلان الجانبي');
+                    }
+                }, 100);
+            }
+        }
+
+        // حقن إعلان في حاوية محددة
+        injectAd(containerId, adCode) {
+            const container = this.adContainers[containerId];
+            if (container) {
+                container.innerHTML = adCode;
+                this.executeScripts(container);
+                
+                // تأكيد ظهور الحاوية
+                container.style.display = 'flex';
+                container.style.visibility = 'visible';
+                container.style.opacity = '1';
+                
+                console.log(`✅ تم حقن الإعلان في ${containerId}`);
+            } else {
+                console.log(`❌ حاوية ${containerId} غير موجودة`);
+            }
+        }
+
+        // محاولة حقن الإعلانات داخل المقال
+        tryInjectInArticleAds() {
+            if (this.inArticleAdsInjected) {
+                console.log('⚠️ إعلانات المقال مضافّة مسبقًا');
+                return;
+            }
+            
+            const articleContent = document.querySelector('.article-content');
+            if (articleContent && this.adsData.inArticleAds.enabled) {
+                this.injectInArticleAds(articleContent);
+                console.log('✅ إعلانات المقال مضافّة');
+                this.inArticleAdsInjected = true;
+            } else {
+                setTimeout(() => this.tryInjectInArticleAds(), 500);
+            }
+        }
+
+        injectInArticleAds(articleContent) {
+            if (!this.adsData.inArticleAds.enabled || !articleContent) return;
+
+            const existingAds = articleContent.querySelectorAll('.ad-in-article-container');
+            if (existingAds.length > 0) {
+                console.log('⚠️ إعلانات المقال موجودة مسبقًا');
+                return;
+            }
+
+            const paragraphs = articleContent.querySelectorAll('p');
+            this.adsData.inArticleAds.positions.forEach((position, index) => {
+                const targetIndex = position.paragraphIndex;
+                if (paragraphs[targetIndex]) {
+                    const existingAd = document.getElementById(`ad-in-article-${index + 1}`);
+                    if (existingAd) return;
+                    
+                    const adElement = document.createElement('div');
+                    adElement.className = 'ad-in-article-container';
+                    adElement.id = `ad-in-article-${index + 1}`;
+                    adElement.innerHTML = position.code;
+                    
+                    paragraphs[targetIndex].after(adElement);
+                    this.executeScripts(adElement);
+                    
+                    console.log(`✅ إعلان المقال ${index + 1} مضاف`);
+                }
+            });
+        }
+
+        executeScripts(container) {
+            const scripts = container.getElementsByTagName('script');
+            for (let i = 0; i < scripts.length; i++) {
+                const newScript = document.createElement('script');
+                if (scripts[i].src) {
+                    newScript.src = scripts[i].src;
+                } else {
+                    newScript.textContent = scripts[i].textContent;
+                }
+                document.head.appendChild(newScript).parentNode.removeChild(newScript);
+            }
+        }
+
+        setupAutoAds() {
+            // كود الإعلانات التلقائية إذا كان مطلوباً
+        }
+    }
+
+    // التهيئة وتحسين التوقيت
+    let adSystem;
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚀 بدء تحميل نظام الإعلانات...');
+        
+        // تأخير بسيط لضمان تحميل هيكل الصفحة أولاً
+        setTimeout(() => {
+            adSystem = new AdSystem();
+            window.adSystem = adSystem;
+        }, 100);
+    });
+
+    // دالة التحقق من حالة الإعلانات
+    window.checkAdsStatus = function() {
+        console.log('📊 حالة الإعلانات:');
+        console.log('- الإعلان العلوي:', document.getElementById('ad-header-container')?.innerHTML ? '🟢 موجود' : '🔴 مفقود');
+        console.log('- الإعلان الجانبي:', document.getElementById('ad-sidebar-container')?.innerHTML ? '🟢 موجود' : '🔴 مفقود');
+        console.log('- الإعلان السفلي:', document.getElementById('ad-footer-container')?.innerHTML ? '🟢 موجود' : '🔴 مفقود');
+        console.log('- إعلان المقال 1:', document.getElementById('ad-in-article-1') ? '🟢 موجود' : '🔴 مفقود');
+        console.log('- إعلان المقال 2:', document.getElementById('ad-in-article-2') ? '🟢 موجود' : '🔴 مفقود');
+        
+        // فحص إضافي للسايدبار
+        const sidebar = document.querySelector('.sidebar');
+        console.log('- السايدبار:', sidebar ? '🟢 موجود' : '🔴 مفقود');
+        if (sidebar) {
+            console.log('- محتوى السايدبار:', sidebar.innerHTML.substring(0, 100) + '...');
+        }
+    };
+</script>
+        
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* جميع أنماط CSS الأصلية تبقى كما هي بدون أي تغيير */
+        /* جميع أنماط CSS الأصلية تبقى كما هي مع تحسينات بسيطة */
         :root {
             --primary: #4A6FFF;
             --secondary: #FF6B8B;
@@ -68,6 +440,110 @@
             max-width: 1280px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        /* أنماط الإعلانات المحسنة */
+        .ad-section {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .ad-container {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ad-header {
+            width: 728px;
+            height: 90px;
+            max-width: 100%;
+        }
+
+        .ad-footer {
+            width: 728px;
+            height: 90px;
+            max-width: 100%;
+        }
+
+        .ad-sidebar {
+            width: 300px;
+            height: 600px;
+            max-width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .ad-in-article {
+            width: 300px;
+            height: 250px;
+            max-width: 100%;
+            margin: 30px auto;
+        }
+
+        .ad-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            color: var(--gray);
+            font-weight: 600;
+            text-align: center;
+            border: 2px dashed #dee2e6;
+        }
+
+        .ad-in-article-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            width: 100%;
+        }
+
+        /* أنماط الإعلان المنبثق */
+        .ad-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px;
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .close-popup {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+            z-index: 10001;
+        }
+
+        .close-popup:hover {
+            color: var(--dark);
         }
 
         /* Header Styles */
@@ -772,6 +1248,25 @@
                 border-radius: 0 0 var(--radius) var(--radius);
                 padding: 18px;
             }
+
+            /* تحسينات الإعلانات للجوال */
+            .ad-header, .ad-footer {
+                width: 100%;
+                height: auto;
+                min-height: 90px;
+            }
+
+            .ad-sidebar {
+                width: 100%;
+                height: auto;
+                min-height: 250px;
+            }
+
+            .ad-in-article {
+                width: 100%;
+                height: auto;
+                min-height: 250px;
+            }
         }
 
         @media (min-width: 769px) {
@@ -901,6 +1396,45 @@
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
+
+            /* تأكيد ظهور الإعلانات */
+.ad-section {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin: 20px 0;
+}
+
+.ad-container {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+.ad-in-article-container {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+/* تأكيد ظهور العناصر المحددة */
+#ad-header-container,
+#ad-sidebar-container, 
+#ad-footer-container,
+#ad-in-article-1,
+#ad-in-article-2 {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
         }
     </style>
 </head>
@@ -910,17 +1444,17 @@
         <div class="container header-container">
             <a href="index.html" class="logo">
                 <i class="fas fa-paw"></i>
-                <span>PetCare Pro</span>
+                <span>Pet-Lovers Hub</span>
             </a>
             
             <nav id="main-nav">
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="#">Dogs</a></li>
-                    <li><a href="#">Cats</a></li>
+                    <li><a href="dogs.html">Dogs</a></li>
+                    <li><a href="cats.html">Cats</a></li>
                     <li><a href="articles.html" class="active">Articles</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">About Us</a></li>
+                    <li><a href="product.html">Products</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
                 </ul>
             </nav>
             
@@ -934,6 +1468,8 @@
         </div>
     </header>
 
+    <!-- حاوية الإعلان العلوي - سيتم إنشاؤها تلقائياً -->
+    
     <!-- Search Modal -->
     <div class="search-modal" id="search-modal">
         <div class="search-container">
@@ -957,54 +1493,90 @@
             <!-- Main Article Content -->
             <main class="article-main">
                 <article id="article-content">
-    <h1>The Complete Guide to Positive Reinforcement Dog Training</h1>
-    <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Professional dog trainer working with a golden retriever using positive reinforcement techniques" loading="lazy" />
-    <p><strong>Category:</strong> Dog Training | <strong>Author:</strong> The Pet Care Team</p>
-    <p>Positive reinforcement training is a scientifically proven method that focuses on rewarding desired behaviors rather than punishing unwanted ones. This approach not only creates a stronger bond between you and your dog but also makes training more enjoyable for both parties.</p>
-<h2>What is Positive Reinforcement Training?</h2>
-<p>Positive reinforcement involves adding something pleasant immediately after a desired behavior occurs, making that behavior more likely to happen again. This could be treats, praise, toys, or anything your dog finds rewarding.</p>
 
-        <figure>
-          <img src="https://images.unsplash.com/photo-1422565096762-bdb997a56a84?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZG9nJTIwNGt8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000" alt="Dog receiving treat for good behavior during training session" loading="lazy" />
-          <figcaption>Rewarding your dog immediately after good behavior reinforces positive actions</figcaption>
-        </figure>
-<h2>Benefits of Positive Reinforcement</h2>
-<ul><li>Builds trust and strengthens bond between owner and dog</li><li>Reduces fear and anxiety in training situations</li><li>Increases dog's confidence and willingness to learn</li><li>Creates long-lasting behavioral changes</li><li>Makes training enjoyable for both dog and owner</li></ul>
-
-        <div class="info-box">
-          <strong>Expert Tip</strong>
-          <p>Always use high-value treats for new behaviors and gradually phase them out as your dog becomes more proficient. Remember to pair treats with verbal praise to create secondary reinforcers.</p>
+            <header class="article-header">
+                <span class="article-category">Dog Training</span>
+                <h1 class="article-title">The Complete Guide to Positive Reinforcement Dog Training</h1>
+                <div class="article-meta">
+                    <span><i class="far fa-user"></i> By Pet Lovers Hub</span>
+                    <span><i class="far fa-calendar"></i> May 19, 2023</span>
+                    <span><i class="far fa-clock"></i> 12 min read</span>
+                    <span><i class="far fa-eye"></i> 2,847 views</span>
+                </div>
+            </header>
+            <div class="featured-image">
+                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Professional dog trainer working with a golden retriever using positive reinforcement techniques" loading="lazy">
+            </div>
+        <div class="article-content"><p>Positive reinforcement training is a scientifically proven method that focuses on rewarding desired behaviors rather than punishing unwanted ones. This approach not only creates a stronger bond between you and your dog but also makes training more enjoyable for both parties.</p><h2>What is Positive Reinforcement Training?</h2><p>Positive reinforcement involves adding something pleasant immediately after a desired behavior occurs, making that behavior more likely to happen again. This could be treats, praise, toys, or anything your dog finds rewarding.</p>
+                            <div class="image-with-caption">
+                                <div class="article-image">
+                                    <img src="https://images.unsplash.com/photo-1422565096762-bdb997a56a84?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZG9nJTIwNGt8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000" alt="Dog receiving treat for good behavior during training session" loading="lazy">
+                                </div>
+                                <p class="image-caption">Rewarding your dog immediately after good behavior reinforces positive actions</p>
+                            </div>
+                        <h2>Benefits of Positive Reinforcement</h2><ul><li>Builds trust and strengthens bond between owner and dog</li><li>Reduces fear and anxiety in training situations</li><li>Increases dog's confidence and willingness to learn</li><li>Creates long-lasting behavioral changes</li><li>Makes training enjoyable for both dog and owner</li></ul>
+                            <div class="info-box">
+                                <h4>Expert Tip</h4>
+                                <p>Always use high-value treats for new behaviors and gradually phase them out as your dog becomes more proficient. Remember to pair treats with verbal praise to create secondary reinforcers.</p>
+                            </div>
+                        <h2>Step-by-Step Training Process</h2><h3>1. Basic Commands</h3><p>Start with simple commands like "sit," "stay," and "come." Use a clear, consistent verbal cue and immediately reward successful attempts.</p>
+                            <div class="image-with-caption">
+                                <div class="article-image">
+                                    <img src="https://images.unsplash.com/photo-1560743641-3914f2c45636?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Step-by-step demonstration of teaching a dog to sit" loading="lazy">
+                                </div>
+                                <p class="image-caption">Breaking down the 'sit' command into manageable steps for your dog</p>
+                            </div>
+                        <h3>2. Timing is Everything</h3><p>The reward must come within 1-2 seconds of the desired behavior for your dog to make the connection. This immediate feedback is crucial for effective learning.</p><h3>3. Consistency Across Environments</h3><p>Practice commands in different locations with varying levels of distraction. This helps your dog generalize the behavior and respond reliably in any situation.</p><h2>Common Training Challenges and Solutions</h2><h3>Dealing with Distractions</h3><p>Start training in a quiet environment and gradually introduce distractions. If your dog struggles, increase the value of your rewards or take a step back in difficulty.</p><h3>When Progress Stalls</h3><p>If your dog stops responding, consider these factors:</p><ul><li>Are the rewards still motivating?</li><li>Is the training session too long?</li><li>Are you progressing too quickly?</li><li>Is your dog tired, hungry, or stressed?</li></ul>
+                <div class="conclusion">
+                    <h3>Key Takeaways</h3>
+                    <p>Positive reinforcement training is about building a partnership with your dog based on mutual trust and respect. By focusing on what your dog does right and rewarding those behaviors, you'll create a well-behaved, confident companion who enjoys learning and working with you.</p>
+                </div>
+            <div class="article-tags"><span class="tag">#DogTraining</span><span class="tag">#PositiveReinforcement</span><span class="tag">#PuppyTraining</span><span class="tag">#DogBehavior</span><span class="tag">#ObedienceTraining</span></div>
+            <div class="article-actions">
+                <button class="share-btn"><i class="fas fa-share-alt"></i> Share</button>
+                <button class="share-btn"><i class="far fa-bookmark"></i> Save</button>
+                <button class="share-btn"><i class="far fa-thumbs-up"></i> Like</button>
+            </div>
         </div>
-<h2>Step-by-Step Training Process</h2>
-<h3>1. Basic Commands</h3>
-<p>Start with simple commands like "sit," "stay," and "come." Use a clear, consistent verbal cue and immediately reward successful attempts.</p>
-
-        <figure>
-          <img src="https://images.unsplash.com/photo-1560743641-3914f2c45636?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Step-by-step demonstration of teaching a dog to sit" loading="lazy" />
-          <figcaption>Breaking down the 'sit' command into manageable steps for your dog</figcaption>
-        </figure>
-<h3>2. Timing is Everything</h3>
-<p>The reward must come within 1-2 seconds of the desired behavior for your dog to make the connection. This immediate feedback is crucial for effective learning.</p>
-<h3>3. Consistency Across Environments</h3>
-<p>Practice commands in different locations with varying levels of distraction. This helps your dog generalize the behavior and respond reliably in any situation.</p>
-<h2>Common Training Challenges and Solutions</h2>
-<h3>Dealing with Distractions</h3>
-<p>Start training in a quiet environment and gradually introduce distractions. If your dog struggles, increase the value of your rewards or take a step back in difficulty.</p>
-<h3>When Progress Stalls</h3>
-<p>If your dog stops responding, consider these factors:</p>
-<ul><li>Are the rewards still motivating?</li><li>Is the training session too long?</li><li>Are you progressing too quickly?</li><li>Is your dog tired, hungry, or stressed?</li></ul>
-    <h2>Key Takeaways</h2>
-    <p>Positive reinforcement training is about building a partnership with your dog based on mutual trust and respect. By focusing on what your dog does right and rewarding those behaviors, you'll create a well-behaved, confident companion who enjoys learning and working with you.</p>
-  </article>
+</article>
             </main>
 
             <!-- Sidebar -->
             <aside class="sidebar" id="sidebar-content">
-                <!-- Sidebar content will be loaded dynamically from JSON -->
-            </aside>
+
+            <div class="author-card">
+                <div class="author-avatar">
+                    <img src="https://tikmob.github.io/pet/images/logo.png" alt="Pet Lovers Hub" loading="lazy">
+                </div>
+                <h3>Pet Lovers Hub</h3>
+                <p class="author-title">Pet Training Expert</p>
+                <p class="author-bio">Written by a group of passionate animal lovers who share a deep respect for pets and the natural world. We’re here to share helpful guides, fun facts, and heartfelt stories from the world of animals.</p>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3>Related Articles</h3>
+                <ul class="related-articles">
+                    
+                </ul>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3>Popular Categories</h3>
+                <ul>
+                    <li><a href="dog-training.html">Dog Training</a></li>
+                    <li><a href="puppy-care.html">Puppy Care</a></li>
+                    <li><a href="behavior-issues.html">Behavior Issues</a></li>
+                    <li><a href="health-nutrition.html">Health & Nutrition</a></li>
+                    <li><a href="product-reviews.html">Product Reviews</a></li>
+                </ul>
+            </div>
+        
+</aside>
         </div>
     </div>
 
+    <!-- حاوية الإعلان السفلي - سيتم إنشاؤها تلقائياً -->
+    
     <!-- Newsletter Section -->
     <section class="newsletter">
         <div class="container newsletter-content">
@@ -1037,42 +1609,41 @@
                 <div class="footer-column">
                     <h3>Dog Resources</h3>
                     <ul>
-                        <li><a href="#">Dog Training</a></li>
-                        <li><a href="#">Dog Food</a></li>
-                        <li><a href="#">Dog Breeds</a></li>
-                        <li><a href="#">Puppies for Sale</a></li>
-                        <li><a href="#">Dog Grooming</a></li>
-                        <li><a href="#">Dog Boarding</a></li>
+                        <li><a href="Dog-Training.html">Dog Training</a></li>
+                        <li><a href="Dog-Food.html">Dog Food</a></li>
+                        <li><a href="Dog-Breeds.html">Dog Breeds</a></li>
+                        <li><a href="Dog-Grooming.html">Dog Grooming</a></li>
+                        <li><a href="Dog-toys.html">Dog Toys</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Cat Resources</h3>
                     <ul>
-                        <li><a href="#">Cat Behavior</a></li>
-                        <li><a href="#">Cat Food</a></li>
-                        <li><a href="#">Cat Breeds</a></li>
-                        <li><a href="#">Cat Litter</a></li>
-                        <li><a href="#">Cat Toys</a></li>
-                        <li><a href="#">Cat Grooming</a></li>
+                        <li><a href="Cat-Behavior.html">Cat Behavior</a></li>
+                        <li><a href="Cat-Food.html">Cat Food</a></li>
+                        <li><a href="Cat-Breeds.html">Cat Breeds</a></li>
+                        <li><a href="Cat-Litter.html">Cat Litter</a></li>
+                        <li><a href="Cat-Toys.html">Cat Toys</a></li>
+                        <li><a href="Cat-Grooming.html">Cat Grooming</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Company</h3>
                     <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Sitemap</a></li>
+                        <li><a href="about-us.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2023 PetCare Pro. All rights reserved.</p>
+                <p>&copy; 2025 PetCare Pro. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -1304,6 +1875,11 @@
         // Update the article content
         document.getElementById('article-content').innerHTML = articleHeader + articleContent;
 
+        // حقن الإعلانات داخل المقال بعد تحميل المحتوى - باستخدام النظام المصحح
+        if (window.adSystem) {
+            window.adSystem.tryInjectInArticleAds();
+        }
+
         // Build sidebar
         const relatedArticles = getRelatedArticles(articleData.id);
         
@@ -1335,11 +1911,11 @@
             <div class="sidebar-widget">
                 <h3>Popular Categories</h3>
                 <ul>
-                    <li><a href="#">Dog Training</a></li>
-                    <li><a href="#">Puppy Care</a></li>
-                    <li><a href="#">Behavior Issues</a></li>
-                    <li><a href="#">Health & Nutrition</a></li>
-                    <li><a href="#">Product Reviews</a></li>
+                    <li><a href="dog-training.html">Dog Training</a></li>
+                    <li><a href="ouppy-care.html">Puppy Care</a></li>
+                    <li><a href="behavior-issues.html">Behavior Issues</a></li>
+                    <li><a href="health-&-nutrition.html">Health & Nutrition</a></li>
+                    <li><a href="product-reviews.html">Product Reviews</a></li>
                 </ul>
             </div>
         `;
@@ -1424,11 +2000,27 @@
         if (articleData) {
             renderArticle(articleData);
         } else {
-            document.getElementById('article-content').innerHTML = '<p>Article not found. Please check the URL.</p>';
+            console.log('المحتوى موجود مسبقاً');
         }
 
         // Setup search functionality
-        setupSearch();
+        // إصلاح دالة البحث
+    const originalSetupSearch = setupSearch;
+    setupSearch = function() {
+        // تأكد من أن بيانات البحث متوفرة
+        if (typeof allArticles === 'undefined' || allArticles.length === 0) {
+            console.log('⚠️ تحذير: بيانات البحث غير متوفرة، جاري التحميل...');
+            allArticles = window.preloadedSearchData || [];
+        }
+        return originalSetupSearch.apply(this, arguments);
+    };
+
+    // تأكد من تهيئة البحث بعد تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(setupSearch, 100);
+    });
+    
+    setupSearch(); // هذا السطر المهم - استدعاء الدالة
 
         // Mobile Menu Toggle
         document.getElementById('mobile-menu').addEventListener('click', function() {
