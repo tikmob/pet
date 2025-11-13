@@ -109,7 +109,7 @@
       "id": "positive-reinforcement-dog-training",
       "title": "The Complete Guide to Positive Reinforcement Dog Training",
       "description": "Learn professional positive reinforcement techniques for dog training. Step-by-step guide to teach commands, solve behavior issues, and strengthen your bond with your dog.",
-      "category": "Dog Training",
+      "category": "product",
       "author": {
         "name": "Pet Lovers Hub",
         "title": "Pet Training Expert",
@@ -253,6 +253,111 @@
         "ObedienceTraining"
       ],
       "keywords": "dog training, positive reinforcement, puppy training, dog behavior, obedience training, pet training"
+    },
+        {
+      "id": "dog-probiotics-guide",
+      "title": "The Ultimate Guide to Dog Probiotics: Boosting Gut Health Naturally",
+      "description": "Discover how probiotics can improve your dog's digestion, immunity, and overall health. Learn the signs of poor gut health and how to introduce probiotics safely into your dog’s diet.",
+      "category": "Dog Health",
+      "author": {
+        "name": "Pet Lovers Hub",
+        "title": "Pet Training Expert",
+        "avatar": "https://tikmob.github.io/pet/images/logo.png",
+        "bio": "Written by a group of passionate animal lovers who share a deep respect for pets and the natural world. We’re here to share helpful guides, fun facts, and heartfelt stories from the world of animals."
+      },
+      "publisher": {
+        "name": "PetCare Pro",
+        "logo": "https://tikmob.github.io/pet/images/logo.png"
+      },
+      "datePublished": "2025-11-10",
+      "dateModified": "2025-11-10",
+      "readTime": "8 min read",
+      "views": "0",
+      "featuredImage": {
+        "url": "https://images.unsplash.com/photo-1601758125946-6ec2ef64a3b3?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Happy healthy dog after taking probiotics"
+      },
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Dogs experience digestive ups and downs just like we do. Whether it’s struggling to go potty or a rumbly tummy after eating, dogs count on you to help them feel better. One simple addition to your dog’s diet, probiotics, can make a huge difference. Research continues to reveal exciting links between gut health and overall canine wellness. From smoother digestion to stronger immune support, probiotics can help keep your dog healthy, comfortable, and full of tail wags."
+        },
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1000&q=80",
+          "alt": "Dog sitting happily after meal with probiotics",
+          "caption": "A healthy gut means a happier, more active dog."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What Are Probiotics?"
+        },
+        {
+          "type": "paragraph",
+          "text": "Probiotics are live, beneficial bacteria that maintain balance in your dog’s digestive system. A dog’s gut is home to a busy community of microorganisms known as the gut microbiome. By introducing 'good' bacteria, probiotics help counter the 'bad' ones and support healthy digestion. They aid in breaking down food, absorbing nutrients, and keeping the immune system strong."
+        },
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1558944351-07b4dc259c98?auto=format&fit=crop&w=1000&q=80",
+          "alt": "Dog with healthy gut microbiome illustration",
+          "caption": "Probiotics balance the gut microbiome for better digestion and nutrient absorption."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Signs Your Dog’s Gut May Need Support"
+        },
+        {
+          "type": "paragraph",
+          "text": "Catching early symptoms of gut imbalance can help you act quickly. If your dog shows any of the following signs, probiotics might help restore digestive health:"
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Frequent digestive upset or loose stools",
+            "Excessive gas or bloating",
+            "Food sensitivities or allergies",
+            "Frequent stomach upset or vomiting",
+            "Changes in appetite",
+            "Dull coat or skin issues",
+            "Low energy levels"
+          ]
+        },
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1602067340370-bdcebe8a9ff7?auto=format&fit=crop&w=1000&q=80",
+          "alt": "Golden Retriever resting with upset stomach",
+          "caption": "Digestive issues are one of the most common reasons dogs benefit from probiotics."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "How to Add Probiotics to Your Dog’s Diet"
+        },
+        {
+          "type": "paragraph",
+          "text": "You can introduce probiotics in several forms: powders, capsules, or dog-friendly treats. Always choose products made specifically for dogs, as human formulas may not be safe or effective for pets."
+        },
+        {
+          "type": "infoBox",
+          "title": "Expert Tip",
+          "content": "Introduce probiotics gradually into your dog’s diet and monitor their stool quality for the first few days. Consistency is key—daily supplementation ensures steady gut balance."
+        }
+      ],
+      "conclusion": {
+        "title": "Final Thoughts",
+        "content": "A healthy gut supports a happy, energetic dog. With probiotics, you can help your furry friend digest food better, build a stronger immune system, and feel great from the inside out. Always consult your vet before introducing new supplements."
+      },
+      "tags": [
+        "DogHealth",
+        "Probiotics",
+        "DogNutrition",
+        "DigestiveCare",
+        "PetWellness"
+      ],
+      "keywords": "dog probiotics, gut health, dog digestion, canine supplements, dog nutrition, probiotics for dogs"
     }
   ]
 }
