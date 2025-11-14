@@ -1106,26 +1106,10 @@
             // Filter articles based on page type and category
             let filteredArticles = allArticles;
             
-            // First filter by page type (مرن أكثر)
-            if (PAGE_TYPE === 'dogs') {
-                filteredArticles = allArticles.filter(article => {
-                    const cat = article.category.toLowerCase();
-                    return cat.includes('dog') || cat.includes('puppy');
-                });
-            } else if (PAGE_TYPE === 'cats') {
-                filteredArticles = allArticles.filter(article => {
-                    const cat = article.category.toLowerCase();
-                    return cat.includes('cat') || cat.includes('kitten');
-                });
-            } else if (PAGE_TYPE === 'horses') {
-                filteredArticles = allArticles.filter(article => {
-                    const cat = article.category.toLowerCase();
-                    return cat.includes('horse') || cat.includes('equine');
-                });
-            } else if (PAGE_TYPE === 'products') {
-                filteredArticles = allArticles.filter(article => {
-                    const cat = article.category.toLowerCase();
-                    return cat.includes('product') || cat.includes('toy') || cat.includes('accessory');
+            let filteredArticles = allArticles;   // افتراضي: الكل
+if (category !== 'all') {
+    filteredArticles = allArticles.filter(a => a.category === category);
+}duct') || cat.includes('toy') || cat.includes('accessory');
                 });
             }
             
