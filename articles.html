@@ -1104,23 +1104,21 @@
             });
             
             // Filter articles based on page type and category
-            let filteredArticles = allArticles;
-            
-            let filteredArticles = allArticles;   // افتراضي: الكل
-if (category !== 'all') {
-    filteredArticles = allArticles.filter(a => a.category === category);
-}duct') || cat.includes('toy') || cat.includes('accessory');
-                });
-            }
-            
-            // Then filter by selected category
-            if (category !== 'all') {
-                filteredArticles = filteredArticles.filter(article => article.category === category);
-            }
-            
-            // Render filtered articles
-            renderArticles(filteredArticles);
-        }
+function filterArticles(category) {
+    currentCategory = category;
+
+    // تفعيل الزرّ النشط فقط
+    document.querySelectorAll('.category-btn').forEach(btn =>
+        btn.classList.toggle('active', btn.dataset.category === category)
+    );
+
+    // إذا اختار "الكل" أرجع كل المقالات، وإلا صفِّ حسب الفئة
+    const filteredArticles = category === 'all'
+        ? allArticles
+        : allArticles.filter(a => a.category === category);
+
+    renderArticles(filteredArticles);
+}
 
         // Helper function to format date
         function formatDate(dateString) {
