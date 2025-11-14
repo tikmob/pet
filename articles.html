@@ -865,18 +865,11 @@
                 twitterDescription: "Expert dog training, health, and care articles"
             },
             cats: {
-                title: "Cat Articles & Guides",
-                description: "Expert advice on cat behavior, health, nutrition, and care for all cat lovers",
-                searchTitle: "Search Cat Articles",
-                searchPlaceholder: "Search cat behavior, health, care...",
-                newsletterTitle: "Get More Cat Care Tips",
-                newsletterDescription: "Subscribe to our newsletter for weekly expert advice, behavior tips, and exclusive content",
-                metaDescription: "Expert cat behavior, health, and care articles for all cat lovers",
-                metaKeywords: "cat behavior, cat health, kitten care, cat nutrition",
-                ogTitle: "Cat Articles - Pet Lovers Hub",
-                ogDescription: "Expert cat behavior, health, and care articles",
-                twitterTitle: "Cat Articles - Pet Lovers Hub",
-                twitterDescription: "Expert cat behavior, health, and care articles"
+    title: "All Pet Articles & Guides",
+    description: "Expert advice on all pets - cats, dogs, horses, and more",
+    searchTitle: "Search All Articles",
+    searchPlaceholder: "Search all pet articles...",
+
             },
             horses: {
                 title: "Horse Articles & Guides",
@@ -946,7 +939,7 @@
             } catch (error) {
                 console.error('Error loading articles:', error);
                 // استخدام بيانات افتراضية للاختبار
-                const articlesData = {
+                //const articlesData = {
                     "articles": [
                         {
                             "id": "positive-reinforcement-dog-training",
@@ -1026,18 +1019,18 @@
         }
 
         // Function to get unique categories from articles
-        function getCategories() {
-            let categories = ['all']; // Always include 'all' category
-            
-            // إضافة الفئات بناءً على نوع الصفحة (مرن أكثر)
-            allArticles.forEach(article => {
-                const category = article.category.toLowerCase();
-                
-                if (PAGE_TYPE === 'dogs') {
-                    if (category.includes('dog') || category.includes('puppy')) {
-                        if (!categories.includes(article.category)) {
-                            categories.push(article.category);
-                        }
+function getCategories() {
+    let categories = ['all']; // Always include 'all' category
+    
+    // Get ALL categories from ALL articles
+    allArticles.forEach(article => {
+        if (!categories.includes(article.category)) {
+            categories.push(article.category);
+        }
+    });
+    
+    return categories;
+}
                     }
                 } else if (PAGE_TYPE === 'cats') {
                     if (category.includes('cat') || category.includes('kitten')) {
@@ -1089,52 +1082,29 @@
         }
 
         // Function to filter articles by category
-        function filterArticles(category) {
-            currentCategory = category;
-            
-            // Update active state of category buttons
-            document.querySelectorAll('.category-btn').forEach(button => {
-                if (button.getAttribute('data-category') === category) {
-                    button.classList.add('active');
-                } else {
-                    button.classList.remove('active');
-                }
-            });
-            
-            // Filter articles based on page type and category
-            let filteredArticles = allArticles;
-            
-            // First filter by page type (مرن أكثر)
-            if (PAGE_TYPE === 'dogs') {
-                filteredArticles = allArticles.filter(article => {
-                    const cat = article.category.toLowerCase();
-                    return cat.includes('dog') || cat.includes('puppy');
-                });
-            } else if (PAGE_TYPE === 'cats') {
-                filteredArticles = allArticles.filter(article => {
-                    const cat = article.category.toLowerCase();
-                    return cat.includes('cat') || cat.includes('kitten');
-                });
-            } else if (PAGE_TYPE === 'horses') {
-                filteredArticles = allArticles.filter(article => {
-                    const cat = article.category.toLowerCase();
-                    return cat.includes('horse') || cat.includes('equine');
-                });
-            } else if (PAGE_TYPE === 'products') {
-                filteredArticles = allArticles.filter(article => {
-                    const cat = article.category.toLowerCase();
-                    return cat.includes('product') || cat.includes('toy') || cat.includes('accessory');
-                });
-            }
-            
-            // Then filter by selected category
-            if (category !== 'all') {
-                filteredArticles = filteredArticles.filter(article => article.category === category);
-            }
-            
-            // Render filtered articles
-            renderArticles(filteredArticles);
+function filterArticles(category) {
+    currentCategory = category;
+    
+    // Update active state of category buttons
+    document.querySelectorAll('.category-btn').forEach(button => {
+        if (button.getAttribute('data-category') === category) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
         }
+    });
+    
+    // Filter articles based on category only (remove page type filtering)
+    let filteredArticles = allArticles;
+    
+    // Only filter by selected category, not by page type
+    if (category !== 'all') {
+        filteredArticles = allArticles.filter(article => article.category === category);
+    }
+    
+    // Render filtered articles
+    renderArticles(filteredArticles);
+}
 
         // Helper function to format date
         function formatDate(dateString) {
@@ -1213,10 +1183,10 @@
                 }
                 
                 // Filter articles based on search query and page type
-                let results = allArticles.filter(article => {
-                    const matchesQuery = article.title.toLowerCase().includes(query) || 
-                                        article.description.toLowerCase().includes(query) ||
-                                        article.category.toLowerCase().includes(query);
+               let results = allArticles.filter(article => {
+    const matchesQuery = article.title.toLowerCase().includes(query) || 
+                        article.description.toLowerCase().includes(query) ||
+                        article.category.toLowerCase().includes(query);
                     
                     if (PAGE_TYPE === 'dogs') {
                         const cat = article.category.toLowerCase();
