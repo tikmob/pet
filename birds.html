@@ -849,6 +849,20 @@
 
         // إعدادات الصفحة لكل نوع
         const PAGE_CONFIG = {
+            birds: {
+    title: "Bird Articles & Guides",
+    description: "Expert advice on bird care, training, nutrition, and health for all bird enthusiasts",
+    searchTitle: "Search Bird Articles",
+    searchPlaceholder: "Search bird care, training, health...",
+    newsletterTitle: "Get More Bird Care Tips",
+    newsletterDescription: "Subscribe to our newsletter for weekly expert advice, training tips, and exclusive content",
+    metaDescription: "Expert bird care, training, and health articles for all bird lovers",
+    metaKeywords: "bird care, parrot training, bird health, bird nutrition",
+    ogTitle: "Bird Articles - Pet Lovers Hub",
+    ogDescription: "Expert bird care, training, and health articles",
+    twitterTitle: "Bird Articles - Pet Lovers Hub",
+    twitterDescription: "Expert bird care, training, and health articles"
+},
             dogs: {
                 title: "Dog Articles & Guides",
                 description: "Expert advice on dog training, health, nutrition, and care for all dog lovers",
@@ -1038,6 +1052,12 @@
                             categories.push(article.category);
                         }
                     }
+                    else if (PAGE_TYPE === 'birds') {
+    filteredArticles = allArticles.filter(article => {
+        const cat = article.category.toLowerCase();
+        return cat.includes('bird') || cat.includes('parrot') || cat.includes('avian');
+    }
+}
                 } else if (PAGE_TYPE === 'cats') {
                     if (category.includes('cat') || category.includes('kitten')) {
                         if (!categories.includes(article.category)) {
