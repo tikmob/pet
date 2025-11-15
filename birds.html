@@ -1077,6 +1077,12 @@ if (PAGE_TYPE === 'dogs') {
                             categories.push(article.category);
                         }
                     }
+    } else if (PAGE_TYPE === 'birds') {
+    filteredArticles = allArticles.filter(article => {
+        const cat = article.category.toLowerCase();
+        return cat.includes('bird') || cat.includes('parrot') || cat.includes('avian');
+    });
+}
                 }
             });
             
