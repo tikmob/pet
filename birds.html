@@ -1068,6 +1068,12 @@ if (PAGE_TYPE === 'dogs') {
         if (!categories.includes(article.category)) categories.push(article.category);
      });
 }
+} else if (PAGE_TYPE === 'birds') {
+    filteredArticles = allArticles.filter(article => {
+        const cat = article.category.toLowerCase();
+        return cat.includes('bird') || cat.includes('parrot') || cat.includes('avian');
+    });
+}
         // Function to render category filter buttons
         function renderCategoryFilter() {
             const categories = getCategories();
