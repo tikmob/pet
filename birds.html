@@ -1046,43 +1046,28 @@
             allArticles.forEach(article => {
                 const category = article.category.toLowerCase();
                 
-                // داخل getCategories()، استبدل هذا الجزء:
+// داخل getCategories()، اجعل الكتلة كاملة هكذا:
 if (PAGE_TYPE === 'dogs') {
     if (category.includes('dog') || category.includes('puppy')) {
-        if (!categories.includes(article.category)) {
-            categories.push(article.category);
-        }
+        if (!categories.includes(article.category)) categories.push(article.category);
     }
-
-                } else if (PAGE_TYPE === 'cats') {
-                    if (category.includes('cat') || category.includes('kitten')) {
-                        if (!categories.includes(article.category)) {
-                            categories.push(article.category);
-                        }
-                    }
-                } else if (PAGE_TYPE === 'horses') {
-                    if (category.includes('horse') || category.includes('equine')) {
-                        if (!categories.includes(article.category)) {
-                            categories.push(article.category);
-                        }
-                    }
-                } else if (PAGE_TYPE === 'products') {
-                    if (category.includes('product') || category.includes('toy') || category.includes('accessory')) {
-                        if (!categories.includes(article.category)) {
-                            categories.push(article.category);
-                        }
-                    }
-    } else if (PAGE_TYPE === 'birds') {
-    filteredArticles = allArticles.filter(article => {
-        const cat = article.category.toLowerCase();
-        return cat.includes('bird') || cat.includes('parrot') || cat.includes('avian');
-    });
+} else if (PAGE_TYPE === 'birds') {        // أضف هذا الشرط المنفصل
+    if (category.includes('bird') || category.includes('parrot') || category.includes('avian')) {
+        if (!categories.includes(article.category)) categories.push(article.category);
+    }
+} else if (PAGE_TYPE === 'cats') {
+    if (category.includes('cat') || category.includes('kitten')) {
+        if (!categories.includes(article.category)) categories.push(article.category);
+    }
+} else if (PAGE_TYPE === 'horses') {
+    if (category.includes('horse') || category.includes('equine')) {
+        if (!categories.includes(article.category)) categories.push(article.category);
+    }
+} else if (PAGE_TYPE === 'products') {
+    if (category.includes('product') || category.includes('toy') || category.includes('accessory')) {
+        if (!categories.includes(article.category)) categories.push(article.category);
+    }
 }
-                }
-            });
-            
-            return categories;
-        }
 
         // Function to render category filter buttons
         function renderCategoryFilter() {
