@@ -1066,9 +1066,8 @@ if (PAGE_TYPE === 'dogs') {
 } else if (PAGE_TYPE === 'products') {
     if (category.includes('product') || category.includes('toy') || category.includes('accessory')) {
         if (!categories.includes(article.category)) categories.push(article.category);
-    }
+     });
 }
-
         // Function to render category filter buttons
         function renderCategoryFilter() {
             const categories = getCategories();
