@@ -368,6 +368,18 @@
             background: var(--light);
         }
 
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--gray);
+        }
+
+        .loading i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
         /* Footer */
         footer {
             background: var(--dark);
@@ -563,10 +575,15 @@
             </div>
             
             <div class="results-count">
-                <span id="results-count">1 article found</span>
+                <span id="results-count">Loading...</span>
             </div>
             
-            <div class="results-grid" id="results-container">
+            <div class="loading" id="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Searching articles...</p>
+            </div>
+            
+            <div class="results-grid" id="results-container" style="display: none;">
                 <!-- Results will be populated by JavaScript -->
             </div>
             
@@ -647,259 +664,125 @@
 
         // Get search query from URL
         const urlParams = new URLSearchParams(window.location.search);
-        const searchQuery = urlParams.get('q') || 'dog';
+        const searchQuery = urlParams.get('q') || 'dog probiotics';
         document.getElementById('search-query').textContent = searchQuery;
 
-        // Sample data - in a real implementation, this would come from an API
-        const articlesData = {
-            "articles": [
-                {
-                    "id": "dog-probiotics-guide",
-                    "title": "The Ultimate Guide to Dog Probiotics: Boosting Gut Health Naturally",
-                    "description": "Discover how probiotics can improve your dog's digestion, immunity, and overall health. Learn the signs of poor gut health and how to introduce probiotics safely into your dog's diet.",
-                    "category": "Dog Health",
-                    "author": {
-                        "name": "Pet Lovers Hub",
-                        "title": "Pet Training Expert",
-                        "avatar": "https://tikmob.github.io/pet/images/logo.png",
-                        "bio": "Written by a group of passionate animal lovers who share a deep respect for pets and the natural world. We're here to share helpful guides, fun facts, and heartfelt stories from the world of animals."
-                    },
-                    "publisher": {
-                        "name": "PetCare Pro",
-                        "logo": "https://tikmob.github.io/pet/images/logo.png"
-                    },
-                    "datePublished": "2025-11-10",
-                    "dateModified": "2025-11-10",
-                    "readTime": "8 min read",
-                    "views": "0",
-                    "featuredImage": {
-                        "url": "https://images.unsplash.com/photo-1601758125946-6ec2ef64a3b3?auto=format&fit=crop&w=1200&q=80",
-                        "alt": "Happy healthy dog after taking probiotics"
-                    },
-                    "content": [
-                        {
-                            "type": "paragraph",
-                            "text": "Dogs experience digestive ups and downs just like we do. Whether it's struggling to go potty or a rumbly tummy after eating, dogs count on you to help them feel better. One simple addition to your dog's diet, probiotics, can make a huge difference. Research continues to reveal exciting links between gut health and overall canine wellness. From smoother digestion to stronger immune support, probiotics can help keep your dog healthy, comfortable, and full of tail wags."
-                        }
-                    ],
-                    "conclusion": {
-                        "title": "Final Thoughts",
-                        "content": "A healthy gut supports a happy, energetic dog. With probiotics, you can help your furry friend digest food better, build a stronger immune system, and feel great from the inside out. Always consult your vet before introducing new supplements."
-                    },
-                    "tags": [
-                        "DogHealth",
-                        "Probiotics",
-                        "DogNutrition",
-                        "DigestiveCare",
-                        "PetWellness"
-                    ],
-                    "keywords": "dog probiotics, gut health, dog digestion, canine supplements, dog nutrition, probiotics for dogs"
-                },
-                {
-                    "id": "dog-training-tips",
-                    "title": "10 Essential Dog Training Tips for New Pet Owners",
-                    "description": "Learn the most effective dog training techniques to build a strong bond with your furry friend. From basic commands to behavior correction, this guide covers everything you need to know.",
-                    "category": "Dog Training",
-                    "author": {
-                        "name": "Pet Lovers Hub",
-                        "title": "Pet Training Expert",
-                        "avatar": "https://tikmob.github.io/pet/images/logo.png",
-                        "bio": "Written by a group of passionate animal lovers who share a deep respect for pets and the natural world. We're here to share helpful guides, fun facts, and heartfelt stories from the world of animals."
-                    },
-                    "publisher": {
-                        "name": "PetCare Pro",
-                        "logo": "https://tikmob.github.io/pet/images/logo.png"
-                    },
-                    "datePublished": "2025-10-15",
-                    "dateModified": "2025-10-15",
-                    "readTime": "12 min read",
-                    "views": "0",
-                    "featuredImage": {
-                        "url": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=1200&q=80",
-                        "alt": "Dog training session with owner"
-                    },
-                    "content": [
-                        {
-                            "type": "paragraph",
-                            "text": "Training your dog is one of the most rewarding experiences for any pet owner. Not only does it create a well-behaved companion, but it also strengthens the bond between you and your furry friend. Whether you're teaching basic commands or addressing behavioral issues, consistency and positive reinforcement are key to successful dog training."
-                        }
-                    ],
-                    "conclusion": {
-                        "title": "Final Thoughts",
-                        "content": "Training your dog requires patience, consistency, and positive reinforcement. Remember that every dog learns at their own pace, so celebrate small victories along the way. With these tips, you'll be well on your way to having a well-behaved and happy canine companion."
-                    },
-                    "tags": [
-                        "DogTraining",
-                        "PetTraining",
-                        "DogBehavior",
-                        "Obedience",
-                        "PuppyTraining"
-                    ],
-                    "keywords": "dog training, puppy training, obedience training, dog behavior, training tips, dog commands"
-                },
-                {
-                    "id": "dog-nutrition-guide",
-                    "title": "Complete Dog Nutrition Guide: What to Feed Your Canine Companion",
-                    "description": "Understanding your dog's nutritional needs is essential for their health and longevity. This comprehensive guide covers everything from puppy food to senior diets and special dietary requirements.",
-                    "category": "Dog Nutrition",
-                    "author": {
-                        "name": "Pet Lovers Hub",
-                        "title": "Pet Nutrition Expert",
-                        "avatar": "https://tikmob.github.io/pet/images/logo.png",
-                        "bio": "Written by a group of passionate animal lovers who share a deep respect for pets and the natural world. We're here to share helpful guides, fun facts, and heartfelt stories from the world of animals."
-                    },
-                    "publisher": {
-                        "name": "PetCare Pro",
-                        "logo": "https://tikmob.github.io/pet/images/logo.png"
-                    },
-                    "datePublished": "2025-09-22",
-                    "dateModified": "2025-09-22",
-                    "readTime": "15 min read",
-                    "views": "0",
-                    "featuredImage": {
-                        "url": "https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1200&q=80",
-                        "alt": "Healthy dog food and ingredients"
-                    },
-                    "content": [
-                        {
-                            "type": "paragraph",
-                            "text": "Proper nutrition is the foundation of your dog's health and wellbeing. From the energetic puppy years to the more sedentary senior stage, your dog's dietary needs will change throughout their life. Understanding these needs and providing balanced nutrition can help prevent health issues and ensure your furry friend lives a long, happy life."
-                        }
-                    ],
-                    "conclusion": {
-                        "title": "Final Thoughts",
-                        "content": "Feeding your dog a balanced, nutritious diet is one of the most important aspects of pet ownership. Always consult with your veterinarian about your dog's specific nutritional needs, especially if they have health conditions or special requirements. Remember that a healthy diet contributes to a healthy, happy dog."
-                    },
-                    "tags": [
-                        "DogNutrition",
-                        "DogFood",
-                        "PetDiet",
-                        "CanineHealth",
-                        "DogCare"
-                    ],
-                    "keywords": "dog nutrition, dog food, canine diet, pet nutrition, healthy dog food, dog feeding guide"
-                },
-                {
-                    "id": "dog-grooming-basics",
-                    "title": "Dog Grooming 101: Essential Tips for Keeping Your Pet Clean and Healthy",
-                    "description": "Regular grooming is essential for your dog's health and comfort. Learn how to properly bathe, brush, and care for your dog's coat, nails, ears, and teeth.",
-                    "category": "Dog Grooming",
-                    "author": {
-                        "name": "Pet Lovers Hub",
-                        "title": "Pet Grooming Expert",
-                        "avatar": "https://tikmob.github.io/pet/images/logo.png",
-                        "bio": "Written by a group of passionate animal lovers who share a deep respect for pets and the natural world. We're here to share helpful guides, fun facts, and heartfelt stories from the world of animals."
-                    },
-                    "publisher": {
-                        "name": "PetCare Pro",
-                        "logo": "https://tikmob.github.io/pet/images/logo.png"
-                    },
-                    "datePublished": "2025-08-30",
-                    "dateModified": "2025-08-30",
-                    "readTime": "10 min read",
-                    "views": "0",
-                    "featuredImage": {
-                        "url": "https://images.unsplash.com/photo-1517423568366-8b83523034fd?auto=format&fit=crop&w=1200&q=80",
-                        "alt": "Dog being groomed by professional"
-                    },
-                    "content": [
-                        {
-                            "type": "paragraph",
-                            "text": "Grooming is about more than just keeping your dog looking good - it's an essential part of their overall health care routine. Regular grooming helps prevent skin issues, matting, and other health problems while also providing an opportunity to check for any abnormalities or health concerns."
-                        }
-                    ],
-                    "conclusion": {
-                        "title": "Final Thoughts",
-                        "content": "Regular grooming is an essential part of responsible dog ownership. Not only does it keep your dog looking their best, but it also contributes to their overall health and wellbeing. Establish a consistent grooming routine that works for both you and your dog, and don't hesitate to seek professional help for tasks you're uncomfortable performing yourself."
-                    },
-                    "tags": [
-                        "DogGrooming",
-                        "PetCare",
-                        "DogHygiene",
-                        "CoatCare",
-                        "DogMaintenance"
-                    ],
-                    "keywords": "dog grooming, pet grooming, dog bathing, coat care, nail trimming, dog hygiene"
+        // Function to load JSON data from external file
+        async function loadArticlesData() {
+            try {
+                // Replace this URL with the path to your actual JSON file
+                const response = await fetch('articles.json');
+                
+                if (!response.ok) {
+                    throw new Error('Failed to load articles data');
                 }
-            ]
-        };
+                
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error loading articles:', error);
+                // Fallback to empty data if JSON file can't be loaded
+                return { articles: [] };
+            }
+        }
 
         // Function to display search results
-        function displaySearchResults() {
+        async function displaySearchResults() {
             const resultsContainer = document.getElementById('results-container');
             const noResults = document.getElementById('no-results');
             const resultsCount = document.getElementById('results-count');
+            const loading = document.getElementById('loading');
             
-            // Filter articles based on search query
-            const filteredArticles = articlesData.articles.filter(article => {
-                const searchTerms = searchQuery.toLowerCase().split(' ');
-                const articleText = (
-                    article.title + ' ' + 
-                    article.description + ' ' + 
-                    article.category + ' ' + 
-                    article.tags.join(' ') + ' ' + 
-                    article.keywords
-                ).toLowerCase();
+            // Show loading state
+            loading.style.display = 'block';
+            resultsContainer.style.display = 'none';
+            noResults.style.display = 'none';
+            
+            try {
+                // Load articles from external JSON file
+                const articlesData = await loadArticlesData();
                 
-                // Check if any search term matches the article text
-                return searchTerms.some(term => {
-                    // Skip very short terms that might match too many articles
-                    if (term.length < 2) return false;
+                // Filter articles based on search query
+                const filteredArticles = articlesData.articles.filter(article => {
+                    const searchTerms = searchQuery.toLowerCase().split(' ');
+                    const articleText = (
+                        article.title + ' ' + 
+                        article.description + ' ' + 
+                        article.category + ' ' + 
+                        (article.tags ? article.tags.join(' ') : '') + ' ' + 
+                        (article.keywords ? article.keywords : '')
+                    ).toLowerCase();
                     
-                    // Check if the term appears in the article text
-                    return articleText.includes(term);
+                    // Check if any search term matches the article text
+                    return searchTerms.some(term => {
+                        // Skip very short terms that might match too many articles
+                        if (term.length < 2) return false;
+                        
+                        // Check if the term appears in the article text
+                        return articleText.includes(term);
+                    });
                 });
-            });
-            
-            // Update results count
-            resultsCount.textContent = `${filteredArticles.length} article${filteredArticles.length !== 1 ? 's' : ''} found`;
-            
-            // Display results or no results message
-            if (filteredArticles.length === 0) {
-                resultsContainer.style.display = 'none';
-                noResults.style.display = 'block';
-            } else {
-                resultsContainer.style.display = 'grid';
-                noResults.style.display = 'none';
                 
-                // Clear previous results
-                resultsContainer.innerHTML = '';
+                // Hide loading state
+                loading.style.display = 'none';
                 
-                // Add results to the page
-                filteredArticles.forEach(article => {
-                    const resultCard = document.createElement('div');
-                    resultCard.className = 'result-card';
+                // Update results count
+                resultsCount.textContent = `${filteredArticles.length} article${filteredArticles.length !== 1 ? 's' : ''} found`;
+                
+                // Display results or no results message
+                if (filteredArticles.length === 0) {
+                    resultsContainer.style.display = 'none';
+                    noResults.style.display = 'block';
+                } else {
+                    resultsContainer.style.display = 'grid';
+                    noResults.style.display = 'none';
                     
-                    resultCard.innerHTML = `
-                        <div class="result-image">
-                            <img src="${article.featuredImage.url}" alt="${article.featuredImage.alt}">
-                            <span class="result-category">${article.category}</span>
-                        </div>
-                        <div class="result-content">
-                            <h3>${article.title}</h3>
-                            <p>${article.description}</p>
-                            
-                            <div class="result-tags">
-                                ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                            </div>
-                            
-                            <div class="result-meta">
-                                <div class="result-author">
-                                    <img src="${article.author.avatar}" alt="${article.author.name}" class="author-avatar">
-                                    <span>${article.author.name}</span>
-                                </div>
-                                <div class="result-stats">
-                                    <span><i class="far fa-clock"></i> ${article.readTime}</span>
-                                    <span><i class="far fa-calendar"></i> ${formatDate(article.datePublished)}</span>
-                                </div>
-                            </div>
-                            
-                            <a href="article-${article.id}.html" class="btn btn-primary">Read Article</a>
-                        </div>
-                    `;
+                    // Clear previous results
+                    resultsContainer.innerHTML = '';
                     
-                    resultsContainer.appendChild(resultCard);
-                });
+                    // Add results to the page
+                    filteredArticles.forEach(article => {
+                        const resultCard = document.createElement('div');
+                        resultCard.className = 'result-card';
+                        
+                        resultCard.innerHTML = `
+                            <div class="result-image">
+                                <img src="${article.featuredImage.url}" alt="${article.featuredImage.alt}">
+                                <span class="result-category">${article.category}</span>
+                            </div>
+                            <div class="result-content">
+                                <h3>${article.title}</h3>
+                                <p>${article.description}</p>
+                                
+                                ${article.tags ? `
+                                <div class="result-tags">
+                                    ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                                </div>
+                                ` : ''}
+                                
+                                <div class="result-meta">
+                                    <div class="result-author">
+                                        <img src="${article.author.avatar}" alt="${article.author.name}" class="author-avatar">
+                                        <span>${article.author.name}</span>
+                                    </div>
+                                    <div class="result-stats">
+                                        <span><i class="far fa-clock"></i> ${article.readTime}</span>
+                                        <span><i class="far fa-calendar"></i> ${formatDate(article.datePublished)}</span>
+                                    </div>
+                                </div>
+                                
+                                <a href="article-${article.id}.html" class="btn btn-primary">Read Article</a>
+                            </div>
+                        `;
+                        
+                        resultsContainer.appendChild(resultCard);
+                    });
+                }
+            } catch (error) {
+                // Hide loading state and show error
+                loading.style.display = 'none';
+                resultsCount.textContent = 'Error loading articles';
+                console.error('Error displaying search results:', error);
             }
         }
         
