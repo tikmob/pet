@@ -1994,14 +1994,7 @@
     document.addEventListener('DOMContentLoaded', async function() {
         console.log('DOM loaded, initializing...');
         
-        await loadAllArticles();
-        const articleData = loadArticleData();
         
-        if (articleData) {
-            renderArticle(articleData);
-        } else {
-            console.log('المحتوى موجود مسبقاً');
-        }
 
         // Setup search functionality
         // إصلاح دالة البحث
@@ -2066,3 +2059,4 @@
 </script>
 </body>
 </html>
+
