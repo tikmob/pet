@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -107,6 +107,8 @@
             color: var(--dark);
             line-height: 1.7;
             overflow-x: hidden;
+            direction: ltr;
+            text-align: left;
         }
 
         .container {
@@ -907,18 +909,22 @@
             font-size: 2.2rem;
             margin-bottom: 30px;
             color: var(--dark);
+            text-align: center;
         }
 
         .seo-content h3 {
             font-size: 1.6rem;
             margin: 40px 0 20px;
             color: var(--dark);
+            border-left: 4px solid var(--primary);
+            padding-left: 15px;
         }
 
         .seo-content p {
             margin-bottom: 20px;
             color: var(--gray);
             line-height: 1.8;
+            text-align: left;
         }
 
         .seo-content ul {
@@ -929,6 +935,12 @@
         .seo-content li {
             margin-bottom: 10px;
             color: var(--gray);
+            text-align: left;
+        }
+
+        .seo-container {
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         /* Responsive Styles */
@@ -960,18 +972,18 @@
             nav {
                 position: fixed;
                 top: 80px;
-                right: -100%;
+                left: -100%;
                 background: white;
                 width: 280px;
                 height: calc(100vh - 80px);
-                box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+                box-shadow: 5px 0 25px rgba(0, 0, 0, 0.1);
                 transition: var(--transition);
                 z-index: 999;
                 padding: 30px;
             }
             
             nav.active {
-                right: 0;
+                left: 0;
             }
             
             nav ul {
@@ -1061,7 +1073,7 @@
         <div class="container header-container">
             <a href="#" class="logo">
                 <i class="fas fa-paw"></i>
-                <span>Pet-Lovers Hub</span>
+                <span>Pet Lovers Hub</span>
             </a>
             
             <nav id="main-nav">
@@ -1069,9 +1081,9 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="dogs.html">Dogs</a></li>
                     <li><a href="cats.html">Cats</a></li>
-                    <li><a href="horse.html">Horse</a></li>
-                    <li><a href="birds.html">Birds</a></li>
-                    <li><a href="product.html">Best Pet Products</a></li>
+                    <li><a href="products.html">Pet Products</a></li>
+                    <li><a href="training.html">Training</a></li>
+                    <li><a href="grooming.html">Grooming</a></li>
                     <li><a href="about-us.html">About Us</a></li>
                 </ul>
             </nav>
@@ -1108,13 +1120,12 @@
             </form>
             
             <div class="search-tags">
-                <span class="search-tag">dog training near me</span>
-                <span class="search-tag">puppies for sale</span>
+                <span class="search-tag">dog training</span>
                 <span class="search-tag">cat litter</span>
-                <span class="search-tag">dog boarding</span>
-                <span class="search-tag">pet grooming</span>
                 <span class="search-tag">dog beds</span>
                 <span class="search-tag">dog crate</span>
+                <span class="search-tag">pet grooming</span>
+                <span class="search-tag">dog boarding</span>
                 <span class="search-tag">dog nail clippers</span>
                 <span class="search-tag">dog collars</span>
                 <span class="search-tag">dog treats</span>
@@ -1133,7 +1144,7 @@
             <div class="categories-grid">
                 <div class="category-card">
                     <div class="category-img">
-                        <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Dog Care">
+                        <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Dog Care and Training">
                         <span class="category-badge">Popular</span>
                     </div>
                     <div class="category-content">
@@ -1145,7 +1156,7 @@
                 
                 <div class="category-card">
                     <div class="category-img">
-                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Cat Care">
+                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Cat Care and Behavior">
                     </div>
                     <div class="category-content">
                         <h3>Cat Care & Behavior</h3>
@@ -1156,7 +1167,7 @@
                 
                 <div class="category-card">
                     <div class="category-img">
-                        <img src="https://cdn.britannica.com/16/234216-050-C66F8665/beagle-hound-dog.jpg" alt="Pet Products">
+                        <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Pet Products and Supplies">
                     </div>
                     <div class="category-content">
                         <h3>Pet Products</h3>
@@ -1200,7 +1211,7 @@
                 
                 <div class="breed-card">
                     <div class="breed-img">
-                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Maine Coon">
+                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Maine Coon Cat">
                     </div>
                     <div class="breed-content">
                         <h3>Maine Coon</h3>
@@ -1216,7 +1227,7 @@
                 
                 <div class="breed-card">
                     <div class="breed-img">
-                        <img src="https://images.unsplash.com/photo-1560743641-3914f2c45636?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Cane Corso">
+                        <img src="https://images.unsplash.com/photo-1560743641-3914f2c45636?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Cane Corso Dog">
                     </div>
                     <div class="breed-content">
                         <h3>Cane Corso</h3>
@@ -1245,10 +1256,10 @@
                 <div class="product-card">
                     <div class="product-badge">Best Seller</div>
                     <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1589923188651-268a6d3e1d1c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Dog Food">
+                        <img src="https://images.unsplash.com/photo-1589923188651-268a6d3e1d1c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Premium Dog Food">
                     </div>
                     <div class="product-content">
-                        <h3>Purina Pro Plan Dog Food</h3>
+                        <h3>Premium Dog Food</h3>
                         <div class="product-rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -1262,7 +1273,7 @@
                             <span class="original-price">$74.99</span>
                         </div>
                         <div class="product-actions">
-                            <a href="product-detail-1.html" class="btn btn-primary">Product Detail</a>
+                            <a href="dog-food.html" class="btn btn-primary">View Details</a>
                             <button class="btn btn-outline"><i class="far fa-heart"></i></button>
                         </div>
                     </div>
@@ -1270,10 +1281,10 @@
                 
                 <div class="product-card">
                     <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1574235664854-8c7a6f7f7d7f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Cat Tree">
+                        <img src="https://images.unsplash.com/photo-1574235664854-8c7a6f7f7d7f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Cat Tree and Scratching Post">
                     </div>
                     <div class="product-content">
-                        <h3>Premium Cat Tree with Scratching Posts</h3>
+                        <h3>Cat Tree with Scratching Posts</h3>
                         <div class="product-rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -1286,7 +1297,7 @@
                             <span class="current-price">$89.99</span>
                         </div>
                         <div class="product-actions">
-                            <a href="product-detail-2.html" class="btn btn-primary">Product Detail</a>
+                            <a href="cat-tree.html" class="btn btn-primary">View Details</a>
                             <button class="btn btn-outline"><i class="far fa-heart"></i></button>
                         </div>
                     </div>
@@ -1295,7 +1306,7 @@
                 <div class="product-card">
                     <div class="product-badge">New</div>
                     <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Dog DNA Test">
+                        <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Dog DNA Test Kit">
                     </div>
                     <div class="product-content">
                         <h3>Dog DNA Test - Breed & Health</h3>
@@ -1312,7 +1323,7 @@
                             <span class="original-price">$159.99</span>
                         </div>
                         <div class="product-actions">
-                            <a href="product-detail-3.html" class="btn btn-primary">Product Detail</a>
+                            <a href="dna-test.html" class="btn btn-primary">View Details</a>
                             <button class="btn btn-outline"><i class="far fa-heart"></i></button>
                         </div>
                     </div>
@@ -1323,7 +1334,7 @@
 
     <!-- SEO Content Section -->
     <section class="seo-content">
-        <div class="container">
+        <div class="container seo-container">
             <h2>Comprehensive Pet Care Guide</h2>
             
             <h3>Dog Care Essentials</h3>
@@ -1337,6 +1348,18 @@
             
             <h3>Specialized Pet Care</h3>
             <p>Some pets require specialized care, such as <strong>service dog</strong> training or managing specific health conditions. We provide resources for <strong>healthy paws</strong> insurance options and reviews of popular pet retailers like <strong>Chewy's</strong> and <strong>Pets Mart</strong>. Our goal is to be your comprehensive resource for all things related to <strong>dogs</strong>, <strong>cats</strong>, and <strong>pets</strong> in general.</p>
+            
+            <h3>Popular Pet Products and Accessories</h3>
+            <p>We regularly review and recommend the best products for your pets, including:</p>
+            <ul>
+                <li><strong>Dog treats</strong> for training and rewards</li>
+                <li>Comfortable <strong>dog beds</strong> for all sizes</li>
+                <li>Durable <strong>dog crates</strong> for travel and safety</li>
+                <li>Essential <strong>dog grooming</strong> supplies</li>
+                <li>Interactive <strong>cat toys</strong> for mental stimulation</li>
+                <li>Effective <strong>cat litter</strong> solutions</li>
+                <li>Stylish <strong>dog collars</strong> and identification <strong>dog tags</strong></li>
+            </ul>
         </div>
     </section>
 
@@ -1372,11 +1395,11 @@
                 <div class="footer-column">
                     <h3>Dog Resources</h3>
                     <ul>
-                         <li><a href="Dog-Training.html">Dog Training</a></li>
-                        <li><a href="Dog-Food.html">Dog Food</a></li>
-                        <li><a href="Dog-Breeds.html">Dog Breeds</a></li>
-                        <li><a href="Dog-Grooming.html">Dog Grooming</a></li>
-                        <li><a href="Dog-toys.html">Dog Toys</a></li>
+                         <li><a href="dog-training.html">Dog Training</a></li>
+                        <li><a href="dog-food.html">Dog Food</a></li>
+                        <li><a href="dog-breeds.html">Dog Breeds</a></li>
+                        <li><a href="dog-grooming.html">Dog Grooming</a></li>
+                        <li><a href="dog-toys.html">Dog Toys</a></li>
                         <li><a href="dog-boarding.html">Dog Boarding</a></li>
                         <li><a href="dog-daycare.html">Dog Daycare</a></li>
                     </ul>
@@ -1385,13 +1408,13 @@
                 <div class="footer-column">
                     <h3>Cat Resources</h3>
                     <ul>
-                        <li><a href="Cat-Behavior.html">Cat Behavior</a></li>
-                        <li><a href="Cat-Food.html">Cat Food</a></li>
-                        <li><a href="Cat-Breeds.html">Cat Breeds</a></li>
-                        <li><a href="Cat-Litter.html">Cat Litter</a></li>
-                        <li><a href="Cat-Toys.html">Cat Toys</a></li>
-                        <li><a href="Cat-Grooming.html">Cat Grooming</a></li>
-                        <li><a href="cats-for-adoption.html">Cats for Adoption</a></li>
+                        <li><a href="cat-behavior.html">Cat Behavior</a></li>
+                        <li><a href="cat-food.html">Cat Food</a></li>
+                        <li><a href="cat-breeds.html">Cat Breeds</a></li>
+                        <li><a href="cat-litter.html">Cat Litter</a></li>
+                        <li><a href="cat-toys.html">Cat Toys</a></li>
+                        <li><a href="cat-grooming.html">Cat Grooming</a></li>
+                        <li><a href="cats-adoption.html">Cats for Adoption</a></li>
                     </ul>
                 </div>
                 
